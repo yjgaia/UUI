@@ -21,6 +21,6 @@ UPPERCASE.IO User Interface BOX for web applications.
 - V_CENTER
 - VALID_FORM
 
-DOCUMENT: http://UPPERCASE.IO/#UDOC/UUI
-
-2014 ⓒ BTNcafe · http://www.btncafe.com · contact@btncafe.com
+License
+-------
+[MIT License](https://github.com/UPPERCASEIO/UUI/blob/master/LICENSE)
