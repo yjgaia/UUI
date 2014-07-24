@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<title>UUI.BUTTON</title>
+		<style>
+			@import url('/__CSS');
+		</style>
+	</head>
+	<body>
+		UUI.BUTTON
+		<p>
+			IE 5.5 (SP1) - OK
+		</p>
+		<p>
+			Firefox 3.0 - OK
+		</p>
+		<p>
+			Opera 9.5 - OK
+		</p>
+		<script src="/__SCRIPT"></script>
+		<script>
+			UUI.MAIN = function() {
+				UUI.BUTTON({
+					style : {
+						border : '1px solid red',
+						width : 250
+					},
+					img : IMG({
+						src : UPPERCASE.R('logo.png')
+					}),
+					msg : 'BTNcafe',
+					href : 'http://www.btncafe.com',
+					target : '_blank'
+				}).appendTo(BODY);
+			};
+		</script>
+	</body>
+</html>
