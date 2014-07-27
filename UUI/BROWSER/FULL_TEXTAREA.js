@@ -96,7 +96,7 @@ UUI.FULL_TEXTAREA = CLASS({
 				position : 'relative',
 				height : 100
 			},
-			c : [ textarea = TEXTAREA({
+			c : textarea = TEXTAREA({
 				style : {
 					width : '100%',
 					height : '100%',
@@ -107,7 +107,7 @@ UUI.FULL_TEXTAREA = CLASS({
 				placeholder : placeholder,
 				on : on,
 				value : value
-			})]
+			})
 		});
 
 		// for VALID_FORM.

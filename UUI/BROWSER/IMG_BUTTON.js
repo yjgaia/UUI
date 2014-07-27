@@ -65,7 +65,7 @@ UUI.IMG_BUTTON = CLASS({
 			href : href,
 			target : target,
 			on : on,
-			c : [img]
+			c : img
 		});
 
 		self.getImg = getImg = function() {

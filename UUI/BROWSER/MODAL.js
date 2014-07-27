@@ -15,7 +15,7 @@ UUI.MODAL = CLASS({
 
 		var
 		// children
-		children = params === undefined ? undefined : (params.c === undefined || CHECK_IS_ARRAY(params.c) === true ? params.c : [params.c]),
+		children = params === undefined ? undefined : params.c,
 
 		// wrapper style
 		wrapperStyle = params === undefined ? undefined : params.wrapperStyle,

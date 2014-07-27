@@ -68,9 +68,9 @@ UUI.TEXT_BUTTON = CLASS({
 			href : href,
 			target : target,
 			on : on,
-			c : [ span = SPAN({
-				c : [title === undefined ? (href === undefined ? '' : href) : title]
-			})]
+			c : span = SPAN({
+				c : title === undefined ? (href === undefined ? '' : href) : title
+			})
 		});
 
 		self.setTitle = setTitle = function(title) {

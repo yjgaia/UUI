@@ -16,7 +16,7 @@ UUI.V_CENTER = CLASS({
 
 		var
 		// children
-		children = params === undefined ? undefined : (params.c === undefined || CHECK_IS_ARRAY(params.c) === true ? params.c : [params.c]),
+		children = params === undefined ? undefined : params.c,
 
 		// wrapper style
 		wrapperStyle = params === undefined ? undefined : params.wrapperStyle,
@@ -105,18 +105,18 @@ UUI.V_CENTER = CLASS({
 				margin : 0,
 				padding : 0
 			},
-			c : [TR({
+			c : TR({
 				style : {
 					margin : 0,
 					padding : 0
 				},
-				c : [ content = TD({
+				c : content = TD({
 					style : {
 						margin : 0,
 						padding : 0
 					}
-				})]
-			})],
+				})
+			}),
 			on : on
 		});
 

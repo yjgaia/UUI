@@ -73,7 +73,7 @@ UUI.LOADING = CLASS({
 				style : indicator === undefined ? {} : {
 					marginTop : 10
 				},
-				c : [msg]
+				c : msg
 			})],
 			on : on
 		});

@@ -128,7 +128,7 @@ UUI.FULL_INPUT = CLASS({
 				padding : 5,
 				backgroundColor : '#FFF'
 			},
-			c : [DIV({
+			c : DIV({
 				style : {
 					position : 'relative'
 				},
@@ -139,7 +139,7 @@ UUI.FULL_INPUT = CLASS({
 					style : {
 						visibility : 'hidden'
 					},
-					c : ['.']
+					c : '.'
 				}),
 
 				// placeholder
@@ -192,7 +192,7 @@ UUI.FULL_INPUT = CLASS({
 						}
 					}
 				})]
-			})]
+			})
 		});
 
 		replacePlaceholderButton = RAR(function() {

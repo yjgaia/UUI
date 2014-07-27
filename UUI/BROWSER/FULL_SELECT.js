@@ -83,14 +83,14 @@ UUI.FULL_SELECT = CLASS({
 				backgroundColor : '#FFF',
 				position : 'relative'
 			},
-			c : [ _select = SELECT({
+			c : _select = SELECT({
 				style : {
 					width : '100%',
 					border : 'none'
 				},
 				on : on,
 				name : name
-			})]
+			})
 		});
 
 		// for VALID_FORM.

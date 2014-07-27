@@ -19,7 +19,7 @@ UUI.TABLE = CLASS({
 		style = params === undefined ? undefined : params.style,
 
 		// children
-		children = params === undefined ? undefined : (params.c === undefined || CHECK_IS_ARRAY(params.c) === true ? params.c : [params.c]),
+		children = params === undefined ? undefined : params.c,
 
 		// trs
 		trs = params === undefined ? undefined : params.trs,

@@ -23,7 +23,7 @@ UUI.VALID_FORM = CLASS({
 		on = params === undefined ? undefined : params.on,
 
 		// children
-		children = params === undefined ? undefined : (params.c === undefined || CHECK_IS_ARRAY(params.c) === true ? params.c : [params.c]),
+		children = params === undefined ? undefined : params.c,
 
 		// style
 		style = params === undefined ? undefined : params.style,
@@ -137,7 +137,7 @@ UUI.VALID_FORM = CLASS({
 
 							(child.getParent().getParent().isValidWrapper === true ? child.getParent().getParent() : (child.getParent().isValidWrapper === true ? child.getParent() : child)).after( errorMsgP = P({
 								style : errorMsgStyle,
-								c : [errorMsg]
+								c : errorMsg
 							}));
 
 							REMOVE_AT({

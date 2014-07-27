@@ -85,7 +85,7 @@ UUI.BUTTON = CLASS({
 
 		if (title !== undefined) {
 			a.prepend( titleDom = DIV({
-				c : [title === undefined ? '' : title]
+				c : title === undefined ? '' : title
 			}));
 		}
 
@@ -94,7 +94,7 @@ UUI.BUTTON = CLASS({
 				style : {
 					marginBottom : title !== undefined ? spacing : 0
 				},
-				c : [img]
+				c : img
 			}));
 		}
 

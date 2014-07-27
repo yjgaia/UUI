@@ -153,7 +153,7 @@ UUI.FULL_CHECKBOX = CLASS({
 					flt : 'left',
 					cursor : 'pointer'
 				},
-				c : [label]
+				c : label
 			}), CLEAR_BOTH()]
 		});
 

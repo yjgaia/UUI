@@ -138,7 +138,7 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 					textAlign : 'center',
 					borderRadius : 10
 				},
-				c : ['Uploading...']
+				c : 'Uploading...'
 			})]
 		});
 

@@ -87,7 +87,7 @@ UUI.BUTTON_H = CLASS({
 				style : {
 					flt : 'left'
 				},
-				c : [title === undefined ? '' : title]
+				c : title === undefined ? '' : title
 			}), CLEAR_BOTH()]
 		});
 

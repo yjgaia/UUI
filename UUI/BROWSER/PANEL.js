@@ -16,7 +16,7 @@ UUI.PANEL = CLASS({
 
 		var
 		// children
-		children = params === undefined ? undefined : (params.c === undefined || CHECK_IS_ARRAY(params.c) === true ? params.c : [params.c]),
+		children = params === undefined ? undefined : params.c,
 
 		// wrapper style
 		wrapperStyle = params === undefined ? undefined : params.wrapperStyle,
@@ -64,7 +64,7 @@ UUI.PANEL = CLASS({
 		}
 
 		wrapper = DIV({
-			c : [ content = DIV()],
+			c : content = DIV(),
 			on : on
 		});
 

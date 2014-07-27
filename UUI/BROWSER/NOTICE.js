@@ -70,7 +70,7 @@ UUI.NOTICE = CLASS({
 			contentStyle : contentStyle,
 			isCannotClose : true,
 			on : on,
-			c : [msg]
+			c : msg
 		});
 
 		self.getDom = getDom = function() {
