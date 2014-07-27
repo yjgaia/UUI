@@ -12,6 +12,7 @@ UUI.PANEL = CLASS({
 		//OPTIONAL: params.c
 		//OPTIONAL: params.wrapperStyle
 		//OPTIONAL: params.contentStyle
+		//OPTIONAL: params.on
 
 		var
 		// children
@@ -22,6 +23,9 @@ UUI.PANEL = CLASS({
 
 		// content style
 		contentStyle = params === undefined ? undefined : params.contentStyle,
+
+		// on
+		on = params === undefined ? undefined : params.on,
 
 		// wrapper
 		wrapper,
@@ -50,8 +54,18 @@ UUI.PANEL = CLASS({
 		// add content style.
 		addContentStyle;
 
+		if (on !== undefined) {
+
+			EACH(on, function(handler, name) {
+				on[name] = function(e) {
+					handler(e, self);
+				};
+			});
+		}
+
 		wrapper = DIV({
-			c : [ content = DIV()]
+			c : [ content = DIV()],
+			on : on
 		});
 
 		self.getDom = getDom = function() {

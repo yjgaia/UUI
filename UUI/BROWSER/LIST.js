@@ -11,6 +11,7 @@ UUI.LIST = CLASS({
 		//OPTIONAL: params
 		//OPTIONAL: params.style
 		//OPTIONAL: params.c
+		//OPTIONAL: params.on
 		//OPTIONAL: params.items
 		//OPTIONAL: params.isRequiringClearBoth
 
@@ -20,6 +21,9 @@ UUI.LIST = CLASS({
 
 		// children
 		children = params === undefined ? undefined : params.c,
+
+		// on
+		on = params === undefined ? undefined : params.on,
 
 		// is requiring clear both
 		isRequiringClearBoth = params === undefined ? undefined : params.isRequiringClearBoth,
@@ -58,9 +62,19 @@ UUI.LIST = CLASS({
 			items = {};
 		}
 
+		if (on !== undefined) {
+
+			EACH(on, function(handler, name) {
+				on[name] = function(e) {
+					handler(e, self);
+				};
+			});
+		}
+
 		ul = UL({
 			style : style,
-			c : children
+			c : children,
+			on : on
 		});
 
 		self.getDom = getDom = function() {

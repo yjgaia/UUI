@@ -9,6 +9,7 @@ UUI.LOADING = CLASS({
 		//OPTIONAL: params.contentStyle
 		//OPTIONAL: params.indicator
 		//REQUIRED: params.msg
+		//OPTIONAL: params.on
 
 		var
 		// wrapper style
@@ -23,9 +24,12 @@ UUI.LOADING = CLASS({
 		// msg
 		msg = params.msg,
 
+		// on
+		on = params.on,
+
 		// modal
 		modal,
-		
+
 		// get dom.
 		getDom,
 
@@ -70,9 +74,10 @@ UUI.LOADING = CLASS({
 					marginTop : 10
 				},
 				c : [msg]
-			})]
+			})],
+			on : on
 		});
-		
+
 		self.getDom = getDom = function() {
 			return modal.getDom();
 		};

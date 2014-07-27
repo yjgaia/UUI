@@ -86,6 +86,15 @@ UUI.MODAL = CLASS({
 		// close.
 		close;
 
+		if (on !== undefined) {
+
+			EACH(on, function(handler, name) {
+				on[name] = function(e) {
+					handler(e, self);
+				};
+			});
+		}
+
 		if (xImg === undefined && isCannotClose !== true) {
 			xImg = IMG({
 				src : UUI.R('x.png')
@@ -120,7 +129,8 @@ UUI.MODAL = CLASS({
 						});
 					}
 				}
-			})]
+			})],
+			on : on
 		}).appendTo(BODY);
 
 		moveToCenter = RAR(function() {

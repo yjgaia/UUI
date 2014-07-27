@@ -12,6 +12,7 @@ UUI.V_CENTER = CLASS({
 		//OPTIONAL: params.c
 		//OPTIONAL: params.wrapperStyle
 		//OPTIONAL: params.contentStyle
+		//OPTIONAL: params.on
 
 		var
 		// children
@@ -22,6 +23,9 @@ UUI.V_CENTER = CLASS({
 
 		// content style
 		contentStyle = params === undefined ? undefined : params.contentStyle,
+
+		// on
+		on = params === undefined ? undefined : params.on,
 
 		// wrapper
 		wrapper,
@@ -86,6 +90,15 @@ UUI.V_CENTER = CLASS({
 		// check is show.
 		checkIsShow;
 
+		if (on !== undefined) {
+
+			EACH(on, function(handler, name) {
+				on[name] = function(e) {
+					handler(e, self);
+				};
+			});
+		}
+
 		wrapper = TABLE({
 			style : {
 				width : '100%',
@@ -103,7 +116,8 @@ UUI.V_CENTER = CLASS({
 						padding : 0
 					}
 				})]
-			})]
+			})],
+			on : on
 		});
 
 		self.getDom = getDom = function() {

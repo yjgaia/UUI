@@ -12,6 +12,7 @@ UUI.TABLE = CLASS({
 		//OPTIONAL: params.style
 		//OPTIONAL: params.c
 		//OPTIONAL: params.trs
+		//OPTIONAL: params.on
 
 		var
 		// style
@@ -22,6 +23,9 @@ UUI.TABLE = CLASS({
 
 		// trs
 		trs = params === undefined ? undefined : params.trs,
+
+		// on
+		on = params === undefined ? undefined : params.on,
 
 		// tr stack
 		trStack = [],
@@ -51,9 +55,19 @@ UUI.TABLE = CLASS({
 			trs = {};
 		}
 
+		if (on !== undefined) {
+
+			EACH(on, function(handler, name) {
+				on[name] = function(e) {
+					handler(e, self);
+				};
+			});
+		}
+
 		table = TABLE({
 			style : style,
-			chlidren : children
+			c : children,
+			on : on
 		});
 
 		self.getDom = getDom = function() {
