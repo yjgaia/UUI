@@ -9,15 +9,18 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 
 	init : function(inner, self, params) {'use strict';
 		//REQUIRED: params
+		//REQUIRED: params.box
 		//OPTIONAL: params.wrapperStyle
 		//OPTIONAL: params.formStyle
 		//OPTIONAL: params.inputStyle
 		//OPTIONAL: params.uploadingStyle
-		//OPTIONAL: params.box
-		//REQUIRED: params.afterUpload
+		//OPTIONAL: params.afterUpload
 		//OPTIONAL: params.on
 
 		var
+		// box
+		box = params.box,
+
 		// wrapper style
 		wrapperStyle = params.wrapperStyle,
 
@@ -29,9 +32,6 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 
 		// uploading style
 		uploadingStyle = params.uploadingStyle,
-
-		// box
-		box = params.box,
 
 		// after upload
 		afterUpload = params.afterUpload,
@@ -92,31 +92,6 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 					display : 'none'
 				},
 				name : '__UPLOAD_FORM_' + self.id
-			}), form = FORM({
-				action : '/' + box.boxName + '/__UPLOAD?' + CONFIG.version,
-				target : '__UPLOAD_FORM_' + self.id,
-				method : 'POST',
-				enctype : 'multipart/form-data',
-				style : {
-					padding : 5
-				},
-				c : [ input = INPUT({
-					type : 'file',
-					isMultiple : true,
-					style : {
-						width : '100%',
-						height : '100%',
-						color : '#000',
-						border : 'none'
-					},
-					on : on
-				}), INPUT({
-					type : 'submit',
-					style : {
-						visibility : 'hidden',
-						position : 'absolute'
-					}
-				})]
 			}), uploading = UUI.PANEL({
 				wrapperStyle : {
 					position : 'absolute',
@@ -136,14 +111,52 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 					marginTop : -13,
 					padding : 5,
 					textAlign : 'center',
-					borderRadius : 10
+					borderRadius : 10,
+					color : '#fff'
 				},
 				c : 'Uploading...'
 			})]
 		});
 
-		// for VALID_FORM.
-		form.isValidWrapper = true;
+		GET('__UPLOAD_SERVER_HOST', function(host) {
+
+			var
+			// callback url
+			callbackURL = global.location.protocol + '//' + global.location.host + '/__UPLOAD_CALLBACK';
+
+			iframe.after( form = FORM({
+				action : 'http://' + (host === '' ? global.location.hostname : host) + ':' + CONFIG.uploadServerPort + '?callbackURL=' + callbackURL,
+				target : '__UPLOAD_FORM_' + self.id,
+				method : 'POST',
+				enctype : 'multipart/form-data',
+				style : COMBINE_DATA({
+					origin : formStyle,
+					extend : {
+						padding : 5
+					}
+				}),
+				c : [ input = INPUT({
+					type : 'file',
+					isMultiple : true,
+					style : {
+						width : '100%',
+						height : '100%',
+						color : '#000',
+						border : 'none'
+					},
+					on : on
+				}), INPUT({
+					type : 'submit',
+					style : {
+						visibility : 'hidden',
+						position : 'absolute'
+					}
+				})]
+			}));
+
+			// for VALID_FORM.
+			form.isValidWrapper = true;
+		});
 
 		EVENT({
 			node : iframe,
@@ -154,13 +167,18 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 			// frame
 			frame = global['__UPLOAD_FORM_' + self.id],
 
+			// file data set str
+			fileDataSetStr = frame !== undefined ? frame.fileDataSetStr : undefined,
+
 			// file data set
-			fileDataSet = frame !== undefined ? frame.fileDataSet : undefined,
+			fileDataSet,
 
 			// error code
 			errorCode = frame !== undefined ? frame.errorCode : undefined;
 
-			if (fileDataSet !== undefined || errorCode !== undefined) {
+			if (fileDataSetStr !== undefined || errorCode !== undefined) {
+
+				fileDataSet = PARSE_STR(decodeURIComponent(fileDataSetStr));
 
 				EACH(fileDataSet, function(fileData, i) {
 					fileDataSet[i] = UNPACK_DATA(fileData);
@@ -168,7 +186,9 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 
 				input.setValue('');
 
-				afterUpload(fileDataSet, errorCode);
+				if (afterUpload !== undefined) {
+					afterUpload(fileDataSet, errorCode);
+				}
 			}
 
 			uploading.hide();
@@ -181,7 +201,10 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 
 			if (input.getValue() !== '') {
 				uploading.show();
-				form.submit(true);
+
+				if (form !== undefined) {
+					form.submit(true);
+				}
 			}
 		});
 
@@ -206,7 +229,14 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 		self.addFormStyle = addFormStyle = function(style) {
 			//REQUIRED: style
 
-			form.addStyle(style);
+			if (form !== undefined) {
+				form.addStyle(style);
+			} else {
+				EXTEND_DATA({
+					origin : formStyle,
+					extend : style
+				});
+			}
 		};
 
 		if (formStyle !== undefined) {
