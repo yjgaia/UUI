@@ -15,6 +15,7 @@ UUI.BUTTON_H = CLASS({
 		//OPTIONAL: params.href
 		//OPTIONAL: params.target
 		//OPTIONAL: params.style
+		//OPTIONAL: params.isImgRight
 		//OPTIONAL: params.on
 
 		var
@@ -36,6 +37,9 @@ UUI.BUTTON_H = CLASS({
 		// style
 		style = params.style,
 
+		// is img right
+		isImgRight = params.isImgRight,
+
 		// on
 		on = params.on,
 
@@ -45,8 +49,8 @@ UUI.BUTTON_H = CLASS({
 		// title dom
 		titleDom,
 
-		// evt
-		evt,
+		// resize event
+		resizeEvent,
 
 		// set title.
 		setTitle,
@@ -98,22 +102,47 @@ UUI.BUTTON_H = CLASS({
 			});
 
 			if (img.getStyle('margin') === undefined && img.getStyle('marginRight') === undefined) {
-				img.addStyle({
+				img.addStyle(isImgRight !== true ? {
 					marginRight : spacing
+				} : {
+					marginLeft : spacing
 				});
 			}
 
-			a.prepend(img);
+			if (isImgRight !== true) {
+				a.prepend(img);
+			} else {
+				titleDom.after(img);
+			}
 
-			evt = EVENT({
+			resizeEvent = EVENT({
+				name : 'resize'
+			}, function(e) {
+
+				var
+				// title dom height
+				titleDomHeight = titleDom.getHeight();
+
+				if (titleDomHeight > 0) {
+					titleDom.addStyle({
+						marginTop : (img.getHeight() - titleDom.getHeight()) / 2
+					});
+				}
+			});
+
+			EVENT_ONCE({
 				node : img,
 				name : 'load'
 			}, function(e) {
-				titleDom.addStyle({
-					marginTop : (img.getHeight() - titleDom.getHeight()) / 2
-				});
+				resizeEvent.fire();
+			});
 
-				evt.remove();
+			img.addShowHandler(function() {
+				resizeEvent.fire();
+			});
+
+			img.addRemoveHandler(function() {
+				resizeEvent.remove();
 			});
 		}
 

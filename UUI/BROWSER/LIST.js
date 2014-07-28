@@ -162,11 +162,11 @@ UUI.LIST = CLASS({
 				data : itemStack,
 				value : item
 			});
-			REMOVE_AT({
+			REMOVE({
 				data : items,
 				key : key
 			});
-			REMOVE_AT({
+			REMOVE({
 				data : removeItemHandlers,
 				key : key
 			});

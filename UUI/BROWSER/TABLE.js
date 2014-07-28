@@ -142,11 +142,11 @@ UUI.TABLE = CLASS({
 				data : trStack,
 				value : tr
 			});
-			REMOVE_AT({
+			REMOVE({
 				data : trs,
 				key : key
 			});
-			REMOVE_AT({
+			REMOVE({
 				data : removeTRHandlers,
 				key : key
 			});

@@ -140,7 +140,7 @@ UUI.VALID_FORM = CLASS({
 								c : errorMsg
 							}));
 
-							REMOVE_AT({
+							REMOVE({
 								data : errors,
 								key : name
 							});
@@ -206,7 +206,7 @@ UUI.VALID_FORM = CLASS({
 
 							msgs.push(errorMsg);
 
-							REMOVE_AT({
+							REMOVE({
 								data : errors,
 								key : name
 							});

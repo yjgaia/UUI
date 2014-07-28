@@ -69,16 +69,7 @@ UUI.FULL_TEXTAREA = CLASS({
 		addWrapperStyle,
 
 		// add input style.
-		addTextareaStyle,
-
-		// show.
-		show,
-
-		// hide.
-		hide,
-
-		// check is show.
-		checkIsShow;
+		addTextareaStyle;
 
 		if (on !== undefined) {
 

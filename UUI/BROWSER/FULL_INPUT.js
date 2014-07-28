@@ -16,7 +16,6 @@ UUI.FULL_INPUT = CLASS({
 		//OPTIONAL: params.wrapperStyle
 		//OPTIONAL: params.inputStyle
 		//OPTIONAL: params.on
-		//OPTIONAL: params.isHidePlaceholder
 
 		var
 		// name
@@ -40,40 +39,14 @@ UUI.FULL_INPUT = CLASS({
 		// on
 		on = params.on,
 
-		// is hide placeholder
-		isHidePlaceholder = params.isHidePlaceholder,
-
 		// keydown delay
 		keydownDelay,
-
-		// placeholder style
-		placeholderStyle = COMBINE_DATA({
-			origin : {
-				position : 'absolute',
-				top : 0,
-				color : '#999',
-				cursor : 'text'
-			},
-			extend : inputStyle !== undefined && inputStyle.textAlign === 'center' ? {
-				left : 0,
-				width : '100%',
-				textAlign : 'center'
-			} : {
-				left : value === undefined ? 0 : value.length,
-			}
-		}),
 
 		// wrapper
 		wrapper,
 
 		// input
 		input,
-
-		// placeholder button
-		placeholderButton,
-
-		// replace placeholder button.
-		replacePlaceholderButton,
 
 		// get input dom.
 		getInputDom,
@@ -103,16 +76,7 @@ UUI.FULL_INPUT = CLASS({
 		addWrapperStyle,
 
 		// add input style.
-		addInputStyle,
-
-		// show.
-		show,
-
-		// hide.
-		hide,
-
-		// check is show.
-		checkIsShow;
+		addInputStyle;
 
 		if (on !== undefined) {
 
@@ -142,12 +106,6 @@ UUI.FULL_INPUT = CLASS({
 					c : '.'
 				}),
 
-				// placeholder
-				placeholderButton = UUI.TEXT_BUTTON({
-					style : placeholderStyle,
-					title : placeholder
-				}),
-
 				// input
 				input = INPUT({
 					style : {
@@ -161,110 +119,10 @@ UUI.FULL_INPUT = CLASS({
 					name : name,
 					type : type,
 					value : value,
-					on : {
-						change : function(e) {
-
-							if (replacePlaceholderButton !== undefined) {
-								replacePlaceholderButton();
-							}
-
-							if (on !== undefined && on.change !== undefined) {
-								on.change(e, self);
-							}
-						},
-						keydown : function(e) {
-
-							keydownDelay = DELAY(function() {
-								replacePlaceholderButton();
-							});
-
-							if (on !== undefined && on.keydown !== undefined) {
-								on.keydown(e, self);
-							}
-						},
-						keyup : function(e) {
-
-							replacePlaceholderButton();
-
-							if (on !== undefined && on.keyup !== undefined) {
-								on.keyup(e, self);
-							}
-						}
-					}
+					on : on,
+					placeholder : placeholder
 				})]
 			})
-		});
-
-		replacePlaceholderButton = RAR(function() {
-
-			var
-			// value
-			value = input.getValue(),
-
-			// count
-			count = 0,
-
-			// font size str
-			fontSizeStr = input.getStyle('fontSize'),
-
-			// font size
-			fontSize = fontSizeStr === undefined ? 12 : INTEGER(fontSizeStr);
-
-			if (input.getStyle('textAlign') === 'center') {
-
-				placeholderButton.addStyle({
-					left : 0,
-					width : '100%',
-					textAlign : 'center'
-				});
-
-				if (value === '') {
-					placeholderButton.show();
-				} else {
-					placeholderButton.hide();
-				}
-
-			} else if (isHidePlaceholder === true) {
-
-				placeholderButton.addStyle({
-					left : 0,
-					width : 'auto',
-					textAlign : 'left'
-				});
-
-				if (value === '') {
-					placeholderButton.show();
-				} else {
-					placeholderButton.hide();
-				}
-
-			} else {
-
-				REPEAT(value.length, function(i) {
-
-					var
-					// c
-					c = value.charAt(i);
-
-					if (escape(c).length > 4) {
-						count += 1.8;
-					} else {
-						count += 1;
-					}
-				});
-
-				placeholderButton.addStyle({
-					left : count * fontSize / 1.6 + (count > 0 ? 5 : 0),
-					width : 'auto',
-					textAlign : 'left'
-				});
-			}
-		});
-
-		wrapper.addRemoveHandler(function() {
-			if (keydownDelay !== undefined) {
-				keydownDelay.remove();
-			}
 		});
 
 		// for VALID_FORM.
@@ -318,8 +176,6 @@ UUI.FULL_INPUT = CLASS({
 			//REQUIRED: style
 
 			input.addStyle(style);
-			placeholderButton.addStyle(style);
-			placeholderButton.addStyle(placeholderStyle);
 		};
 
 		if (inputStyle !== undefined) {

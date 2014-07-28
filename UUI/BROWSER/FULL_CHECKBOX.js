@@ -102,16 +102,7 @@ UUI.FULL_CHECKBOX = CLASS({
 		addWrapperStyle,
 
 		// add input style.
-		addInputStyle,
-
-		// show.
-		show,
-
-		// hide.
-		hide,
-
-		// check is show.
-		checkIsShow;
+		addInputStyle;
 
 		if (on !== undefined) {
 

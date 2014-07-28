@@ -79,16 +79,7 @@ UUI.V_CENTER = CLASS({
 		addWrapperStyle,
 
 		// add content style.
-		addContentStyle,
-
-		// show.
-		show,
-
-		// hide.
-		hide,
-
-		// check is show.
-		checkIsShow;
+		addContentStyle;
 
 		if (on !== undefined) {
 
