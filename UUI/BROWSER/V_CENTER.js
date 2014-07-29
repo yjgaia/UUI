@@ -122,9 +122,16 @@ UUI.V_CENTER = CLASS({
 		};
 
 		if (children !== undefined) {
-			EACH(children, function(child, i) {
-				append(child);
-			});
+
+			if (CHECK_IS_ARRAY(children) === true) {
+
+				EACH(children, function(child, i) {
+					append(child);
+				});
+
+			} else {
+				append(children);
+			}
 		}
 
 		self.prepend = prepend = function(node) {

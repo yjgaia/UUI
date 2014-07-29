@@ -14,7 +14,8 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 		//OPTIONAL: params.formStyle
 		//OPTIONAL: params.inputStyle
 		//OPTIONAL: params.uploadingStyle
-		//OPTIONAL: params.afterUpload
+		//OPTIONAL: params.uploadOverSizeFile
+		//OPTIONAL: params.uploadSuccess
 		//OPTIONAL: params.on
 
 		var
@@ -33,8 +34,11 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 		// uploading style
 		uploadingStyle = params.uploadingStyle,
 
-		// after upload
-		afterUpload = params.afterUpload,
+		// upload over size file
+		uploadOverSizeFile = params.uploadOverSizeFile,
+
+		// upload sucess
+		uploadSuccess = params.uploadSuccess,
 
 		// on
 		on = params.on,
@@ -125,25 +129,28 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 			callbackURL = global.location.protocol + '//' + global.location.host + '/__UPLOAD_CALLBACK';
 
 			iframe.after( form = FORM({
-				action : 'http://' + (host === '' ? global.location.hostname : host) + ':' + CONFIG.uploadServerPort + '?callbackURL=' + callbackURL,
+				action : 'http://' + (host === '' ? global.location.hostname : host) + ':' + CONFIG.uploadServerPort + '?boxName=' + box.boxName + '&callbackURL=' + callbackURL,
 				target : '__UPLOAD_FORM_' + self.id,
 				method : 'POST',
 				enctype : 'multipart/form-data',
 				style : COMBINE_DATA({
-					origin : formStyle,
-					extend : {
+					origin : {
 						padding : 5
-					}
+					},
+					extend : formStyle
 				}),
 				c : [ input = INPUT({
 					type : 'file',
 					isMultiple : true,
-					style : {
-						width : '100%',
-						height : '100%',
-						color : '#000',
-						border : 'none'
-					},
+					style : COMBINE_DATA({
+						origin : {
+							width : '100%',
+							height : '100%',
+							color : '#000',
+							border : 'none'
+						},
+						extend : inputStyle
+					}),
 					on : on
 				}), INPUT({
 					type : 'submit',
@@ -173,10 +180,18 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 			// file data set
 			fileDataSet,
 
-			// error code
-			errorCode = frame !== undefined ? frame.errorCode : undefined;
+			// max upload file MB
+			maxUploadFileMB = frame !== undefined ? frame.maxUploadFileMB : undefined;
 
-			if (fileDataSetStr !== undefined || errorCode !== undefined) {
+			if (maxUploadFileMB !== undefined) {
+
+				if (uploadOverSizeFile !== undefined) {
+					uploadOverSizeFile(maxUploadFileMB);
+				}
+
+				input.setValue('');
+
+			} else if (fileDataSetStr !== undefined) {
 
 				fileDataSet = PARSE_STR(decodeURIComponent(fileDataSetStr));
 
@@ -184,11 +199,11 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 					fileDataSet[i] = UNPACK_DATA(fileData);
 				});
 
-				input.setValue('');
-
-				if (afterUpload !== undefined) {
-					afterUpload(fileDataSet, errorCode);
+				if (uploadSuccess !== undefined) {
+					uploadSuccess(fileDataSet);
 				}
+
+				input.setValue('');
 			}
 
 			uploading.hide();
@@ -213,7 +228,9 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 		};
 
 		self.select = select = function() {
-			input.select();
+			if (input !== undefined) {
+				input.select();
+			}
 		};
 
 		self.addWrapperStyle = addWrapperStyle = function(style) {
@@ -246,7 +263,14 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 		self.addInputStyle = addInputStyle = function(style) {
 			//REQUIRED: style
 
-			input.addStyle(style);
+			if (input !== undefined) {
+				input.addStyle(style);
+			} else {
+				EXTEND_DATA({
+					origin : inputStyle,
+					extend : style
+				});
+			}
 		};
 
 		if (inputStyle !== undefined) {
