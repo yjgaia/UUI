@@ -163,6 +163,20 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 
 			// for VALID_FORM.
 			form.isValidWrapper = true;
+
+			EVENT({
+				node : input,
+				name : 'change'
+			}, function(e) {
+
+				if (input.getValue() !== '') {
+					uploading.show();
+
+					if (form !== undefined) {
+						form.submit(true);
+					}
+				}
+			});
 		});
 
 		EVENT({
@@ -207,20 +221,6 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 			}
 
 			uploading.hide();
-		});
-
-		EVENT({
-			node : input,
-			name : 'change'
-		}, function(e) {
-
-			if (input.getValue() !== '') {
-				uploading.show();
-
-				if (form !== undefined) {
-					form.submit(true);
-				}
-			}
 		});
 
 		self.getDom = getDom = function() {
