@@ -61,12 +61,9 @@ UUI.LOADING = CLASS({
 		addContentStyle;
 
 		modal = UUI.MODAL({
-			wrapperStyle : COMBINE_DATA({
-				origin : {
-					textAlign : 'center'
-				},
-				extend : wrapperStyle
-			}),
+			wrapperStyle : COMBINE([{
+				textAlign : 'center'
+			}, wrapperStyle]),
 			contentStyle : contentStyle,
 			isCannotClose : true,
 			c : [indicator === undefined ? '' : indicator, P({

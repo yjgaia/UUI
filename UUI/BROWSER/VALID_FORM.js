@@ -99,7 +99,7 @@ UUI.VALID_FORM = CLASS({
 
 			var
 			// errors
-			errors = COPY_DATA(_errors),
+			errors = COPY(_errors),
 
 			// f.
 			f = function(node) {
@@ -168,7 +168,7 @@ UUI.VALID_FORM = CLASS({
 
 			var
 			// errors
-			errors = COPY_DATA(_errors),
+			errors = COPY(_errors),
 
 			// msgs
 			msgs = [],

@@ -56,15 +56,12 @@ UUI.TEXT_BUTTON = CLASS({
 		}
 
 		a = A({
-			style : COMBINE_DATA({
-				origin : {
-					cursor : 'pointer',
-					textDecoration : 'none',
-					touchCallout : 'none',
-					userSelect : 'none'
-				},
-				extend : style
-			}),
+			style : COMBINE([{
+				cursor : 'pointer',
+				textDecoration : 'none',
+				touchCallout : 'none',
+				userSelect : 'none'
+			}, style]),
 			href : href,
 			target : target,
 			on : on,

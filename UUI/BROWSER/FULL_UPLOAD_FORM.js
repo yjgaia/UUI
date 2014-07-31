@@ -129,28 +129,22 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 			callbackURL = global.location.protocol + '//' + global.location.host + '/__UPLOAD_CALLBACK';
 
 			iframe.after( form = FORM({
-				action : 'http://' + (host === '' ? global.location.hostname : host) + ':' + CONFIG.uploadServerPort + '?boxName=' + box.boxName + '&callbackURL=' + callbackURL,
+				action : 'http://' + (host === '' ? global.location.hostname : host) + ':' + CONFIG.webServerPort + '/__UPLOAD?boxName=' + box.boxName + '&callbackURL=' + callbackURL,
 				target : '__UPLOAD_FORM_' + self.id,
 				method : 'POST',
 				enctype : 'multipart/form-data',
-				style : COMBINE_DATA({
-					origin : {
-						padding : 5
-					},
-					extend : formStyle
-				}),
+				style : COMBINE([{
+					padding : 5
+				}, formStyle]),
 				c : [ input = INPUT({
 					type : 'file',
 					isMultiple : true,
-					style : COMBINE_DATA({
-						origin : {
-							width : '100%',
-							height : '100%',
-							color : '#000',
-							border : 'none'
-						},
-						extend : inputStyle
-					}),
+					style : COMBINE([{
+						width : '100%',
+						height : '100%',
+						color : '#000',
+						border : 'none'
+					}, inputStyle]),
 					on : on
 				}), INPUT({
 					type : 'submit',
@@ -249,7 +243,7 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 			if (form !== undefined) {
 				form.addStyle(style);
 			} else {
-				EXTEND_DATA({
+				EXTEND({
 					origin : formStyle,
 					extend : style
 				});
@@ -266,7 +260,7 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 			if (input !== undefined) {
 				input.addStyle(style);
 			} else {
-				EXTEND_DATA({
+				EXTEND({
 					origin : inputStyle,
 					extend : style
 				});

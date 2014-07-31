@@ -130,14 +130,11 @@ UUI.FULL_CHECKBOX = CLASS({
 				},
 				name : name,
 				type : 'checkbox',
-				on : COMBINE_DATA({
-					origin : {
-						tap : function(e) {
-							e.stop();
-						}
-					},
-					extend : on !== undefined ? on : {}
-				}),
+				on : COMBINE([{
+					tap : function(e) {
+						e.stop();
+					}
+				}, on !== undefined ? on : {}]),
 				value : value
 			}), labelDom = SPAN({
 				style : {

@@ -40,15 +40,12 @@ UUI.FULL_SUBMIT = CLASS({
 
 		input = INPUT({
 			type : 'submit',
-			style : COMBINE_DATA({
-				origin : {
-					border : 'none',
-					width : '100%',
-					padding : '10px 0',
-					cursor : 'pointer'
-				},
-				extend : style
-			}),
+			style : COMBINE([{
+				border : 'none',
+				width : '100%',
+				padding : '10px 0',
+				cursor : 'pointer'
+			}, style]),
 			on : on
 		});
 
