@@ -3,11 +3,13 @@
  */
 UUI.FULL_INPUT = CLASS({
 
-	preset : function() {'use strict';
+	preset : function() {
+		'use strict';
 		return NODE;
 	},
 
-	init : function(inner, self, params) {'use strict';
+	init : function(inner, self, params) {
+		'use strict';
 		//REQUIRED: params
 		//REQUIRED: params.name
 		//OPTIONAL: params.type
@@ -122,7 +124,12 @@ UUI.FULL_INPUT = CLASS({
 					on : on,
 					placeholder : placeholder
 				})]
-			})
+			}),
+			on : {
+				tap : function() {
+					input.focus();
+				}
+			}
 		});
 
 		// for VALID_FORM.

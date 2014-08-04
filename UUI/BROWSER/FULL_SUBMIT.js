@@ -41,6 +41,7 @@ UUI.FULL_SUBMIT = CLASS({
 		input = INPUT({
 			type : 'submit',
 			style : COMBINE([{
+				display : 'block',
 				border : 'none',
 				width : '100%',
 				padding : '10px 0',
