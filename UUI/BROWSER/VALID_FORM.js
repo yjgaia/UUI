@@ -3,11 +3,14 @@
  */
 UUI.VALID_FORM = CLASS({
 
-	preset : function() {'use strict';
+	preset : function() {
+		'use strict';
+
 		return NODE;
 	},
 
-	init : function(inner, self, params) {'use strict';
+	init : function(inner, self, params) {
+		'use strict';
 		//OPTIONAL: params
 		//OPTIONAL: params.errorMsgs
 		//OPTIONAL: params.on
@@ -18,15 +21,6 @@ UUI.VALID_FORM = CLASS({
 		var
 		// error msgs
 		errorMsgs = params === undefined ? undefined : params.errorMsgs,
-
-		// on
-		on = params === undefined ? undefined : params.on,
-
-		// children
-		children = params === undefined ? undefined : params.c,
-
-		// style
-		style = params === undefined ? undefined : params.style,
 
 		// error msg style
 		errorMsgStyle = params === undefined ? undefined : params.errorMsgStyle,
@@ -55,20 +49,7 @@ UUI.VALID_FORM = CLASS({
 		// get error msgs.
 		getErrorMsgs;
 
-		if (on !== undefined) {
-
-			EACH(on, function(handler, name) {
-				on[name] = function(e) {
-					handler(e, self);
-				};
-			});
-		}
-
-		form = FORM({
-			style : style,
-			c : children,
-			on : on
-		});
+		form = FORM();
 
 		form.addRemoveHandler(function() {
 			EACH(delays, function(delay) {
@@ -142,14 +123,14 @@ UUI.VALID_FORM = CLASS({
 
 							REMOVE({
 								data : errors,
-								key : name
+								name : name
 							});
 
 							delays.push(DELAY(2, function(delay) {
 								errorMsgP.remove();
 
 								REMOVE({
-									data : delays,
+									array : delays,
 									value : delay
 								});
 							}));
@@ -208,7 +189,7 @@ UUI.VALID_FORM = CLASS({
 
 							REMOVE({
 								data : errors,
-								key : name
+								name : name
 							});
 						}
 					}

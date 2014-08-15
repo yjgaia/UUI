@@ -5,6 +5,7 @@ UUI.FULL_INPUT = CLASS({
 
 	preset : function() {
 		'use strict';
+
 		return NODE;
 	},
 
@@ -37,9 +38,6 @@ UUI.FULL_INPUT = CLASS({
 
 		// input style
 		inputStyle = params.inputStyle,
-
-		// on
-		on = params.on,
 
 		// keydown delay
 		keydownDelay,
@@ -78,16 +76,10 @@ UUI.FULL_INPUT = CLASS({
 		addWrapperStyle,
 
 		// add input style.
-		addInputStyle;
+		addInputStyle,
 
-		if (on !== undefined) {
-
-			EACH(on, function(handler, name) {
-				on[name] = function(e) {
-					handler(e, self);
-				};
-			});
-		}
+		// on.
+		on;
 
 		wrapper = DIV({
 			style : {
@@ -121,7 +113,6 @@ UUI.FULL_INPUT = CLASS({
 					name : name,
 					type : type,
 					value : value,
-					on : on,
 					placeholder : placeholder
 				})]
 			}),
@@ -188,5 +179,12 @@ UUI.FULL_INPUT = CLASS({
 		if (inputStyle !== undefined) {
 			addInputStyle(inputStyle);
 		}
+
+		self.on = on = function(name, handler) {
+			//REQUIRED: name
+			//REQUIRED: handler
+
+			input.on(name, handler);
+		};
 	}
 });

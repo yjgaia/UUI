@@ -3,11 +3,14 @@
  */
 UUI.BUTTON_H = CLASS({
 
-	preset : function() {'use strict';
+	preset : function() {
+		'use strict';
+
 		return NODE;
 	},
 
-	init : function(inner, self, params) {'use strict';
+	init : function(inner, self, params) {
+		'use strict';
 		//REQUIRED: params
 		//OPTIONAL: params.img
 		//OPTIONAL: params.title
@@ -34,14 +37,8 @@ UUI.BUTTON_H = CLASS({
 		// target
 		target = params.target,
 
-		// style
-		style = params.style,
-
 		// is img right
 		isImgRight = params.isImgRight,
-
-		// on
-		on = params.on,
 
 		// a
 		a,
@@ -64,26 +61,16 @@ UUI.BUTTON_H = CLASS({
 		// tap.
 		tap;
 
-		if (on !== undefined) {
-
-			EACH(on, function(handler, name) {
-				on[name] = function(e) {
-					handler(e, self);
-				};
-			});
-		}
-
 		a = A({
-			style : COMBINE([{
+			style : {
 				display : 'block',
 				cursor : 'pointer',
 				textDecoration : 'none',
 				touchCallout : 'none',
 				userSelect : 'none'
-			}, style]),
+			},
 			href : href,
 			target : target,
-			on : on,
 			c : [ titleDom = DIV({
 				style : {
 					flt : 'left'

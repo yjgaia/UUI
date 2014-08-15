@@ -3,7 +3,8 @@
  */
 UUI.LOADING = CLASS({
 
-	init : function(inner, self, params) {'use strict';
+	init : function(inner, self, params) {
+		'use strict';
 		//REQUIRED: params
 		//OPTIONAL: params.wrapperStyle
 		//OPTIONAL: params.contentStyle

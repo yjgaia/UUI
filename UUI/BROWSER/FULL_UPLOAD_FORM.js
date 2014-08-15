@@ -3,11 +3,14 @@
  */
 UUI.FULL_UPLOAD_FORM = CLASS({
 
-	preset : function() {'use strict';
+	preset : function() {
+		'use strict';
+
 		return NODE;
 	},
 
-	init : function(inner, self, params) {'use strict';
+	init : function(inner, self, params) {
+		'use strict';
 		//REQUIRED: params
 		//REQUIRED: params.box
 		//OPTIONAL: params.wrapperStyle
@@ -40,9 +43,6 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 		// upload sucess
 		uploadSuccess = params.uploadSuccess,
 
-		// on
-		on = params.on,
-
 		// wrapper
 		wrapper,
 
@@ -74,16 +74,10 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 		addInputStyle,
 
 		// add uplading style.
-		addUploadingStyle;
+		addUploadingStyle,
 
-		if (on !== undefined) {
-
-			EACH(on, function(handler, name) {
-				on[name] = function(e) {
-					handler(e, self);
-				};
-			});
-		}
+		// on.
+		on;
 
 		wrapper = DIV({
 			style : {
@@ -144,8 +138,7 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 						height : '100%',
 						color : '#000',
 						border : 'none'
-					}, inputStyle]),
-					on : on
+					}, inputStyle])
 				}), INPUT({
 					type : 'submit',
 					style : {
@@ -280,5 +273,12 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 		if (uploadingStyle !== undefined) {
 			addUploadingStyle(uploadingStyle);
 		}
+
+		self.on = on = function(name, handler) {
+			//REQUIRED: name
+			//REQUIRED: handler
+
+			input.on(name, handler);
+		};
 	}
 });

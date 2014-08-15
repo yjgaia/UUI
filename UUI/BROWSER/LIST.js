@@ -3,11 +3,14 @@
  */
 UUI.LIST = CLASS({
 
-	preset : function() {'use strict';
+	preset : function() {
+		'use strict';
+
 		return NODE;
 	},
 
-	init : function(inner, self, params) {'use strict';
+	init : function(inner, self, params) {
+		'use strict';
 		//OPTIONAL: params
 		//OPTIONAL: params.style
 		//OPTIONAL: params.c
@@ -16,15 +19,6 @@ UUI.LIST = CLASS({
 		//OPTIONAL: params.isRequiringClearBoth
 
 		var
-		// style
-		style = params === undefined ? undefined : params.style,
-
-		// children
-		children = params === undefined ? undefined : params.c,
-
-		// on
-		on = params === undefined ? undefined : params.on,
-
 		// is requiring clear both
 		isRequiringClearBoth = params === undefined ? undefined : params.isRequiringClearBoth,
 
@@ -62,20 +56,7 @@ UUI.LIST = CLASS({
 			items = {};
 		}
 
-		if (on !== undefined) {
-
-			EACH(on, function(handler, name) {
-				on[name] = function(e) {
-					handler(e, self);
-				};
-			});
-		}
-
-		ul = UL({
-			style : style,
-			c : children,
-			on : on
-		});
+		ul = UL();
 
 		self.getDom = getDom = function() {
 			return ul;
@@ -101,8 +82,8 @@ UUI.LIST = CLASS({
 
 				item.insertBefore(items[key]);
 
-				itemStack[FIND_KEY({
-					data : itemStack,
+				itemStack[FIND({
+					array : itemStack,
 					value : items[key]
 				})] = item;
 
@@ -159,15 +140,15 @@ UUI.LIST = CLASS({
 			}
 
 			REMOVE({
-				data : itemStack,
+				array : itemStack,
 				value : item
 			});
 			REMOVE({
-				data : items,
+				array : items,
 				key : key
 			});
 			REMOVE({
-				data : removeItemHandlers,
+				array : removeItemHandlers,
 				key : key
 			});
 		};

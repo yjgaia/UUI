@@ -3,11 +3,14 @@
  */
 UUI.TEXT_BUTTON = CLASS({
 
-	preset : function() {'use strict';
+	preset : function() {
+		'use strict';
+
 		return NODE;
 	},
 
-	init : function(inner, self, params) {'use strict';
+	init : function(inner, self, params) {
+		'use strict';
 		//REQUIRED: params
 		//OPTIONAL: params.title
 		//OPTIONAL: params.href
@@ -25,12 +28,6 @@ UUI.TEXT_BUTTON = CLASS({
 		// target
 		target = params.target,
 
-		// style
-		style = params.style,
-
-		// on
-		on = params.on,
-
 		// a
 		a,
 
@@ -46,25 +43,15 @@ UUI.TEXT_BUTTON = CLASS({
 		// tap.
 		tap;
 
-		if (on !== undefined) {
-
-			EACH(on, function(handler, name) {
-				on[name] = function(e) {
-					handler(e, self);
-				};
-			});
-		}
-
 		a = A({
-			style : COMBINE([{
+			style : {
 				cursor : 'pointer',
 				textDecoration : 'none',
 				touchCallout : 'none',
 				userSelect : 'none'
-			}, style]),
+			},
 			href : href,
 			target : target,
-			on : on,
 			c : span = SPAN({
 				c : title === undefined ? (href === undefined ? '' : href) : title
 			})

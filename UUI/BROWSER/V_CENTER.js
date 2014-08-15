@@ -3,11 +3,14 @@
  */
 UUI.V_CENTER = CLASS({
 
-	preset : function() {'use strict';
+	preset : function() {
+		'use strict';
+
 		return NODE;
 	},
 
-	init : function(inner, self, params) {'use strict';
+	init : function(inner, self, params) {
+		'use strict';
 		//OPTIONAL: params
 		//OPTIONAL: params.c
 		//OPTIONAL: params.wrapperStyle
@@ -15,17 +18,11 @@ UUI.V_CENTER = CLASS({
 		//OPTIONAL: params.on
 
 		var
-		// children
-		children = params === undefined ? undefined : params.c,
-
 		// wrapper style
 		wrapperStyle = params === undefined ? undefined : params.wrapperStyle,
 
 		// content style
 		contentStyle = params === undefined ? undefined : params.contentStyle,
-
-		// on
-		on = params === undefined ? undefined : params.on,
 
 		// wrapper
 		wrapper,
@@ -81,15 +78,6 @@ UUI.V_CENTER = CLASS({
 		// add content style.
 		addContentStyle;
 
-		if (on !== undefined) {
-
-			EACH(on, function(handler, name) {
-				on[name] = function(e) {
-					handler(e, self);
-				};
-			});
-		}
-
 		wrapper = TABLE({
 			style : {
 				width : '100%',
@@ -107,8 +95,7 @@ UUI.V_CENTER = CLASS({
 						padding : 0
 					}
 				})
-			}),
-			on : on
+			})
 		});
 
 		self.getDom = getDom = function() {
@@ -120,19 +107,6 @@ UUI.V_CENTER = CLASS({
 
 			content.append(node);
 		};
-
-		if (children !== undefined) {
-
-			if (CHECK_IS_ARRAY(children) === true) {
-
-				EACH(children, function(child, i) {
-					append(child);
-				});
-
-			} else {
-				append(children);
-			}
-		}
 
 		self.prepend = prepend = function(node) {
 			//REQUIRED: node

@@ -3,11 +3,14 @@
  */
 UUI.TABLE = CLASS({
 
-	preset : function() {'use strict';
+	preset : function() {
+		'use strict';
+
 		return NODE;
 	},
 
-	init : function(inner, self, params) {'use strict';
+	init : function(inner, self, params) {
+		'use strict';
 		//OPTIONAL: params
 		//OPTIONAL: params.style
 		//OPTIONAL: params.c
@@ -15,17 +18,8 @@ UUI.TABLE = CLASS({
 		//OPTIONAL: params.on
 
 		var
-		// style
-		style = params === undefined ? undefined : params.style,
-
-		// children
-		children = params === undefined ? undefined : params.c,
-
 		// trs
 		trs = params === undefined ? undefined : params.trs,
-
-		// on
-		on = params === undefined ? undefined : params.on,
 
 		// tr stack
 		trStack = [],
@@ -55,20 +49,7 @@ UUI.TABLE = CLASS({
 			trs = {};
 		}
 
-		if (on !== undefined) {
-
-			EACH(on, function(handler, name) {
-				on[name] = function(e) {
-					handler(e, self);
-				};
-			});
-		}
-
-		table = TABLE({
-			style : style,
-			c : children,
-			on : on
-		});
+		table = TABLE();
 
 		self.getDom = getDom = function() {
 			return table;
@@ -94,8 +75,8 @@ UUI.TABLE = CLASS({
 
 				tr.insertBefore(trs[key]);
 
-				trStack[FIND_KEY({
-					data : trStack,
+				trStack[FIND({
+					array : trStack,
 					value : trs[key]
 				})] = tr;
 
@@ -139,15 +120,15 @@ UUI.TABLE = CLASS({
 			}
 
 			REMOVE({
-				data : trStack,
+				array : trStack,
 				value : tr
 			});
 			REMOVE({
-				data : trs,
+				array : trs,
 				key : key
 			});
 			REMOVE({
-				data : removeTRHandlers,
+				array : removeTRHandlers,
 				key : key
 			});
 		};

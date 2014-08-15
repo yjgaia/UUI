@@ -3,11 +3,14 @@
  */
 UUI.FULL_TEXTAREA = CLASS({
 
-	preset : function() {'use strict';
+	preset : function() {
+		'use strict';
+
 		return NODE;
 	},
 
-	init : function(inner, self, params) {'use strict';
+	init : function(inner, self, params) {
+		'use strict';
 		//REQUIRED: params
 		//REQUIRED: params.name
 		//OPTIONAL: params.placeholder
@@ -31,9 +34,6 @@ UUI.FULL_TEXTAREA = CLASS({
 
 		// textarea style
 		textareaStyle = params.textareaStyle,
-
-		// on
-		on = params.on,
 
 		// wrapper
 		wrapper,
@@ -69,16 +69,10 @@ UUI.FULL_TEXTAREA = CLASS({
 		addWrapperStyle,
 
 		// add input style.
-		addTextareaStyle;
+		addTextareaStyle,
 
-		if (on !== undefined) {
-
-			EACH(on, function(handler, name) {
-				on[name] = function(e) {
-					handler(e, self);
-				};
-			});
-		}
+		// on.
+		on;
 
 		wrapper = DIV({
 			style : {
@@ -96,7 +90,6 @@ UUI.FULL_TEXTAREA = CLASS({
 				},
 				name : name,
 				placeholder : placeholder,
-				on : on,
 				value : value
 			})
 		});
@@ -157,5 +150,12 @@ UUI.FULL_TEXTAREA = CLASS({
 		if (textareaStyle !== undefined) {
 			addTextareaStyle(textareaStyle);
 		}
+
+		self.on = on = function(name, handler) {
+			//REQUIRED: name
+			//REQUIRED: handler
+
+			textarea.on(name, handler);
+		};
 	}
 });

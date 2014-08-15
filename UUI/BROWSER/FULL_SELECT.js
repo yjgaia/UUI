@@ -3,18 +3,20 @@
  */
 UUI.FULL_SELECT = CLASS({
 
-	preset : function() {'use strict';
+	preset : function() {
+		'use strict';
+
 		return NODE;
 	},
 
-	init : function(inner, self, params) {'use strict';
+	init : function(inner, self, params) {
+		'use strict';
 		//REQUIRED: params
 		//REQUIRED: params.name
 		//OPTIONAL: params.value
 		//REQUIRED: params.options
 		//OPTIONAL: params.wrapperStyle
 		//OPTIONAL: params.selectStyle
-		//OPTIONAL: params.on
 
 		var
 		// name
@@ -31,9 +33,6 @@ UUI.FULL_SELECT = CLASS({
 
 		// select style
 		selectStyle = params.selectStyle,
-
-		// on
-		on = params.on,
 
 		// wrapper
 		wrapper,
@@ -66,16 +65,10 @@ UUI.FULL_SELECT = CLASS({
 		addSelectStyle,
 
 		// add option.
-		addOption;
+		addOption,
 
-		if (on !== undefined) {
-
-			EACH(on, function(handler, name) {
-				on[name] = function(e) {
-					handler(e, self);
-				};
-			});
-		}
+		// on.
+		on;
 
 		wrapper = DIV({
 			style : {
@@ -88,7 +81,6 @@ UUI.FULL_SELECT = CLASS({
 					width : '100%',
 					border : 'none'
 				},
-				on : on,
 				name : name
 			})
 		});
@@ -157,5 +149,12 @@ UUI.FULL_SELECT = CLASS({
 				addOption(option);
 			});
 		}
+
+		self.on = on = function(name, handler) {
+			//REQUIRED: name
+			//REQUIRED: handler
+
+			_select.on(name, handler);
+		};
 	}
 });

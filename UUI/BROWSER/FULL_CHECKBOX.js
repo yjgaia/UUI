@@ -3,11 +3,14 @@
  */
 UUI.FULL_CHECKBOX = CLASS({
 
-	preset : function() {'use strict';
+	preset : function() {
+		'use strict';
+
 		return NODE;
 	},
 
-	init : function(inner, self, params) {'use strict';
+	init : function(inner, self, params) {
+		'use strict';
 		//REQUIRED: params
 		//REQUIRED: params.name
 		//REQUIRED: params.label
@@ -31,9 +34,6 @@ UUI.FULL_CHECKBOX = CLASS({
 
 		// input style
 		inputStyle = params.inputStyle,
-
-		// on
-		on = params.on,
 
 		// wrapper
 		wrapper,
@@ -102,16 +102,10 @@ UUI.FULL_CHECKBOX = CLASS({
 		addWrapperStyle,
 
 		// add input style.
-		addInputStyle;
+		addInputStyle,
 
-		if (on !== undefined) {
-
-			EACH(on, function(handler, name) {
-				on[name] = function(e) {
-					handler(e, self);
-				};
-			});
-		}
+		// on.
+		on;
 
 		wrapper = DIV({
 			style : {
@@ -130,11 +124,11 @@ UUI.FULL_CHECKBOX = CLASS({
 				},
 				name : name,
 				type : 'checkbox',
-				on : COMBINE([{
+				on : {
 					tap : function(e) {
 						e.stop();
 					}
-				}, on !== undefined ? on : {}]),
+				},
 				value : value
 			}), labelDom = SPAN({
 				style : {
@@ -193,5 +187,12 @@ UUI.FULL_CHECKBOX = CLASS({
 		if (inputStyle !== undefined) {
 			addInputStyle(inputStyle);
 		}
+
+		self.on = on = function(name, handler) {
+			//REQUIRED: name
+			//REQUIRED: handler
+
+			input.on(name, handler);
+		};
 	}
 });
