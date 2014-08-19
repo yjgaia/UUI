@@ -31,9 +31,6 @@ UUI.NOTICE = CLASS({
 		// modal
 		modal,
 
-		// get dom.
-		getDom,
-
 		// append.
 		append,
 
@@ -70,10 +67,6 @@ UUI.NOTICE = CLASS({
 			on : on,
 			c : msg
 		});
-
-		self.getDom = getDom = function() {
-			return modal.getDom();
-		};
 
 		self.append = append = function(node) {
 			//REQUIRED: node

@@ -55,9 +55,6 @@ UUI.BUTTON_H = CLASS({
 		// get img.
 		getImg,
 
-		// get dom.
-		getDom,
-
 		// tap.
 		tap;
 
@@ -121,14 +118,16 @@ UUI.BUTTON_H = CLASS({
 				resizeEvent.fire();
 			});
 
-			img.addShowHandler(function() {
+			self.on('show', function() {
 				resizeEvent.fire();
 			});
 
-			img.addRemoveHandler(function() {
+			self.on('remove', function() {
 				resizeEvent.remove();
 			});
 		}
+
+		inner.setDom(a);
 
 		self.setTitle = setTitle = function(title) {
 			titleDom.empty();
@@ -137,10 +136,6 @@ UUI.BUTTON_H = CLASS({
 
 		self.getImg = getImg = function() {
 			return img;
-		};
-
-		self.getDom = getDom = function() {
-			return a;
 		};
 
 		self.tap = tap = function() {

@@ -34,9 +34,6 @@ UUI.IMG_BUTTON = CLASS({
 		// get img.
 		getImg,
 
-		// get dom.
-		getDom,
-
 		// tap.
 		tap;
 
@@ -52,12 +49,10 @@ UUI.IMG_BUTTON = CLASS({
 			c : img
 		});
 
+		inner.setDom(a);
+
 		self.getImg = getImg = function() {
 			return img;
-		};
-
-		self.getDom = getDom = function() {
-			return a;
 		};
 
 		self.tap = tap = function() {

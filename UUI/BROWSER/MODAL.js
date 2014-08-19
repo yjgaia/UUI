@@ -54,9 +54,6 @@ UUI.MODAL = CLASS({
 		// move to center.
 		moveToCenter,
 
-		// get dom.
-		getDom,
-
 		// append.
 		append,
 
@@ -170,7 +167,7 @@ UUI.MODAL = CLASS({
 			find(wrapper.getChildren());
 		});
 
-		wrapper.addShowHandler(moveToCenter);
+		wrapper.on('show', moveToCenter);
 
 		resizeEvent = EVENT({
 			name : 'resize'
@@ -189,15 +186,11 @@ UUI.MODAL = CLASS({
 			}
 		});
 
-		wrapper.addRemoveHandler(function() {
+		wrapper.on('remove', function() {
 			resizeEvent.remove();
 			scrollEvent.remove();
 			escEvent.remove();
 		});
-
-		self.getDom = getDom = function() {
-			return wrapper;
-		};
 
 		self.append = append = function(node) {
 			//REQUIRED: node

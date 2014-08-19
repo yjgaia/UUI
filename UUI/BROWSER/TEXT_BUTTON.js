@@ -37,9 +37,6 @@ UUI.TEXT_BUTTON = CLASS({
 		// set title.
 		setTitle,
 
-		// get dom.
-		getDom,
-
 		// tap.
 		tap;
 
@@ -57,13 +54,11 @@ UUI.TEXT_BUTTON = CLASS({
 			})
 		});
 
+		inner.setDom(a);
+
 		self.setTitle = setTitle = function(title) {
 			span.empty();
 			span.append(title);
-		};
-
-		self.getDom = getDom = function() {
-			return a;
 		};
 
 		self.tap = tap = function() {

@@ -41,12 +41,6 @@ UUI.FULL_TEXTAREA = CLASS({
 		// textarea
 		textarea,
 
-		// get textarea dom.
-		getTextareaDom,
-
-		// get dom.
-		getDom,
-
 		// get name.
 		getName,
 
@@ -94,16 +88,7 @@ UUI.FULL_TEXTAREA = CLASS({
 			})
 		});
 
-		// for VALID_FORM.
-		wrapper.isValidWrapper = true;
-
-		self.getTextareaDom = getTextareaDom = function() {
-			return textarea;
-		};
-
-		self.getDom = getDom = function() {
-			return wrapper;
-		};
+		inner.setWrapperDom(wrapper);
 
 		self.getName = getName = function() {
 			return name;
@@ -151,11 +136,15 @@ UUI.FULL_TEXTAREA = CLASS({
 			addTextareaStyle(textareaStyle);
 		}
 
-		self.on = on = function(name, handler) {
-			//REQUIRED: name
-			//REQUIRED: handler
+		self.on = on = function(eventName, eventHandler) {
+			//REQUIRED: eventName
+			//REQUIRED: eventHandler
 
-			textarea.on(name, handler);
+			EVENT({
+				node : self,
+				lowNode : textarea,
+				name : eventName
+			}, eventHandler);
 		};
 	}
 });

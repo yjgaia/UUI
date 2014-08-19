@@ -58,9 +58,6 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 		// uploading
 		uploading,
 
-		// get dom.
-		getDom,
-
 		// select.
 		select,
 
@@ -148,9 +145,6 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 				})]
 			}));
 
-			// for VALID_FORM.
-			form.isValidWrapper = true;
-
 			EVENT({
 				node : input,
 				name : 'change'
@@ -210,9 +204,7 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 			uploading.hide();
 		});
 
-		self.getDom = getDom = function() {
-			return wrapper;
-		};
+		inner.setWrapperDom(wrapper);
 
 		self.select = select = function() {
 			if (input !== undefined) {
@@ -274,11 +266,15 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 			addUploadingStyle(uploadingStyle);
 		}
 
-		self.on = on = function(name, handler) {
-			//REQUIRED: name
-			//REQUIRED: handler
+		self.on = on = function(eventName, eventHandler) {
+			//REQUIRED: eventName
+			//REQUIRED: eventHandler
 
-			input.on(name, handler);
+			EVENT({
+				node : self,
+				lowNode : input,
+				name : eventName
+			}, eventHandler);
 		};
 	}
 });

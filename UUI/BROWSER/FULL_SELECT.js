@@ -40,9 +40,6 @@ UUI.FULL_SELECT = CLASS({
 		// _select
 		_select,
 
-		// get dom.
-		getDom,
-
 		// get name.
 		getName,
 
@@ -85,12 +82,7 @@ UUI.FULL_SELECT = CLASS({
 			})
 		});
 
-		// for VALID_FORM.
-		wrapper.isValidWrapper = true;
-
-		self.getDom = getDom = function() {
-			return wrapper;
-		};
+		inner.setWrapperDom(wrapper);
 
 		self.getName = getName = function() {
 			return name;
@@ -150,11 +142,15 @@ UUI.FULL_SELECT = CLASS({
 			});
 		}
 
-		self.on = on = function(name, handler) {
-			//REQUIRED: name
-			//REQUIRED: handler
+		self.on = on = function(eventName, eventHandler) {
+			//REQUIRED: eventName
+			//REQUIRED: eventHandler
 
-			_select.on(name, handler);
+			EVENT({
+				node : self,
+				lowNode : _select,
+				name : eventName
+			}, eventHandler);
 		};
 	}
 });

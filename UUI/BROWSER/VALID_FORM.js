@@ -31,9 +31,6 @@ UUI.VALID_FORM = CLASS({
 		// form
 		form,
 
-		// get dom.
-		getDom,
-
 		// get data.
 		getData,
 
@@ -51,24 +48,63 @@ UUI.VALID_FORM = CLASS({
 
 		form = FORM();
 
-		form.addRemoveHandler(function() {
+		self.on('remove', function() {
 			EACH(delays, function(delay) {
 				delay.remove();
 			});
 		});
 
-		self.getDom = getDom = function() {
-			return form;
-		};
+		inner.setDom(form);
 
 		self.getData = getData = function() {
-			return form.getData();
+
+			var
+			// data
+			data = {},
+
+			// f.
+			f = function(node) {
+				//REQUIRED: node
+
+				EACH(node.getChildren(), function(child) {
+
+					if (child.getValue !== undefined && child.getName !== undefined && child.getName() !== undefined) {
+						data[child.getName()] = child.getValue();
+					}
+
+					f(child);
+				});
+			};
+
+			f(self);
+
+			return data;
 		};
 
 		self.setData = setData = function(data) {
 			//REQUIRED: data
 
-			return form.setData(data);
+			var
+			// f.
+			f = function(node) {
+				//REQUIRED: node
+
+				EACH(node.getChildren(), function(child) {
+
+					var
+					// value
+					value;
+
+					if (child.setValue !== undefined && child.getName !== undefined && child.getName() !== undefined) {
+						value = data[child.getName()];
+						child.setValue(value === undefined ? '' : value);
+					}
+
+					f(child);
+				});
+			};
+
+			f(self);
 		};
 
 		self.submit = submit = function() {
@@ -116,7 +152,7 @@ UUI.VALID_FORM = CLASS({
 								}
 							}
 
-							(child.getParent().getParent().isValidWrapper === true ? child.getParent().getParent() : (child.getParent().isValidWrapper === true ? child.getParent() : child)).after( errorMsgP = P({
+							child.after( errorMsgP = P({
 								style : errorMsgStyle,
 								c : errorMsg
 							}));

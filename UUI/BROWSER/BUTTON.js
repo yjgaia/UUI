@@ -48,9 +48,6 @@ UUI.BUTTON = CLASS({
 		// get img.
 		getImg,
 
-		// get dom.
-		getDom,
-
 		// tap.
 		tap;
 
@@ -82,6 +79,8 @@ UUI.BUTTON = CLASS({
 			}));
 		}
 
+		inner.setDom(a);
+
 		self.setTitle = setTitle = function(title) {
 			titleDom.empty();
 			titleDom.append(title);
@@ -89,10 +88,6 @@ UUI.BUTTON = CLASS({
 
 		self.getImg = getImg = function() {
 			return img;
-		};
-
-		self.getDom = getDom = function() {
-			return a;
 		};
 
 		self.tap = tap = function() {

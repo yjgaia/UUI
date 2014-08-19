@@ -37,9 +37,6 @@ UUI.LIST = CLASS({
 		// clear both
 		clearBoth,
 
-		// get dom.
-		getDom,
-
 		// add item.
 		addItem,
 
@@ -56,11 +53,7 @@ UUI.LIST = CLASS({
 			items = {};
 		}
 
-		ul = UL();
-
-		self.getDom = getDom = function() {
-			return ul;
-		};
+		inner.setDom( ul = UL());
 
 		self.addItem = addItem = function(params) {
 			//REQUIRED: params

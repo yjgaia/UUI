@@ -44,45 +44,6 @@ UUI.FULL_CHECKBOX = CLASS({
 		// label dom
 		labelDom,
 
-		// get dom.
-		getDom,
-
-		// append.
-		append,
-
-		// append to.
-		appendTo,
-
-		// prepend.
-		prepend,
-
-		// prepend to.
-		prependTo,
-
-		// after.
-		after,
-
-		// insert after.
-		insertAfter,
-
-		// before.
-		before,
-
-		// insert before.
-		insertBefore,
-
-		// remove.
-		remove,
-
-		// empty.
-		empty,
-
-		// get parent.
-		getParent,
-
-		// set parent.
-		setParent,
-
 		// get name.
 		getName,
 
@@ -139,12 +100,7 @@ UUI.FULL_CHECKBOX = CLASS({
 			}), CLEAR_BOTH()]
 		});
 
-		// for VALID_FORM.
-		wrapper.isValidWrapper = true;
-
-		self.getDom = getDom = function() {
-			return wrapper;
-		};
+		inner.setWrapperDom(wrapper);
 
 		self.getName = getName = function() {
 			return name;
@@ -188,11 +144,15 @@ UUI.FULL_CHECKBOX = CLASS({
 			addInputStyle(inputStyle);
 		}
 
-		self.on = on = function(name, handler) {
-			//REQUIRED: name
-			//REQUIRED: handler
+		self.on = on = function(eventName, eventHandler) {
+			//REQUIRED: eventName
+			//REQUIRED: eventHandler
 
-			input.on(name, handler);
+			EVENT({
+				node : self,
+				lowNode : input,
+				name : eventName
+			}, eventHandler);
 		};
 	}
 });

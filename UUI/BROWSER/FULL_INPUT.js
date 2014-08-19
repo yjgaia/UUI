@@ -48,12 +48,6 @@ UUI.FULL_INPUT = CLASS({
 		// input
 		input,
 
-		// get input dom.
-		getInputDom,
-
-		// get dom.
-		getDom,
-
 		// get name.
 		getName,
 
@@ -123,16 +117,7 @@ UUI.FULL_INPUT = CLASS({
 			}
 		});
 
-		// for VALID_FORM.
-		wrapper.isValidWrapper = true;
-
-		self.getInputDom = getInputDom = function() {
-			return input;
-		};
-
-		self.getDom = getDom = function() {
-			return wrapper;
-		};
+		inner.setWrapperDom(wrapper);
 
 		self.getName = getName = function() {
 			return name;
@@ -180,11 +165,15 @@ UUI.FULL_INPUT = CLASS({
 			addInputStyle(inputStyle);
 		}
 
-		self.on = on = function(name, handler) {
-			//REQUIRED: name
-			//REQUIRED: handler
+		self.on = on = function(eventName, eventHandler) {
+			//REQUIRED: eventName
+			//REQUIRED: eventHandler
 
-			input.on(name, handler);
+			EVENT({
+				node : self,
+				lowNode : input,
+				name : eventName
+			}, eventHandler);
 		};
 	}
 });

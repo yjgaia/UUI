@@ -30,21 +30,6 @@ UUI.PANEL = CLASS({
 		// content
 		content,
 
-		// get dom.
-		getDom,
-
-		// append.
-		append,
-
-		// prepend.
-		prepend,
-
-		// empty.
-		empty,
-
-		// get children.
-		getChildren,
-
 		// add wrapper style.
 		addWrapperStyle,
 
@@ -55,29 +40,8 @@ UUI.PANEL = CLASS({
 			c : content = DIV()
 		});
 
-		self.getDom = getDom = function() {
-			return wrapper;
-		};
-
-		self.append = append = function(node) {
-			//REQUIRED: node
-
-			content.append(node);
-		};
-
-		self.prepend = prepend = function(node) {
-			//REQUIRED: node
-
-			content.prepend(node);
-		};
-
-		self.empty = empty = function() {
-			content.empty();
-		};
-
-		self.getChildren = getChildren = function() {
-			return content.getChildren();
-		};
+		inner.setWrapperDom(wrapper);
+		inner.setContentDom(content);
 
 		self.addWrapperStyle = addWrapperStyle = function(style) {
 			//REQUIRED: style

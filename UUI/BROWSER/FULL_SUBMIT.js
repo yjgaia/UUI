@@ -21,10 +21,7 @@ UUI.FULL_SUBMIT = CLASS({
 		value = params === undefined ? undefined : params.value,
 
 		// input
-		input,
-
-		// get dom.
-		getDom;
+		input;
 
 		input = INPUT({
 			type : 'submit',
@@ -41,8 +38,6 @@ UUI.FULL_SUBMIT = CLASS({
 			input.setValue(value);
 		}
 
-		self.getDom = getDom = function() {
-			return input;
-		};
+		inner.setDom(input);
 	}
 });

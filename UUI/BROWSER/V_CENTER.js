@@ -30,48 +30,6 @@ UUI.V_CENTER = CLASS({
 		// content
 		content,
 
-		// get dom.
-		getDom,
-
-		// append.
-		append,
-
-		// append to.
-		appendTo,
-
-		// prepend.
-		prepend,
-
-		// prepend to.
-		prependTo,
-
-		// after.
-		after,
-
-		// insert after.
-		insertAfter,
-
-		// before.
-		before,
-
-		// insert before.
-		insertBefore,
-
-		// remove.
-		remove,
-
-		// empty.
-		empty,
-
-		// get parent.
-		getParent,
-
-		// set parent.
-		setParent,
-
-		// get children.
-		getChildren,
-
 		// add wrapper style.
 		addWrapperStyle,
 
@@ -98,29 +56,8 @@ UUI.V_CENTER = CLASS({
 			})
 		});
 
-		self.getDom = getDom = function() {
-			return wrapper;
-		};
-
-		self.append = append = function(node) {
-			//REQUIRED: node
-
-			content.append(node);
-		};
-
-		self.prepend = prepend = function(node) {
-			//REQUIRED: node
-
-			content.prepend(node);
-		};
-
-		self.empty = empty = function() {
-			content.empty();
-		};
-
-		self.getChildren = getChildren = function() {
-			return content.getChildren();
-		};
+		inner.setWrapperDom(wrapper);
+		inner.setContentDom(content);
 
 		self.addWrapperStyle = addWrapperStyle = function(style) {
 			//REQUIRED: style

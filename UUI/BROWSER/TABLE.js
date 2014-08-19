@@ -30,9 +30,6 @@ UUI.TABLE = CLASS({
 		// table
 		table,
 
-		// get dom.
-		getDom,
-
 		// add tr.
 		addTR,
 
@@ -49,11 +46,7 @@ UUI.TABLE = CLASS({
 			trs = {};
 		}
 
-		table = TABLE();
-
-		self.getDom = getDom = function() {
-			return table;
-		};
+		inner.setDom( table = TABLE());
 
 		self.addTR = addTR = function(params) {
 			//REQUIRED: params
