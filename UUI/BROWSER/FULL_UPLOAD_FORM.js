@@ -129,6 +129,7 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 				}, formStyle]),
 				c : [ input = INPUT({
 					type : 'file',
+					name : 'file',
 					isMultiple : true,
 					style : COMBINE([{
 						width : '100%',
