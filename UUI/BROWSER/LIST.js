@@ -137,12 +137,12 @@ UUI.LIST = CLASS({
 				value : item
 			});
 			REMOVE({
-				array : items,
-				key : key
+				data : items,
+				name : key
 			});
 			REMOVE({
-				array : removeItemHandlers,
-				key : key
+				data : removeItemHandlers,
+				name : key
 			});
 		};
 

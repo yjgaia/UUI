@@ -117,12 +117,12 @@ UUI.TABLE = CLASS({
 				value : tr
 			});
 			REMOVE({
-				array : trs,
-				key : key
+				data : trs,
+				name : key
 			});
 			REMOVE({
-				array : removeTRHandlers,
-				key : key
+				data : removeTRHandlers,
+				name : key
 			});
 		};
 
