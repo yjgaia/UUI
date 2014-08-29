@@ -70,15 +70,18 @@ UUI.FULL_SELECT = CLASS({
 		wrapper = DIV({
 			style : {
 				padding : 5,
-				backgroundColor : '#FFF',
+				backgroundColor : '#fff',
 				position : 'relative'
 			},
 			c : _select = SELECT({
 				style : {
 					width : '100%',
-					border : 'none'
+					border : 'none',
+					background : 'transparent'
 				},
-				name : name
+				name : name,
+				value : value,
+				c : options
 			})
 		});
 
@@ -97,10 +100,6 @@ UUI.FULL_SELECT = CLASS({
 
 			_select.setValue(value);
 		};
-
-		if (value !== undefined) {
-			setValue(value);
-		}
 
 		self.select = select = function() {
 			_select.select();
@@ -135,12 +134,6 @@ UUI.FULL_SELECT = CLASS({
 
 			_select.append(option);
 		};
-
-		if (options !== undefined) {
-			EACH(options, function(option) {
-				addOption(option);
-			});
-		}
 
 		self.on = on = function(eventName, eventHandler) {
 			//REQUIRED: eventName

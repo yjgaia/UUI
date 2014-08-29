@@ -78,7 +78,7 @@ UUI.FULL_INPUT = CLASS({
 		wrapper = DIV({
 			style : {
 				padding : 5,
-				backgroundColor : '#FFF'
+				backgroundColor : '#fff'
 			},
 			c : DIV({
 				style : {
