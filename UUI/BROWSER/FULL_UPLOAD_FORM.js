@@ -271,11 +271,22 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 			//REQUIRED: eventName
 			//REQUIRED: eventHandler
 
-			EVENT({
-				node : self,
-				lowNode : input,
-				name : eventName
-			}, eventHandler);
+			if (eventName === 'focus' || eventName === 'blur' || eventName === 'change' || eventName === 'keydown' || eventName === 'keypress' || eventName === 'keyup') {
+
+				EVENT({
+					node : self,
+					lowNode : input,
+					name : eventName
+				}, eventHandler);
+
+			} else {
+
+				EVENT({
+					node : self,
+					lowNode : wrapper,
+					name : eventName
+				}, eventHandler);
+			}
 		};
 	}
 });

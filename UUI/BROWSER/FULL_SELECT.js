@@ -139,11 +139,22 @@ UUI.FULL_SELECT = CLASS({
 			//REQUIRED: eventName
 			//REQUIRED: eventHandler
 
-			EVENT({
-				node : self,
-				lowNode : _select,
-				name : eventName
-			}, eventHandler);
+			if (eventName === 'focus' || eventName === 'blur' || eventName === 'change' || eventName === 'select' || eventName === 'keydown' || eventName === 'keypress' || eventName === 'keyup') {
+
+				EVENT({
+					node : self,
+					lowNode : _select,
+					name : eventName
+				}, eventHandler);
+
+			} else {
+
+				EVENT({
+					node : self,
+					lowNode : wrapper,
+					name : eventName
+				}, eventHandler);
+			}
 		};
 	}
 });

@@ -140,11 +140,22 @@ UUI.FULL_TEXTAREA = CLASS({
 			//REQUIRED: eventName
 			//REQUIRED: eventHandler
 
-			EVENT({
-				node : self,
-				lowNode : textarea,
-				name : eventName
-			}, eventHandler);
+			if (eventName === 'focus' || eventName === 'blur' || eventName === 'change' || eventName === 'keydown' || eventName === 'keypress' || eventName === 'keyup') {
+
+				EVENT({
+					node : self,
+					lowNode : textarea,
+					name : eventName
+				}, eventHandler);
+
+			} else {
+
+				EVENT({
+					node : self,
+					lowNode : wrapper,
+					name : eventName
+				}, eventHandler);
+			}
 		};
 	}
 });
