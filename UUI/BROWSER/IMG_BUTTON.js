@@ -56,7 +56,10 @@ UUI.IMG_BUTTON = CLASS({
 		};
 
 		self.tap = tap = function() {
-			a.tap();
+			EVENT.fireAll({
+				node : self,
+				name : 'tap'
+			});
 		};
 	}
 });

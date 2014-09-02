@@ -139,9 +139,10 @@ UUI.BUTTON_H = CLASS({
 		};
 
 		self.tap = tap = function() {
-			if (on !== undefined && on.tap !== undefined) {
-				on.tap();
-			}
+			EVENT.fireAll({
+				node : self,
+				name : 'tap'
+			});
 		};
 	}
 });
