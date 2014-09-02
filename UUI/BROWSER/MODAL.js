@@ -51,6 +51,9 @@ UUI.MODAL = CLASS({
 		// esc event
 		escEvent,
 
+		// get node.
+		getNode,
+
 		// move to center.
 		moveToCenter,
 
@@ -81,17 +84,11 @@ UUI.MODAL = CLASS({
 		// add content style.
 		addContentStyle,
 
+		// on.
+		on,
+
 		// close.
 		close;
-
-		if (on !== undefined) {
-
-			EACH(on, function(handler, name) {
-				on[name] = function(e) {
-					handler(e, self);
-				};
-			});
-		}
 
 		if (xImg === undefined && isCannotClose !== true) {
 			xImg = IMG({
@@ -124,8 +121,7 @@ UUI.MODAL = CLASS({
 						});
 					}
 				}
-			})],
-			on : on
+			})]
 		}).appendTo(BODY);
 
 		moveToCenter = RAR(function() {
@@ -191,6 +187,10 @@ UUI.MODAL = CLASS({
 			scrollEvent.remove();
 			escEvent.remove();
 		});
+
+		self.getNode = getNode = function() {
+			return wrapper;
+		};
 
 		self.append = append = function(node) {
 			//REQUIRED: node
@@ -267,15 +267,49 @@ UUI.MODAL = CLASS({
 			addContentStyle(contentStyle);
 		}
 
+		self.on = on = function(eventName, eventHandler) {
+			EVENT({
+				node : self,
+				lowNode : wrapper,
+				name : eventName
+			}, eventHandler);
+		};
+
 		self.close = close = function() {
 
-			if (on !== undefined && on.close !== undefined) {
-				if (on.close(self) !== false) {
-					remove();
-				}
-			} else {
+			if (EVENT.fireAll({
+				node : self,
+				name : 'close'
+			}) !== false) {
 				remove();
 			}
 		};
+	},
+
+	afterInit : function(inner, self, params) {
+		'use strict';
+		//OPTIONAL: params
+		//OPTIONAL: params.c
+		//OPTIONAL: params.wrapperStyle
+		//OPTIONAL: params.contentStyle
+		//OPTIONAL: params.xStyle
+		//OPTIONAL: params.xImg
+		//OPTIONAL: params.isCannotClose
+		//OPTIONAL: params.on
+
+		var
+		// on
+		on;
+
+		// init params.
+		if (params !== undefined && CHECK_IS_DATA(params) === true) {
+			on = params.on;
+		}
+
+		if (on !== undefined) {
+			EACH(on, function(handler, name) {
+				self.on(name, handler);
+			});
+		}
 	}
 });

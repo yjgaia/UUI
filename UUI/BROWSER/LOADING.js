@@ -31,6 +31,9 @@ UUI.LOADING = CLASS({
 		// modal
 		modal,
 
+		// get node.
+		getNode,
+
 		// append.
 		append,
 
@@ -72,6 +75,10 @@ UUI.LOADING = CLASS({
 			})],
 			on : on
 		});
+
+		self.getNode = getNode = function() {
+			return modal.getNode();
+		};
 
 		self.append = append = function(node) {
 			//REQUIRED: node
