@@ -128,16 +128,16 @@ UUI.MODAL = CLASS({
 
 			var
 			// left
-			left = (WIN_WIDTH() - wrapper.getWidth()) / 2 + SCROLL_LEFT(),
+			left = (WIN_WIDTH() - wrapper.getWidth()) / 2,
 
 			// top
-			top = (WIN_HEIGHT() - wrapper.getHeight()) / 2 + SCROLL_TOP(),
+			top = (WIN_HEIGHT() - wrapper.getHeight()) / 2,
 
 			// find.
 			find;
 
 			wrapper.addStyle({
-				position : 'absolute',
+				position : 'fixed',
 				left : left < 0 ? 0 : left,
 				top : top < 0 ? 0 : top
 			});
