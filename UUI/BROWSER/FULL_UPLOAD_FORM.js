@@ -113,14 +113,14 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 			})]
 		});
 
-		GET('__UPLOAD_SERVER_HOST', function(host) {
+		GET('__UPLOAD_SERVER_HOST?defaultHost=' + global.location.host, function(host) {
 
 			var
 			// callback url
 			callbackURL = global.location.protocol + '//' + global.location.host + '/__UPLOAD_CALLBACK';
 
 			iframe.after( form = FORM({
-				action : 'http://' + (host === '' ? global.location.hostname : host) + ':' + CONFIG.webServerPort + '/__UPLOAD?boxName=' + box.boxName + '&callbackURL=' + callbackURL,
+				action : 'http://' + host + ':' + CONFIG.webServerPort + '/__UPLOAD?boxName=' + box.boxName + '&callbackURL=' + callbackURL,
 				target : '__UPLOAD_FORM_' + self.id,
 				method : 'POST',
 				enctype : 'multipart/form-data',
