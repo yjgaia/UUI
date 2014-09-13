@@ -64,6 +64,9 @@ UUI.FULL_SELECT = CLASS({
 		// add option.
 		addOption,
 
+		// remove all options.
+		removeAllOptions,
+
 		// on.
 		on;
 
@@ -133,6 +136,10 @@ UUI.FULL_SELECT = CLASS({
 			//REQUIRED: option
 
 			_select.append(option);
+		};
+
+		self.removeAllOptions = removeAllOptions = function() {
+			_select.empty();
 		};
 
 		self.on = on = function(eventName, eventHandler) {
