@@ -113,7 +113,7 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 			})]
 		});
 
-		GET('__UPLOAD_SERVER_HOST?defaultHost=' + global.location.host, function(host) {
+		GET('__UPLOAD_SERVER_HOST?defaultHost=' + global.location.hostname, function(host) {
 
 			var
 			// callback url
