@@ -102,7 +102,7 @@ UUI.FULL_INPUT = CLASS({
 						top : 0,
 						width : '100%',
 						border : 'none',
-						background : 'transparent'
+						background : type === 'date' || type === 'datetime' || type === 'datetime-local' || type === 'month' || type === 'time' || type === 'week' ? undefined : 'transparent'
 					},
 					name : name,
 					type : type,

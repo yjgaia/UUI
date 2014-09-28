@@ -9,7 +9,7 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 		return NODE;
 	},
 
-	init : function(inner, self, params) {
+	init : function(inner, self, params, callbackOrHandlers) {
 		'use strict';
 		//REQUIRED: params
 		//REQUIRED: params.box
@@ -24,6 +24,9 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 		var
 		// box
 		box = params.box,
+
+		// callback url
+		callbackURL = params.callbackURL !== undefined ? params.callbackURL : 'http://' + BROWSER_CONFIG.host + ':' + BROWSER_CONFIG.port + '/__UPLOAD_CALLBACK',
 
 		// wrapper style
 		wrapperStyle = params.wrapperStyle,
@@ -113,11 +116,11 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 			})]
 		});
 
-		GET('__UPLOAD_SERVER_HOST?defaultHost=' + global.location.hostname, function(host) {
-
-			var
-			// callback url
-			callbackURL = global.location.protocol + '//' + global.location.host + '/__UPLOAD_CALLBACK';
+		GET({
+			host : BROWSER_CONFIG.host,
+			port : BROWSER_CONFIG.port,
+			uri : '__UPLOAD_SERVER_HOST?defaultHost=' + BROWSER_CONFIG.host
+		}, function(host) {
 
 			iframe.after( form = FORM({
 				action : 'http://' + host + ':' + CONFIG.webServerPort + '/__UPLOAD?boxName=' + box.boxName + '&callbackURL=' + callbackURL,
