@@ -13,6 +13,9 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 		'use strict';
 		//REQUIRED: params
 		//REQUIRED: params.box
+		//OPTIONAL: params.capture
+		//OPTIONAL: params.accept
+		//OPTIONAL: params.isMultiple
 		//OPTIONAL: params.wrapperStyle
 		//OPTIONAL: params.formStyle
 		//OPTIONAL: params.inputStyle
@@ -24,6 +27,15 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 		var
 		// box
 		box = params.box,
+
+		// capture
+		capture = params.capture,
+
+		// accept
+		accept = params.accept,
+
+		// is multiple
+		isMultiple = params.isMultiple,
 
 		// callback url
 		callbackURL = params.callbackURL !== undefined ? params.callbackURL : 'http://' + BROWSER_CONFIG.host + ':' + BROWSER_CONFIG.port + '/__UPLOAD_CALLBACK',
@@ -133,7 +145,9 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 				c : [ input = INPUT({
 					type : 'file',
 					name : 'file',
-					isMultiple : true,
+					capture : capture,
+					accept : accept,
+					isMultiple : isMultiple,
 					style : COMBINE([{
 						width : '100%',
 						height : '100%',
@@ -199,7 +213,7 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 				});
 
 				if (uploadSuccess !== undefined) {
-					uploadSuccess(fileDataSet);
+					uploadSuccess(isMultiple !== true ? fileDataSet[0] : fileDataSet);
 				}
 
 				input.setValue('');

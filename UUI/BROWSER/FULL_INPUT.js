@@ -16,6 +16,8 @@ UUI.FULL_INPUT = CLASS({
 		//OPTIONAL: params.type
 		//OPTIONAL: params.placeholder
 		//OPTIONAL: params.value
+		//OPTIONAL: params.capture
+		//OPTIONAL: params.accept
 		//OPTIONAL: params.wrapperStyle
 		//OPTIONAL: params.inputStyle
 		//OPTIONAL: params.on
@@ -29,6 +31,12 @@ UUI.FULL_INPUT = CLASS({
 
 		// placeholder
 		placeholder = params.placeholder,
+
+		// capture
+		capture = params.capture,
+
+		// accept
+		accept = params.accept,
 
 		// value
 		value = params.value,
@@ -107,6 +115,8 @@ UUI.FULL_INPUT = CLASS({
 					name : name,
 					type : type,
 					value : value,
+					capture : capture,
+					accept : accept,
 					placeholder : placeholder
 				})]
 			}),
