@@ -140,7 +140,19 @@ UUI.FULL_INPUT = CLASS({
 		self.setValue = setValue = function(value) {
 			//REQUIRED: value
 
+			var
+			// origin value
+			originValue = input.getValue();
+
 			input.setValue(value);
+
+			if (originValue !== value) {
+
+				EVENT.fireAll({
+					node : self,
+					name : 'change'
+				});
+			}
 		};
 
 		self.select = select = function() {

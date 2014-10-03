@@ -63,7 +63,13 @@ UUI.FULL_CHECKBOX = CLASS({
 		addInputStyle,
 
 		// on.
-		on;
+		on,
+
+		// toggle check.
+		toggleCheck,
+
+		// check is checked.
+		checkIsChecked;
 
 		wrapper = DIV({
 			style : {
@@ -104,7 +110,32 @@ UUI.FULL_CHECKBOX = CLASS({
 		self.setValue = setValue = function(value) {
 			//REQUIRED: value
 
+			var
+			// checked
+			checked = input.checkIsChecked();
+
 			input.setValue(value);
+
+			if (value === true) {
+
+				if (checked !== true) {
+
+					EVENT.fireAll({
+						node : self,
+						name : 'change'
+					});
+				}
+
+			} else {
+
+				if (checked === true) {
+
+					EVENT.fireAll({
+						node : self,
+						name : 'change'
+					});
+				}
+			}
 		};
 
 		self.select = select = function() {
@@ -156,5 +187,38 @@ UUI.FULL_CHECKBOX = CLASS({
 				}, eventHandler);
 			}
 		};
+
+		self.toggleCheck = toggleCheck = function(e) {
+
+			var
+			// checked
+			checked = input.toggleCheck();
+
+			EVENT.fireAll({
+				node : self,
+				name : 'change'
+			});
+
+			return checked;
+		};
+
+		self.checkIsChecked = checkIsChecked = function() {
+			return input.checkIsChecked();
+		};
+
+		EVENT({
+			node : self,
+			lowNode : input,
+			name : 'keyup'
+		}, function(e) {
+			if (e !== undefined && e.getKeyCode() === 32) {
+				DELAY(function() {
+					EVENT.fireAll({
+						node : self,
+						name : 'change'
+					});
+				});
+			}
+		});
 	}
 });

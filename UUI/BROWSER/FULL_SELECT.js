@@ -101,7 +101,19 @@ UUI.FULL_SELECT = CLASS({
 		self.setValue = setValue = function(value) {
 			//REQUIRED: value
 
+			var
+			// origin value
+			originValue = _select.getValue();
+
 			_select.setValue(value);
+
+			if (originValue !== value) {
+
+				EVENT.fireAll({
+					node : self,
+					name : 'change'
+				});
+			}
 		};
 
 		self.select = select = function() {
