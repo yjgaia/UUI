@@ -122,7 +122,13 @@ UUI.FULL_INPUT = CLASS({
 			}),
 			on : {
 				tap : function() {
+
 					input.focus();
+
+					EVENT.fireAll({
+						node : self,
+						name : 'focus'
+					});
 				}
 			}
 		});
@@ -156,15 +162,38 @@ UUI.FULL_INPUT = CLASS({
 		};
 
 		self.select = select = function() {
+
 			input.select();
+
+			EVENT.fireAll({
+				node : self,
+				name : 'select'
+			});
+
+			EVENT.fireAll({
+				node : self,
+				name : 'focus'
+			});
 		};
 
 		self.focus = focus = function() {
+
 			input.focus();
+
+			EVENT.fireAll({
+				node : self,
+				name : 'focus'
+			});
 		};
 
 		self.blur = blur = function() {
+
 			input.blur();
+
+			EVENT.fireAll({
+				node : self,
+				name : 'blur'
+			});
 		};
 
 		self.addWrapperStyle = addWrapperStyle = function(style) {

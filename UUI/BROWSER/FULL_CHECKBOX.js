@@ -91,7 +91,13 @@ UUI.FULL_CHECKBOX = CLASS({
 				c : label,
 				on : {
 					tap : function(e) {
+
 						input.toggleCheck();
+
+						EVENT.fireAll({
+							node : self,
+							name : 'change'
+						});
 					}
 				}
 			}), CLEAR_BOTH()]
@@ -139,11 +145,28 @@ UUI.FULL_CHECKBOX = CLASS({
 		};
 
 		self.select = select = function() {
+
 			input.select();
+
+			EVENT.fireAll({
+				node : self,
+				name : 'select'
+			});
+
+			EVENT.fireAll({
+				node : self,
+				name : 'focus'
+			});
 		};
 
 		self.blur = blur = function() {
+
 			input.blur();
+
+			EVENT.fireAll({
+				node : self,
+				name : 'blur'
+			});
 		};
 
 		self.addWrapperStyle = addWrapperStyle = function(style) {

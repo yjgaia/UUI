@@ -194,7 +194,10 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 			fileDataSet,
 
 			// max upload file MB
-			maxUploadFileMB = frame !== undefined ? frame.maxUploadFileMB : undefined;
+			maxUploadFileMB = frame !== undefined ? frame.maxUploadFileMB : undefined,
+
+			// origin value
+			originValue;
 
 			if (maxUploadFileMB !== undefined) {
 
@@ -202,7 +205,17 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 					uploadOverSizeFile(maxUploadFileMB);
 				}
 
+				originValue = input.getValue();
+
 				input.setValue('');
+
+				if (originValue !== '') {
+
+					EVENT.fireAll({
+						node : self,
+						name : 'change'
+					});
+				}
 
 			} else if (fileDataSetStr !== undefined) {
 
@@ -216,7 +229,17 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 					uploadSuccess(isMultiple !== true ? fileDataSet[0] : fileDataSet);
 				}
 
+				originValue = input.getValue();
+
 				input.setValue('');
+
+				if (originValue !== '') {
+
+					EVENT.fireAll({
+						node : self,
+						name : 'change'
+					});
+				}
 			}
 
 			uploading.hide();
@@ -225,8 +248,20 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 		inner.setWrapperDom(wrapper);
 
 		self.select = select = function() {
+
 			if (input !== undefined) {
+
 				input.select();
+
+				EVENT.fireAll({
+					node : self,
+					name : 'select'
+				});
+
+				EVENT.fireAll({
+					node : self,
+					name : 'focus'
+				});
 			}
 		};
 
