@@ -12,8 +12,8 @@ UUI.FULL_SUBMIT = CLASS({
 	init : function(inner, self, params) {
 		'use strict';
 		//OPTIONAL: params
-		//OPTIONAL: params.style
 		//OPTIONAL: params.value
+		//OPTIONAL: params.style
 		//OPTIONAL: params.on
 
 		var

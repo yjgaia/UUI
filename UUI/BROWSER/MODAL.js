@@ -7,19 +7,18 @@ UUI.MODAL = CLASS({
 		'use strict';
 		//OPTIONAL: params
 		//OPTIONAL: params.c
-		//OPTIONAL: params.wrapperStyle
+		//OPTIONAL: params.style
 		//OPTIONAL: params.contentStyle
 		//OPTIONAL: params.xStyle
 		//OPTIONAL: params.xImg
 		//OPTIONAL: params.isCannotClose
-		//OPTIONAL: params.on
 
 		var
 		// children
 		children = params === undefined ? undefined : params.c,
 
-		// wrapper style
-		wrapperStyle = params === undefined ? undefined : params.wrapperStyle,
+		// style
+		style = params === undefined ? undefined : params.style,
 
 		// content style
 		contentStyle = params === undefined ? undefined : params.contentStyle,
@@ -32,9 +31,6 @@ UUI.MODAL = CLASS({
 
 		// is cannot close
 		isCannotClose = params === undefined ? undefined : params.isCannotClose,
-
-		// on
-		on = params === undefined ? undefined : params.on,
 
 		// wrapper
 		wrapper,
@@ -77,9 +73,9 @@ UUI.MODAL = CLASS({
 
 		// get children.
 		getChildren,
-
-		// add wrapper style.
-		addWrapperStyle,
+		
+		// add style.
+		addStyle,
 
 		// add content style.
 		addContentStyle,
@@ -88,7 +84,13 @@ UUI.MODAL = CLASS({
 		on,
 
 		// close.
-		close;
+		close,
+		
+		// get left.
+		getLeft,
+		
+		// get top.
+		getTop;
 
 		if (xImg === undefined && isCannotClose !== true) {
 			xImg = IMG({
@@ -111,12 +113,12 @@ UUI.MODAL = CLASS({
 						close();
 					},
 					mouseover : function() {
-						addWrapperStyle({
+						addStyle({
 							opacity : 0.8
 						});
 					},
 					mouseout : function() {
-						addWrapperStyle({
+						addStyle({
 							opacity : 1
 						});
 					}
@@ -245,15 +247,15 @@ UUI.MODAL = CLASS({
 			return content.getChildren();
 		};
 
-		self.addWrapperStyle = addWrapperStyle = function(style) {
+		self.addStyle = addStyle = function(style) {
 			//REQUIRED: style
 
 			wrapper.addStyle(style);
 			moveToCenter();
 		};
 
-		if (wrapperStyle !== undefined) {
-			addWrapperStyle(wrapperStyle);
+		if (style !== undefined) {
+			addStyle(style);
 		}
 
 		self.addContentStyle = addContentStyle = function(style) {
@@ -284,13 +286,21 @@ UUI.MODAL = CLASS({
 				remove();
 			}
 		};
+		
+		self.getLeft = getLeft = function() {
+			return wrapper.getLeft();
+		};
+		
+		self.getTop = getTop = function() {
+			return wrapper.getTop();
+		};
 	},
 
 	afterInit : function(inner, self, params) {
 		'use strict';
 		//OPTIONAL: params
 		//OPTIONAL: params.c
-		//OPTIONAL: params.wrapperStyle
+		//OPTIONAL: params.style
 		//OPTIONAL: params.contentStyle
 		//OPTIONAL: params.xStyle
 		//OPTIONAL: params.xImg

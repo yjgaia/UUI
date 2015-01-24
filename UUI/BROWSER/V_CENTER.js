@@ -13,14 +13,11 @@ UUI.V_CENTER = CLASS({
 		'use strict';
 		//OPTIONAL: params
 		//OPTIONAL: params.c
-		//OPTIONAL: params.wrapperStyle
+		//OPTIONAL: params.style
 		//OPTIONAL: params.contentStyle
 		//OPTIONAL: params.on
 
 		var
-		// wrapper style
-		wrapperStyle = params === undefined ? undefined : params.wrapperStyle,
-
 		// content style
 		contentStyle = params === undefined ? undefined : params.contentStyle,
 
@@ -29,9 +26,6 @@ UUI.V_CENTER = CLASS({
 
 		// content
 		content,
-
-		// add wrapper style.
-		addWrapperStyle,
 
 		// add content style.
 		addContentStyle;
@@ -58,16 +52,6 @@ UUI.V_CENTER = CLASS({
 
 		inner.setWrapperDom(wrapper);
 		inner.setContentDom(content);
-
-		self.addWrapperStyle = addWrapperStyle = function(style) {
-			//REQUIRED: style
-
-			wrapper.addStyle(style);
-		};
-
-		if (wrapperStyle !== undefined) {
-			addWrapperStyle(wrapperStyle);
-		}
 
 		self.addContentStyle = addContentStyle = function(style) {
 			//REQUIRED: style

@@ -15,7 +15,7 @@ UUI.FULL_TEXTAREA = CLASS({
 		//REQUIRED: params.name
 		//OPTIONAL: params.placeholder
 		//OPTIONAL: params.value
-		//OPTIONAL: params.wrapperStyle
+		//OPTIONAL: params.style
 		//OPTIONAL: params.textareaStyle
 		//OPTIONAL: params.on
 
@@ -28,9 +28,6 @@ UUI.FULL_TEXTAREA = CLASS({
 
 		// value
 		value = params.value,
-
-		// wrapper style
-		wrapperStyle = params.wrapperStyle,
 
 		// textarea style
 		textareaStyle = params.textareaStyle,
@@ -58,9 +55,6 @@ UUI.FULL_TEXTAREA = CLASS({
 
 		// blur.
 		blur,
-
-		// add wrapper style.
-		addWrapperStyle,
 
 		// add input style.
 		addTextareaStyle,
@@ -127,16 +121,6 @@ UUI.FULL_TEXTAREA = CLASS({
 		self.blur = blur = function() {
 			textarea.blur();
 		};
-
-		self.addWrapperStyle = addWrapperStyle = function(style) {
-			//REQUIRED: style
-
-			wrapper.addStyle(style);
-		};
-
-		if (wrapperStyle !== undefined) {
-			addWrapperStyle(wrapperStyle);
-		}
 
 		self.addTextareaStyle = addTextareaStyle = function(style) {
 			//REQUIRED: style

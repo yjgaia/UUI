@@ -12,8 +12,8 @@ UUI.TABLE = CLASS({
 	init : function(inner, self, params) {
 		'use strict';
 		//OPTIONAL: params
-		//OPTIONAL: params.style
 		//OPTIONAL: params.c
+		//OPTIONAL: params.style
 		//OPTIONAL: params.trs
 		//OPTIONAL: params.on
 

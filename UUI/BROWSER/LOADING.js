@@ -6,15 +6,15 @@ UUI.LOADING = CLASS({
 	init : function(inner, self, params) {
 		'use strict';
 		//REQUIRED: params
-		//OPTIONAL: params.wrapperStyle
+		//OPTIONAL: params.style
 		//OPTIONAL: params.contentStyle
 		//OPTIONAL: params.indicator
 		//REQUIRED: params.msg
 		//OPTIONAL: params.on
 
 		var
-		// wrapper style
-		wrapperStyle = params.wrapperStyle,
+		// style
+		style = params.style,
 
 		// content style
 		contentStyle = params.contentStyle,
@@ -55,16 +55,16 @@ UUI.LOADING = CLASS({
 		// get children.
 		getChildren,
 
-		// add wrapper style.
-		addWrapperStyle,
+		// add style.
+		addStyle,
 
 		// add content style.
 		addContentStyle;
 
 		modal = UUI.MODAL({
-			wrapperStyle : COMBINE([{
+			style : COMBINE([{
 				textAlign : 'center'
-			}, wrapperStyle]),
+			}, style]),
 			contentStyle : contentStyle,
 			isCannotClose : true,
 			c : [indicator === undefined ? '' : indicator, P({
@@ -116,10 +116,10 @@ UUI.LOADING = CLASS({
 			return modal.getChildren();
 		};
 
-		self.addWrapperStyle = addWrapperStyle = function(style) {
+		self.addStyle = addStyle = function(style) {
 			//REQUIRED: style
 
-			modal.addWrapperStyle(style);
+			modal.addStyle(style);
 		};
 
 		self.addContentStyle = addContentStyle = function(style) {

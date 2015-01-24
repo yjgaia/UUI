@@ -18,7 +18,7 @@ UUI.FULL_INPUT = CLASS({
 		//OPTIONAL: params.value
 		//OPTIONAL: params.capture
 		//OPTIONAL: params.accept
-		//OPTIONAL: params.wrapperStyle
+		//OPTIONAL: params.style
 		//OPTIONAL: params.inputStyle
 		//OPTIONAL: params.on
 
@@ -40,9 +40,6 @@ UUI.FULL_INPUT = CLASS({
 
 		// value
 		value = params.value,
-
-		// wrapper style
-		wrapperStyle = params.wrapperStyle,
 
 		// input style
 		inputStyle = params.inputStyle,
@@ -73,9 +70,6 @@ UUI.FULL_INPUT = CLASS({
 
 		// blur.
 		blur,
-
-		// add wrapper style.
-		addWrapperStyle,
 
 		// add input style.
 		addInputStyle,
@@ -195,16 +189,6 @@ UUI.FULL_INPUT = CLASS({
 				name : 'blur'
 			});
 		};
-
-		self.addWrapperStyle = addWrapperStyle = function(style) {
-			//REQUIRED: style
-
-			wrapper.addStyle(style);
-		};
-
-		if (wrapperStyle !== undefined) {
-			addWrapperStyle(wrapperStyle);
-		}
 
 		self.addInputStyle = addInputStyle = function(style) {
 			//REQUIRED: style

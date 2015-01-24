@@ -6,16 +6,16 @@ UUI.NOTICE = CLASS({
 	init : function(inner, self, params) {
 		'use strict';
 		//REQUIRED: params
-		//OPTIONAL: params.wrapperStyle
+		//OPTIONAL: params.style
 		//OPTIONAL: params.contentStyle
 		//OPTIONAL: params.isCannotClose
 		//OPTIONAL: params.on
 		//REQUIRED: params.msg
 
 		var
-		// wrapper style
-		wrapperStyle = params.wrapperStyle,
-
+		// style
+		style = params.style,
+		
 		// content style
 		contentStyle = params.contentStyle,
 
@@ -55,16 +55,13 @@ UUI.NOTICE = CLASS({
 		// get children.
 		getChildren,
 
-		// add wrapper style.
-		addWrapperStyle,
-
 		// add content style.
 		addContentStyle;
 
 		modal = UUI.MODAL({
-			wrapperStyle : COMBINE([{
+			style : COMBINE([{
 				textAlign : 'center'
-			}, wrapperStyle]),
+			}, style]),
 			contentStyle : contentStyle,
 			isCannotClose : true,
 			on : on,
@@ -109,12 +106,6 @@ UUI.NOTICE = CLASS({
 
 		self.getChildren = getChildren = function() {
 			return modal.getChildren();
-		};
-
-		self.addWrapperStyle = addWrapperStyle = function(style) {
-			//REQUIRED: style
-
-			modal.addWrapperStyle(style);
 		};
 
 		self.addContentStyle = addContentStyle = function(style) {

@@ -15,7 +15,7 @@ UUI.FULL_CHECKBOX = CLASS({
 		//REQUIRED: params.name
 		//REQUIRED: params.label
 		//OPTIONAL: params.value
-		//OPTIONAL: params.wrapperStyle
+		//OPTIONAL: params.style
 		//OPTIONAL: params.inputStyle
 		//OPTIONAL: params.on
 
@@ -28,9 +28,6 @@ UUI.FULL_CHECKBOX = CLASS({
 
 		// value
 		value = params.value,
-
-		// wrapper style
-		wrapperStyle = params.wrapperStyle,
 
 		// input style
 		inputStyle = params.inputStyle,
@@ -55,9 +52,6 @@ UUI.FULL_CHECKBOX = CLASS({
 
 		// blur.
 		blur,
-
-		// add wrapper style.
-		addWrapperStyle,
 
 		// add input style.
 		addInputStyle,
@@ -168,16 +162,6 @@ UUI.FULL_CHECKBOX = CLASS({
 				name : 'blur'
 			});
 		};
-
-		self.addWrapperStyle = addWrapperStyle = function(style) {
-			//REQUIRED: style
-
-			wrapper.addStyle(style);
-		};
-
-		if (wrapperStyle !== undefined) {
-			addWrapperStyle(wrapperStyle);
-		}
 
 		self.addInputStyle = addInputStyle = function(style) {
 			//REQUIRED: style

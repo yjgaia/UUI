@@ -12,8 +12,8 @@ UUI.LIST = CLASS({
 	init : function(inner, self, params) {
 		'use strict';
 		//OPTIONAL: params
-		//OPTIONAL: params.style
 		//OPTIONAL: params.c
+		//OPTIONAL: params.style
 		//OPTIONAL: params.on
 		//OPTIONAL: params.items
 		//OPTIONAL: params.isRequiringClearBoth

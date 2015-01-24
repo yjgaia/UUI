@@ -16,7 +16,7 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 		//OPTIONAL: params.capture
 		//OPTIONAL: params.accept
 		//OPTIONAL: params.isMultiple
-		//OPTIONAL: params.wrapperStyle
+		//OPTIONAL: params.style
 		//OPTIONAL: params.formStyle
 		//OPTIONAL: params.inputStyle
 		//OPTIONAL: params.uploadingStyle
@@ -39,9 +39,6 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 
 		// callback url
 		callbackURL = params.callbackURL !== undefined ? params.callbackURL : 'http://' + BROWSER_CONFIG.host + ':' + BROWSER_CONFIG.port + '/__UPLOAD_CALLBACK',
-
-		// wrapper style
-		wrapperStyle = params.wrapperStyle,
 
 		// form style
 		formStyle = params.formStyle,
@@ -76,9 +73,6 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 		// select.
 		select,
 
-		// add wrapper style.
-		addWrapperStyle,
-
 		// add form style.
 		addFormStyle,
 
@@ -103,7 +97,7 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 				},
 				name : '__UPLOAD_FORM_' + self.id
 			}), uploading = UUI.PANEL({
-				wrapperStyle : {
+				style : {
 					position : 'absolute',
 					top : 0,
 					left : 0,
@@ -265,16 +259,6 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 			}
 		};
 
-		self.addWrapperStyle = addWrapperStyle = function(style) {
-			//REQUIRED: style
-
-			wrapper.addStyle(style);
-		};
-
-		if (wrapperStyle !== undefined) {
-			addWrapperStyle(wrapperStyle);
-		}
-
 		self.addFormStyle = addFormStyle = function(style) {
 			//REQUIRED: style
 
@@ -312,7 +296,7 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 		self.addUploadingStyle = addUploadingStyle = function(style) {
 			//REQUIRED: style
 
-			uploading.addWrapperStyle(style);
+			uploading.addStyle(style);
 		};
 
 		if (uploadingStyle !== undefined) {

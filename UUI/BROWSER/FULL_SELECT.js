@@ -15,7 +15,7 @@ UUI.FULL_SELECT = CLASS({
 		//REQUIRED: params.name
 		//OPTIONAL: params.value
 		//REQUIRED: params.options
-		//OPTIONAL: params.wrapperStyle
+		//OPTIONAL: params.style
 		//OPTIONAL: params.selectStyle
 
 		var
@@ -27,9 +27,6 @@ UUI.FULL_SELECT = CLASS({
 
 		// options
 		options = params.options,
-
-		// wrapper style
-		wrapperStyle = params.wrapperStyle,
 
 		// select style
 		selectStyle = params.selectStyle,
@@ -54,9 +51,6 @@ UUI.FULL_SELECT = CLASS({
 
 		// blur.
 		blur,
-
-		// add wrapper style.
-		addWrapperStyle,
 
 		// add select style.
 		addSelectStyle,
@@ -123,16 +117,6 @@ UUI.FULL_SELECT = CLASS({
 		self.blur = blur = function() {
 			_select.blur();
 		};
-
-		self.addWrapperStyle = addWrapperStyle = function(style) {
-			//REQUIRED: style
-
-			wrapper.addStyle(style);
-		};
-
-		if (wrapperStyle !== undefined) {
-			addWrapperStyle(wrapperStyle);
-		}
 
 		self.addSelectStyle = addSelectStyle = function(style) {
 			//REQUIRED: style
