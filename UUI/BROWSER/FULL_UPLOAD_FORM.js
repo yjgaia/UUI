@@ -38,7 +38,7 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 		isMultiple = params.isMultiple,
 
 		// callback url
-		callbackURL = params.callbackURL !== undefined ? params.callbackURL : 'http://' + BROWSER_CONFIG.host + ':' + BROWSER_CONFIG.port + '/__UPLOAD_CALLBACK',
+		callbackURL = params.callbackURL !== undefined ? params.callbackURL : 'http://' + BROWSER_CONFIG.host + ':' + CONFIG.webServerPort + '/__UPLOAD_CALLBACK',
 
 		// form style
 		formStyle = params.formStyle,
@@ -123,8 +123,7 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 		});
 
 		GET({
-			host : BROWSER_CONFIG.host,
-			port : BROWSER_CONFIG.port,
+			port : CONFIG.webServerPort,
 			uri : '__UPLOAD_SERVER_HOST?defaultHost=' + BROWSER_CONFIG.host
 		}, function(host) {
 
