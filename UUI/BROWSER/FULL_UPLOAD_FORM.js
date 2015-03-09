@@ -38,7 +38,7 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 		isMultiple = params.isMultiple,
 
 		// callback url
-		callbackURL = params.callbackURL !== undefined ? params.callbackURL : 'http://' + BROWSER_CONFIG.host + ':' + CONFIG.webServerPort + '/__UPLOAD_CALLBACK',
+		callbackURL = params.callbackURL !== undefined ? params.callbackURL : 'http://' + BROWSER_CONFIG.host + ':' + BROWSER_CONFIG.port + '/__UPLOAD_CALLBACK',
 
 		// form style
 		formStyle = params.formStyle,
@@ -219,7 +219,7 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 				});
 
 				if (uploadSuccess !== undefined) {
-					uploadSuccess(isMultiple !== true ? fileDataSet[0] : fileDataSet);
+					uploadSuccess(isMultiple !== true ? fileDataSet[0] : fileDataSet, self);
 				}
 
 				originValue = input.getValue();
