@@ -86,7 +86,7 @@ UUI.LIST = CLASS({
 				item.insertBefore(itemStack[0]);
 				itemStack.unshift(item);
 			} else {
-				ul.append(item);
+				self.append(item);
 				itemStack.push(item);
 			}
 

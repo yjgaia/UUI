@@ -6,7 +6,7 @@ UUI.VALID_FORM = CLASS({
 	preset : function() {
 		'use strict';
 
-		return NODE;
+		return FORM;
 	},
 
 	init : function(inner, self, params) {
@@ -28,88 +28,17 @@ UUI.VALID_FORM = CLASS({
 		// delays
 		delays = [],
 
-		// form
-		form,
-
-		// get data.
-		getData,
-
-		// set data.
-		setData,
-
-		// submit.
-		submit,
-
 		// show errors.
 		showErrors,
 
 		// get error msgs.
 		getErrorMsgs;
 
-		form = FORM();
-
 		self.on('remove', function() {
 			EACH(delays, function(delay) {
 				delay.remove();
 			});
 		});
-
-		inner.setDom(form);
-
-		self.getData = getData = function() {
-
-			var
-			// data
-			data = {},
-
-			// f.
-			f = function(node) {
-				//REQUIRED: node
-
-				EACH(node.getChildren(), function(child) {
-
-					if (child.getValue !== undefined && child.getName !== undefined && child.getName() !== undefined) {
-						data[child.getName()] = child.getValue();
-					}
-
-					f(child);
-				});
-			};
-
-			f(self);
-
-			return data;
-		};
-
-		self.setData = setData = function(data) {
-			//REQUIRED: data
-
-			var
-			// f.
-			f = function(node) {
-				//REQUIRED: node
-
-				EACH(node.getChildren(), function(child) {
-
-					var
-					// value
-					value;
-
-					if (child.setValue !== undefined && child.getName !== undefined && child.getName() !== undefined) {
-						value = data[child.getName()];
-						child.setValue(value === undefined ? '' : value);
-					}
-
-					f(child);
-				});
-			};
-
-			f(self);
-		};
-
-		self.submit = submit = function() {
-			form.submit();
-		};
 
 		self.showErrors = showErrors = function(_errors) {
 			//REQUIRED: _errors

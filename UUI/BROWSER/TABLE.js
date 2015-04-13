@@ -79,7 +79,7 @@ UUI.TABLE = CLASS({
 				tr.insertBefore(trStack[0]);
 				trStack.unshift(tr);
 			} else {
-				table.append(tr);
+				self.append(tr);
 				trStack.push(tr);
 			}
 
@@ -88,8 +88,7 @@ UUI.TABLE = CLASS({
 
 		EACH(trs, function(tr, key) {
 			trStack.push(tr);
-
-			table.append(tr);
+			self.append(tr);
 		});
 
 		self.removeTR = removeTR = function(key) {
