@@ -32,7 +32,10 @@ UUI.VALID_FORM = CLASS({
 		showErrors,
 
 		// get error msgs.
-		getErrorMsgs;
+		getErrorMsgs,
+		
+		// get error msg style.
+		getErrorMsgStyle;
 
 		self.on('remove', function() {
 			EACH(delays, function(delay) {
@@ -91,7 +94,7 @@ UUI.VALID_FORM = CLASS({
 								name : name
 							});
 
-							delays.push(DELAY(2, function(delay) {
+							delays.push(DELAY(3, function(delay) {
 								errorMsgP.remove();
 
 								REMOVE({
@@ -109,63 +112,39 @@ UUI.VALID_FORM = CLASS({
 			f(self);
 		};
 
-		self.getErrorMsgs = getErrorMsgs = function(_errors) {
-			//REQUIRED: _errors
+		self.getErrorMsgs = getErrorMsgs = function(errors) {
+			//REQUIRED: errors
 
 			var
-			// errors
-			errors = COPY(_errors),
-
 			// msgs
-			msgs = [],
+			msgs = {};
+			
+			EACH(errors, function(error, name) {
+				
+				var
+				// error msg
+				errorMsg;
 
-			// f.
-			f = function(node) {
+				if (errorMsgs !== undefined) {
+					errorMsg = errorMsgs[name][error.type];
 
-				EACH(node.getChildren(), function(child) {
-
-					var
-					// name
-					name,
-
-					// error
-					error,
-
-					// error msg
-					errorMsg;
-
-					if (child.getValue !== undefined && child.getName !== undefined) {
-
-						name = child.getName();
-						error = errors[name];
-
-						if (error !== undefined && errorMsgs !== undefined) {
-							errorMsg = errorMsgs[name][error.type];
-
-							if ( typeof errorMsg === 'function') {
-								if (error.validParam !== undefined) {
-									errorMsg = errorMsg(error.validParam);
-								} else {
-									errorMsg = errorMsg(error.validParams);
-								}
-							}
-
-							msgs.push(errorMsg);
-
-							REMOVE({
-								data : errors,
-								name : name
-							});
+					if ( typeof errorMsg === 'function') {
+						if (error.validParam !== undefined) {
+							errorMsg = errorMsg(error.validParam);
+						} else {
+							errorMsg = errorMsg(error.validParams);
 						}
 					}
 
-					f(child);
-				});
-			};
-
-			f(self);
+					msgs[name] = errorMsg;
+				}
+			});
 
 			return msgs;
+		};
+		
+		self.getErrorMsgStyle = getErrorMsgStyle = function() {
+			return errorMsgStyle;
 		};
 	}
 });
