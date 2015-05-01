@@ -1,7 +1,7 @@
 /**
- * Full-size checkbox class
+ * Full-size radio class
  */
-UUI.FULL_CHECKBOX = CLASS({
+UUI.FULL_RADIO = CLASS({
 
 	preset : function() {
 		'use strict';
@@ -79,7 +79,7 @@ UUI.FULL_CHECKBOX = CLASS({
 					marginRight : 5
 				},
 				name : name,
-				type : 'checkbox',
+				type : 'radio',
 				value : value
 			}), SPAN({
 				style : {
