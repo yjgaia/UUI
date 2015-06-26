@@ -132,9 +132,7 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 				target : '__UPLOAD_FORM_' + self.id,
 				method : 'POST',
 				enctype : 'multipart/form-data',
-				style : COMBINE([{
-					padding : 5
-				}, formStyle]),
+				style : formStyle,
 				c : [ input = INPUT({
 					type : 'file',
 					name : 'file',

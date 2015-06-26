@@ -65,7 +65,7 @@ UUI.FULL_TEXTAREA = CLASS({
 		wrapper = DIV({
 			style : {
 				padding : 5,
-				backgroundColor : '#FFF',
+				backgroundColor : '#fff',
 				position : 'relative',
 				height : 100
 			},
