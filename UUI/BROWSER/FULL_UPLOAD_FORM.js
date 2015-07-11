@@ -38,7 +38,7 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 		isMultiple = params.isMultiple,
 
 		// callback url
-		callbackURL = params.callbackURL !== undefined ? params.callbackURL : 'http://' + BROWSER_CONFIG.host + ':' + BROWSER_CONFIG.port + '/__UPLOAD_CALLBACK',
+		callbackURL = params.callbackURL !== undefined ? params.callbackURL : 'http://' + BROWSER_CONFIG.host + ':' + BROWSER_CONFIG.port + '/__CORS_CALLBACK',
 
 		// form style
 		formStyle = params.formStyle,
