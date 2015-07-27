@@ -9,7 +9,7 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 		return NODE;
 	},
 
-	init : function(inner, self, params, callbackOrHandlers) {
+	init : function(inner, self, params, handlers) {
 		'use strict';
 		//REQUIRED: params
 		//REQUIRED: params.box
@@ -20,9 +20,10 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 		//OPTIONAL: params.formStyle
 		//OPTIONAL: params.inputStyle
 		//OPTIONAL: params.uploadingStyle
-		//OPTIONAL: params.uploadOverSizeFile
-		//OPTIONAL: params.uploadSuccess
 		//OPTIONAL: params.on
+		//OPTIONAL: handlers
+		//OPTIONAL: handlers.success
+		//OPTIONAL: handlers.overSizeFile
 
 		var
 		// box
@@ -48,12 +49,12 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 
 		// uploading style
 		uploadingStyle = params.uploadingStyle,
+		
+		// success handler.
+		successHandler,
 
-		// upload over size file
-		uploadOverSizeFile = params.uploadOverSizeFile,
-
-		// upload sucess
-		uploadSuccess = params.uploadSuccess,
+		// over size file handler.
+		overSizeFileHandler,
 
 		// wrapper
 		wrapper,
@@ -84,6 +85,11 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 
 		// on.
 		on;
+		
+		if (handlers !== undefined) {
+			successHandler = handlers.success;
+			overSizeFileHandler = handlers.overSizeFile;
+		}
 
 		wrapper = DIV({
 			style : {
@@ -192,8 +198,8 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 
 			if (maxUploadFileMB !== undefined) {
 
-				if (uploadOverSizeFile !== undefined) {
-					uploadOverSizeFile(maxUploadFileMB);
+				if (overSizeFileHandler !== undefined) {
+					overSizeFileHandler(maxUploadFileMB);
 				}
 
 				originValue = input.getValue();
@@ -216,8 +222,8 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 					fileDataSet[i] = UNPACK_DATA(fileData);
 				});
 
-				if (uploadSuccess !== undefined) {
-					uploadSuccess(isMultiple !== true ? fileDataSet[0] : fileDataSet, self);
+				if (successHandler !== undefined) {
+					successHandler(isMultiple !== true ? fileDataSet[0] : fileDataSet, self);
 				}
 
 				originValue = input.getValue();

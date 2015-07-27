@@ -9,7 +9,7 @@ UUI.CALENDAR = CLASS({
 		return UUI.TABLE;
 	},
 
-	init : function(inner, self, params, selectDateHandler) {
+	init : function(inner, self, params, selectDateHandlerOrHandlers) {
 		'use strict';
 		//REQUIRED: params
 		//OPTIONAL: params.year
@@ -21,7 +21,9 @@ UUI.CALENDAR = CLASS({
 		//OPTIONAL: params.selectedDateStyle
 		//OPTIONAL: params.leftArrowImg
 		//OPTIONAL: params.rightArrowImg
-		//OPTIONAL: selectDateHandler
+		//OPTIONAL: selectDateHandlerOrHandlers
+		//OPTIONAL: selectDateHandlerOrHandlers.selectDate
+		//OPTIONAL: selectDateHandlerOrHandlers.each
 
 		var
 		// year
@@ -51,14 +53,29 @@ UUI.CALENDAR = CLASS({
 		// right arrow img
 		rightArrowImg = params.rightArrowImg,
 		
+		// select date handler.
+		selectDateHandler,
+		
+		// each handler.
+		eachHandler,
+		
 		// now cal
 		nowCal,
+		
+		// first date cal
+		firstDateCal,
 		
 		// title
 		title,
 		
 		// load dates.
-		loadDates;
+		loadDates,
+		
+		// get year.
+		getYear,
+		
+		// get month.
+		getMonth;
 		
 		if (year === undefined || month === undefined) {
 			
@@ -71,6 +88,13 @@ UUI.CALENDAR = CLASS({
 			if (month === undefined) {
 				month = nowCal.getMonth();
 			}
+		}
+		
+		if (CHECK_IS_DATA(selectDateHandlerOrHandlers) !== true) {
+			selectDateHandler = selectDateHandlerOrHandlers;
+		} else {
+			selectDateHandler = selectDateHandlerOrHandlers.selectDate;
+			eachHandler = selectDateHandlerOrHandlers.each;
 		}
 		
 		// header
@@ -144,16 +168,17 @@ UUI.CALENDAR = CLASS({
 			})]
 		}));
 		
+		self.getYear = getYear = function() {
+			return firstDateCal.getYear();
+		};
+		
+		self.getMonth = getMonth = function() {
+			return firstDateCal.getMonth();
+		};
+		
 		loadDates = RAR(function() {
 			
 			var
-			// first date cal
-			firstDateCal = CALENDAR(CREATE_DATE({
-				year : year,
-				month : month,
-				date : 1
-			})),
-			
 			// last date cal
 			lastDateCal = CALENDAR(CREATE_DATE({
 				year : year,
@@ -162,11 +187,7 @@ UUI.CALENDAR = CLASS({
 			})),
 			
 			// start date cal
-			startDateCal = CALENDAR(CREATE_DATE({
-				year : year,
-				month : month,
-				date : -(firstDateCal.getDay() - 1)
-			})),
+			startDateCal,
 			
 			// date count
 			dateCount = 0,
@@ -180,6 +201,18 @@ UUI.CALENDAR = CLASS({
 			// selected date origin style
 			selectedDateOriginStyle;
 			
+			firstDateCal = CALENDAR(CREATE_DATE({
+				year : year,
+				month : month,
+				date : 1
+			}));
+			
+			startDateCal = CALENDAR(CREATE_DATE({
+				year : year,
+				month : month,
+				date : -(firstDateCal.getDay() - 1)
+			}));
+			
 			title.empty();
 			title.append(firstDateCal.getYear() + '년 ' + firstDateCal.getMonth() + '월');
 			
@@ -189,6 +222,10 @@ UUI.CALENDAR = CLASS({
 			
 			REPEAT(firstDateCal.getDay(), function(i) {
 				
+				var
+				// td
+				td;
+				
 				if (dateCount % 7 === 0) {
 					self.addTR({
 						key : dateCount / 7,
@@ -196,7 +233,7 @@ UUI.CALENDAR = CLASS({
 					});
 				}
 				
-				nowTR.append(TD({
+				nowTR.append(td = TD({
 					style : otherMonthDateStyle === undefined ? dateStyle : otherMonthDateStyle,
 					c : startDateCal.getDate() + i,
 					on : {
@@ -219,11 +256,19 @@ UUI.CALENDAR = CLASS({
 									year : year,
 									month : month - 1,
 									date : startDateCal.getDate() + i
-								})));
+								})), self);
 							}
 						}
 					}
 				}));
+				
+				if (eachHandler !== undefined) {
+					eachHandler(td, CALENDAR(CREATE_DATE({
+						year : year,
+						month : month - 1,
+						date : startDateCal.getDate() + i
+					})), self);
+				}
 				
 				dateCount += 1;
 			});
@@ -233,6 +278,10 @@ UUI.CALENDAR = CLASS({
 				end : lastDateCal.getDate()
 			}, function(date, i) {
 				
+				var
+				// td
+				td;
+				
 				if (dateCount % 7 === 0) {
 					self.addTR({
 						key : dateCount / 7,
@@ -240,7 +289,7 @@ UUI.CALENDAR = CLASS({
 					});
 				}
 				
-				nowTR.append(TD({
+				nowTR.append(td = TD({
 					style : dateStyle,
 					c : date,
 					on : {
@@ -263,16 +312,28 @@ UUI.CALENDAR = CLASS({
 									year : year,
 									month : month,
 									date : date
-								})));
+								})), self);
 							}
 						}
 					}
 				}));
 				
+				if (eachHandler !== undefined) {
+					eachHandler(td, CALENDAR(CREATE_DATE({
+						year : year,
+						month : month,
+						date : date
+					})), self);
+				}
+				
 				dateCount += 1;
 			});
 			
 			REPEAT(42 - dateCount, function(i) {
+				
+				var
+				// td
+				td;
 				
 				if (dateCount % 7 === 0) {
 					self.addTR({
@@ -281,7 +342,7 @@ UUI.CALENDAR = CLASS({
 					});
 				}
 				
-				nowTR.append(TD({
+				nowTR.append(td = TD({
 					style : otherMonthDateStyle === undefined ? dateStyle : otherMonthDateStyle,
 					c : i + 1,
 					on : {
@@ -304,11 +365,19 @@ UUI.CALENDAR = CLASS({
 									year : year,
 									month : month + 1,
 									date : i + 1
-								})));
+								})), self);
 							}
 						}
 					}
 				}));
+				
+				if (eachHandler !== undefined) {
+					eachHandler(td, CALENDAR(CREATE_DATE({
+						year : year,
+						month : month + 1,
+						date : i + 1
+					})), self);
+				}
 				
 				dateCount += 1;
 			});
