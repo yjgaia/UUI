@@ -83,6 +83,7 @@ UUI.FULL_TEXTAREA = CLASS({
 		});
 
 		inner.setWrapperDom(wrapper);
+		inner.setContentDom(textarea);
 
 		self.getName = getName = function() {
 			return name;
