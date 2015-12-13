@@ -114,7 +114,6 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 					position : 'absolute',
 					top : 0,
 					left : 0,
-					width : '100%',
 					backgroundColor : RGBA([0, 0, 0, 0.5]),
 					color : '#fff',
 					textAlign : 'center'
@@ -171,6 +170,7 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 				if (input.getValue() !== '') {
 					
 					uploading.addStyle({
+						width : wrapper.getWidth(),
 						height : wrapper.getHeight()
 					});
 					
