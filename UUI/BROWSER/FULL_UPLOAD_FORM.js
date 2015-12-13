@@ -55,6 +55,9 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 
 		// over size file handler.
 		overSizeFileHandler,
+		
+		// upload progress room
+		uploadProgressRoom,
 
 		// wrapper
 		wrapper,
@@ -70,6 +73,9 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 
 		// uploading
 		uploading,
+		
+		// uploading progress
+		uploadingProgress,
 
 		// select.
 		select,
@@ -102,29 +108,22 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 					display : 'none'
 				},
 				name : '__UPLOAD_FORM_' + self.id
-			}), uploading = UUI.PANEL({
+			}), uploading = UUI.V_CENTER({
 				style : {
+					display : 'none',
 					position : 'absolute',
 					top : 0,
 					left : 0,
 					width : '100%',
-					height : '100%',
-					display : 'none'
+					backgroundColor : RGBA([0, 0, 0, 0.5]),
+					color : '#fff',
+					textAlign : 'center'
 				},
-				contentStyle : {
-					backgroundColor : '#000',
-					position : 'absolute',
-					top : '50%',
-					left : '50%',
-					width : 100,
-					marginLeft : -55,
-					marginTop : -13,
-					padding : 5,
-					textAlign : 'center',
-					borderRadius : 10,
-					color : '#fff'
-				},
-				c : 'Uploading...'
+				c : ['Uploading...', uploadingProgress = SPAN({
+					style : {
+						marginLeft : 10
+					}
+				})]
 			})]
 		});
 
@@ -132,9 +131,13 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 			port : CONFIG.webServerPort,
 			uri : '__UPLOAD_SERVER_HOST?defaultHost=' + BROWSER_CONFIG.host
 		}, function(host) {
+			
+			var
+			// upload key
+			uploadKey = RANDOM_STR(20);
 
 			iframe.after( form = FORM({
-				action : 'http://' + host + ':' + CONFIG.webServerPort + '/__UPLOAD?boxName=' + box.boxName + '&callbackURL=' + callbackURL,
+				action : 'http://' + host + ':' + CONFIG.webServerPort + '/__UPLOAD?boxName=' + box.boxName + '&callbackURL=' + callbackURL + '&uploadKey=' + uploadKey,
 				target : '__UPLOAD_FORM_' + self.id,
 				method : 'POST',
 				enctype : 'multipart/form-data',
@@ -166,7 +169,21 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 			}, function(e) {
 
 				if (input.getValue() !== '') {
+					
+					uploading.addStyle({
+						height : wrapper.getHeight()
+					});
+					
 					uploading.show();
+					
+					if (uploadProgressRoom !== undefined) {
+						uploadProgressRoom.exit();
+					}
+					uploadProgressRoom = box.ROOM('uploadProgressRoom/' + uploadKey);
+					uploadProgressRoom.on('progress', function(info) {
+						uploadingProgress.empty();
+						uploadingProgress.append('(' + info.bytesRecieved + '/' + info.bytesExpected + ')');
+					});
 
 					if (form !== undefined) {
 						form.submit(true);
@@ -240,6 +257,11 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 			}
 
 			uploading.hide();
+			
+			if (uploadProgressRoom !== undefined) {
+				uploadProgressRoom.exit();
+				uploadProgressRoom = undefined;
+			}
 		});
 
 		inner.setWrapperDom(wrapper);
