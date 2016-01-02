@@ -17,6 +17,7 @@ UUI.CALENDAR = CLASS({
 		//OPTIONAL: params.headerStyle
 		//OPTIONAL: params.dayStyle
 		//OPTIONAL: params.dateStyle
+		//OPTIONAL: params.todayDateStyle
 		//OPTIONAL: params.otherMonthDateStyle
 		//OPTIONAL: params.selectedDateStyle
 		//OPTIONAL: params.leftArrowImg
@@ -41,6 +42,9 @@ UUI.CALENDAR = CLASS({
 		// date style
 		dateStyle = params.dateStyle,
 		
+		// today date style
+		todayDateStyle = params.todayDateStyle,
+		
 		// other month date style
 		otherMonthDateStyle = params.otherMonthDateStyle,
 		
@@ -60,7 +64,7 @@ UUI.CALENDAR = CLASS({
 		eachHandler,
 		
 		// now cal
-		nowCal,
+		nowCal = CALENDAR(),
 		
 		// first date cal
 		firstDateCal,
@@ -78,8 +82,6 @@ UUI.CALENDAR = CLASS({
 		getMonth;
 		
 		if (year === undefined || month === undefined) {
-			
-			nowCal = CALENDAR();
 			
 			if (year === undefined) {
 				year = nowCal.getYear();
@@ -290,7 +292,11 @@ UUI.CALENDAR = CLASS({
 				}
 				
 				nowTR.append(td = TD({
-					style : dateStyle,
+					style : COMBINE([dateStyle,
+						todayDateStyle !== undefined &&
+						firstDateCal.getYear() === nowCal.getYear() &&
+						firstDateCal.getMonth() === nowCal.getMonth() &&
+						date === nowCal.getDate() ? todayDateStyle : {}]),
 					c : date,
 					on : {
 						tap : function(e, td) {
@@ -300,7 +306,11 @@ UUI.CALENDAR = CLASS({
 							}
 							
 							selectedDate = td;
-							selectedDateOriginStyle = dateStyle;
+							selectedDateOriginStyle = COMBINE([dateStyle,
+								todayDateStyle !== undefined &&
+								firstDateCal.getYear() === nowCal.getYear() &&
+								firstDateCal.getMonth() === nowCal.getMonth() &&
+								date === nowCal.getDate() ? todayDateStyle : {}]);
 							
 							if (selectedDateStyle !== undefined) {
 								td.addStyle(selectedDateStyle);

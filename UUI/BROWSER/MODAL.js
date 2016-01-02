@@ -101,11 +101,11 @@ UUI.MODAL = CLASS({
 		wrapper = DIV({
 			c : [ content = DIV(), isCannotClose === true ? '' : UUI.IMG_BUTTON({
 				style : COMBINE([{
+					lineHeight : 0,
 					position : 'absolute'
 				}, xStyle === undefined ? {
-					top : -20,
-					right : -20,
-					padding : 10
+					top : -10,
+					right : -10
 				} : xStyle]),
 				img : xImg,
 				on : {
