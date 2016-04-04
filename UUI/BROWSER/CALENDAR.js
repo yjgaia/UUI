@@ -14,6 +14,7 @@ UUI.CALENDAR = CLASS({
 		//REQUIRED: params
 		//OPTIONAL: params.year
 		//OPTIONAL: params.month
+		//OPTIONAL: params.date
 		//OPTIONAL: params.headerStyle
 		//OPTIONAL: params.dayStyle
 		//OPTIONAL: params.dateStyle
@@ -32,6 +33,9 @@ UUI.CALENDAR = CLASS({
 		
 		// month
 		month = params.month,
+		
+		// date
+		date = params.date,
 		
 		// header style
 		headerStyle = params.headerStyle === undefined ? {} : params.headerStyle,
@@ -278,7 +282,7 @@ UUI.CALENDAR = CLASS({
 			REPEAT({
 				start : firstDateCal.getDate(),
 				end : lastDateCal.getDate()
-			}, function(date, i) {
+			}, function(d, i) {
 				
 				var
 				// td
@@ -296,8 +300,8 @@ UUI.CALENDAR = CLASS({
 						todayDateStyle !== undefined &&
 						firstDateCal.getYear() === nowCal.getYear() &&
 						firstDateCal.getMonth() === nowCal.getMonth() &&
-						date === nowCal.getDate() ? todayDateStyle : {}]),
-					c : date,
+						d === nowCal.getDate() ? todayDateStyle : {}]),
+					c : d,
 					on : {
 						tap : function(e, td) {
 							
@@ -310,7 +314,7 @@ UUI.CALENDAR = CLASS({
 								todayDateStyle !== undefined &&
 								firstDateCal.getYear() === nowCal.getYear() &&
 								firstDateCal.getMonth() === nowCal.getMonth() &&
-								date === nowCal.getDate() ? todayDateStyle : {}]);
+								d === nowCal.getDate() ? todayDateStyle : {}]);
 							
 							if (selectedDateStyle !== undefined) {
 								td.addStyle(selectedDateStyle);
@@ -321,18 +325,38 @@ UUI.CALENDAR = CLASS({
 								selectDateHandler(CALENDAR(CREATE_DATE({
 									year : year,
 									month : month,
-									date : date
+									date : d
 								})), self);
 							}
 						}
 					}
 				}));
 				
+				if (firstDateCal.getYear() === nowCal.getYear() &&
+				firstDateCal.getMonth() === nowCal.getMonth() &&
+				d === date) {
+					
+					if (selectedDateOriginStyle !== undefined) {
+						selectedDate.addStyle(selectedDateOriginStyle);
+					}
+					
+					selectedDate = td;
+					selectedDateOriginStyle = COMBINE([dateStyle,
+						todayDateStyle !== undefined &&
+						firstDateCal.getYear() === nowCal.getYear() &&
+						firstDateCal.getMonth() === nowCal.getMonth() &&
+						d === nowCal.getDate() ? todayDateStyle : {}]);
+					
+					if (selectedDateStyle !== undefined) {
+						td.addStyle(selectedDateStyle);
+					}
+				}
+				
 				if (eachHandler !== undefined) {
 					eachHandler(td, CALENDAR(CREATE_DATE({
 						year : year,
 						month : month,
-						date : date
+						date : d
 					})), self);
 				}
 				
