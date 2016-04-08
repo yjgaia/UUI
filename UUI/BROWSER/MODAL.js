@@ -40,10 +40,7 @@ UUI.MODAL = CLASS({
 
 		// resize event
 		resizeEvent,
-
-		// scroll event
-		scrollEvent,
-
+		
 		// esc event
 		escEvent,
 
@@ -130,16 +127,16 @@ UUI.MODAL = CLASS({
 
 			var
 			// left
-			left = (WIN_WIDTH() - wrapper.getWidth()) / 2 + SCROLL_LEFT(),
+			left = (WIN_WIDTH() - wrapper.getWidth()) / 2,
 
 			// top
-			top = (WIN_HEIGHT() - wrapper.getHeight()) / 2 + SCROLL_TOP(),
+			top = (WIN_HEIGHT() - wrapper.getHeight()) / 2,
 
 			// find.
 			find;
 
 			wrapper.addStyle({
-				position : 'absolute',
+				position : 'fixed',
 				left : left < 0 ? 0 : left,
 				top : top < 0 ? 0 : top
 			});
@@ -171,10 +168,6 @@ UUI.MODAL = CLASS({
 			name : 'resize'
 		}, moveToCenter);
 
-		scrollEvent = EVENT({
-			name : 'scroll'
-		}, moveToCenter);
-
 		escEvent = EVENT({
 			name : 'keydown'
 		}, function(e) {
@@ -186,7 +179,6 @@ UUI.MODAL = CLASS({
 
 		wrapper.on('remove', function() {
 			resizeEvent.remove();
-			scrollEvent.remove();
 			escEvent.remove();
 		});
 
