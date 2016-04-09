@@ -125,15 +125,15 @@ UUI.TABLE = CLASS({
 			});
 		};
 
-		self.addRemoveTRHandler = addRemoveTRHandler = function(key, removeTRHandler) {
+		self.addRemoveTRHandler = addRemoveTRHandler = function(key, handler) {
 			//REQUIRED: key
-			//REQUIRED: removeTRHandler
+			//REQUIRED: handler
 
 			if (removeTRHandlers[key] === undefined) {
 				removeTRHandlers[key] = [];
 			}
 
-			removeTRHandlers[key].push(removeTRHandler);
+			removeTRHandlers[key].push(handler);
 		};
 
 		self.removeAllTRs = removeAllTRs = function() {

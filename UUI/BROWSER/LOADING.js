@@ -127,6 +127,5 @@ UUI.LOADING = CLASS({
 
 			modal.addContentStyle(style);
 		};
-
 	}
 });

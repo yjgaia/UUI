@@ -146,15 +146,15 @@ UUI.LIST = CLASS({
 			});
 		};
 
-		self.addRemoveItemHandler = addRemoveItemHandler = function(key, removeItemHandler) {
+		self.addRemoveItemHandler = addRemoveItemHandler = function(key, handler) {
 			//REQUIRED: key
-			//REQUIRED: removeItemHandler
+			//REQUIRED: handler
 
 			if (removeItemHandlers[key] === undefined) {
 				removeItemHandlers[key] = [];
 			}
 
-			removeItemHandlers[key].push(removeItemHandler);
+			removeItemHandlers[key].push(handler);
 		};
 
 		self.removeAllItems = removeAllItems = function() {
