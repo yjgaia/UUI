@@ -15,7 +15,7 @@ UUI_SHOWCASE.MAIN = METHOD({
 		wrapper = DIV({
 			style : {
 				padding : 20,
-				width : 200
+				width : 250
 			},
 			c : H1({
 				style : {
@@ -258,5 +258,136 @@ UUI_SHOWCASE.MAIN = METHOD({
 		DELAY(3, function() {
 			loading.remove();
 		});
+		
+		wrapper.append(BR());
+		
+		UUI.VALID_FORM({
+			errorMsgs : {
+				name : {
+					good : 'Good Name!'
+				}
+			},
+			errorMsgStyle : {
+				marginTop : 5,
+				color : 'red'
+			},
+			style : {
+				background : 'gray',
+				padding : 10
+			},
+			c : [UUI.FULL_INPUT({
+				name : 'name',
+				placeholder : 'Name'
+			}), UUI.FULL_SELECT({
+				style : {
+					marginTop : 10
+				},
+				name : 'age',
+				options : [OPTION({
+					value : 28,
+					c : '28'
+				}), OPTION({
+					value : 29,
+					c : '29'
+				}), OPTION({
+					value : 30,
+					c : '30'
+				})],
+				value : 29
+			}), UUI.FULL_CHECKBOX({
+				style : {
+					marginTop : 10
+				},
+				name : 'dog',
+				label : 'Dog'
+			}), UUI.FULL_CHECKBOX({
+				name : 'cat',
+				label : 'Cat'
+			}), UUI.FULL_TEXTAREA({
+				style : {
+					marginTop : 10
+				},
+				name : 'intoduce',
+				placeholder : 'Intoduce'
+			}), UUI.CALENDAR({
+				headerStyle : {
+					fontSize : 20,
+					padding : '10px 15px',
+					fontWeight : 'bold'
+				},
+				dayStyle : {
+					backgroundColor : '#999',
+					color : '#fff',
+					padding : 5,
+					textAlign : 'center',
+					fontWeight : 'bold'
+				},
+				dateStyle : {
+					backgroundColor : '#eee',
+					fontSize : 15,
+					color : '#000',
+					fontWeight : 'bold',
+					padding : '8px 0',
+					border : '1px solid #fff',
+					textAlign : 'center',
+					cursor : 'pointer'
+				},
+				todayDateStyle : {
+					backgroundColor : '#ccc'
+				},
+				selectedDateStyle : {
+					backgroundColor : '#999'
+				},
+				otherMonthDateStyle : {
+					backgroundColor : '#eee',
+					fontSize : 15,
+					color : '#ccc',
+					padding : '8px 0',
+					border : '1px solid #fff',
+					textAlign : 'center',
+					cursor : 'pointer'
+				}
+			}, function(selectedCal) {
+				console.log(selectedCal.getYear() + '-' + selectedCal.getMonth() + '-' + selectedCal.getDate());
+			}), UUI.FULL_UPLOAD_FORM({
+				style : {
+					marginTop : 10
+				},
+				box : UUI_SHOWCASE
+			}, {
+				overSizeFile : function(maxUploadFileMB) {
+					alert('Max upload file size is ' + maxUploadFileMB + 'mb.');
+				},
+				success : function(fileData, form) {
+					
+					if (
+					fileData.type === 'image/png' ||
+					fileData.type === 'image/jpeg' ||
+					fileData.type === 'image/gif') {
+					
+						form.after(IMG({
+							src : UUI_SHOWCASE.RF(fileData.id)
+						}));
+					}
+				}
+			}), UUI.FULL_SUBMIT({
+				style : {
+					marginTop : 10
+				},
+				value : 'Submit'
+			})],
+			on : {
+				submit : function(e, form) {
+					
+					console.log(form.getData());
+					
+					form.showErrors({
+						name : {
+							type : 'good'
+						}
+					});
+				}
+			}
+		}).appendTo(wrapper);
 	}
 });

@@ -277,22 +277,164 @@ DELAY(3, function() {
 ```
 
 ## VALID_FORM
-
-## FULL_CHECKBOX
+유효성 검사 기능이 있는 입력 폼을 생성합니다. 입력된 값에 오류가 있는 경우 오류 메시지를 출력할 수 있습니다.
+```javascript
+UUI.VALID_FORM({
+	errorMsgs : {
+		name : {
+			good : 'Good Name!'
+		}
+	},
+	errorMsgStyle : {
+		marginTop : 5,
+		color : 'red'
+	},
+	style : {
+		background : 'gray',
+		padding : 10
+	},
+	c : [UUI.FULL_INPUT({
+		name : 'name',
+		placeholder : 'Name'
+	})],
+	on : {
+		submit : function(e, form) {
+			
+			console.log(form.getData());
+			
+			form.showErrors({
+				name : {
+					type : 'good'
+				}
+			});
+		}
+	}
+}).appendTo(wrapper);
+```
 
 ## FULL_INPUT
-
-## FULL_RADIO
+너비가 폼 크기와 딱 맞는 입력 칸을 생성합니다.
+```javascript
+UUI.FULL_INPUT({
+	name : 'name',
+	placeholder : 'Name'
+})
+```
 
 ## FULL_SELECT
+너비가 폼 크기와 딱 맞는 선택 칸을 생성합니다.
+```javascript
+UUI.FULL_SELECT({
+	name : 'age',
+	options : [OPTION({
+		value : 28,
+		c : '28'
+	}), OPTION({
+		value : 29,
+		c : '29'
+	}), OPTION({
+		value : 30,
+		c : '30'
+	})],
+	value : 29
+})
+```
 
-## FULL_SUBMIT
+## FULL_CHECKBOX
+너비가 폼 크기와 딱 맞는 체크 박스를 생성합니다.
+```javascript
+UUI.FULL_CHECKBOX({
+	name : 'dog',
+	label : 'Dog'
+})
+```
 
 ## FULL_TEXTAREA
+너비가 폼 크기와 딱 맞는 여러 줄 입력 칸을 생성합니다.
+```javascript
+UUI.FULL_TEXTAREA({
+	name : 'intoduce',
+	placeholder : 'Intoduce'
+})
+```
+
+## FULL_SUBMIT
+너비가 폼 크기와 딱 맞는 전송 버튼을 생성합니다.
+```javascript
+UUI.FULL_SUBMIT({
+	value : 'Submit'
+})
+```
 
 ## FULL_UPLOAD_FORM
+파일 업로드 폼을 생성합니다. *이 기능은 데이터베이스가 필요하므로 [UJS](https://github.com/Hanul/UJS)에서는 사용할 수 없습니다. [UPPERCASE](https://github.com/Hanul/UPPERCASE) 전용 기능입니다.*
+```javascript
+UUI.FULL_UPLOAD_FORM({
+	box : UUI_SHOWCASE
+}, {
+	overSizeFile : function(maxUploadFileMB) {
+		alert('Max upload file size is ' + maxUploadFileMB + 'mb.');
+	},
+	success : function(fileData, form) {
+		
+		if (
+		fileData.type === 'image/png' ||
+		fileData.type === 'image/jpeg' ||
+		fileData.type === 'image/gif') {
+		
+			form.after(IMG({
+				src : UUI_SHOWCASE.RF(fileData.id)
+			}));
+		}
+	}
+})
+```
 
 ## CALENDAR
+날짜를 선택할 수 있는 달력을 생성합니다.
+```javascript
+UUI.CALENDAR({
+	headerStyle : {
+		fontSize : 20,
+		padding : '10px 15px',
+		fontWeight : 'bold'
+	},
+	dayStyle : {
+		backgroundColor : '#999',
+		color : '#fff',
+		padding : 5,
+		textAlign : 'center',
+		fontWeight : 'bold'
+	},
+	dateStyle : {
+		backgroundColor : '#eee',
+		fontSize : 15,
+		color : '#000',
+		fontWeight : 'bold',
+		padding : '8px 0',
+		border : '1px solid #fff',
+		textAlign : 'center',
+		cursor : 'pointer'
+	},
+	todayDateStyle : {
+		backgroundColor : '#ccc'
+	},
+	selectedDateStyle : {
+		backgroundColor : '#999'
+	},
+	otherMonthDateStyle : {
+		backgroundColor : '#eee',
+		fontSize : 15,
+		color : '#ccc',
+		padding : '8px 0',
+		border : '1px solid #fff',
+		textAlign : 'center',
+		cursor : 'pointer'
+	}
+}, function(selectedCal) {
+	console.log(selectedCal.getYear() + '-' + selectedCal.getMonth() + '-' + selectedCal.getDate());
+})
+```
 
 ## 라이센스
 [MIT](LICENSE)

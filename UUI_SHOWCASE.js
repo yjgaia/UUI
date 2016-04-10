@@ -8,6 +8,7 @@ BOOT({
 		webServerPort : 8409
 	},
 	NODE_CONFIG : {
-		isNotUsingCPUClustering : true
+		isNotUsingCPUClustering : true,
+		dbName : 'UUI_SHOWCASE'
 	}
 });
