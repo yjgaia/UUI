@@ -39,7 +39,7 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 		isMultiple = params.isMultiple,
 
 		// callback url
-		callbackURL = params.callbackURL !== undefined ? params.callbackURL : 'http://' + BROWSER_CONFIG.host + ':' + BROWSER_CONFIG.port + '/__CORS_CALLBACK',
+		callbackURL = params.callbackURL !== undefined ? params.callbackURL : (BROWSER_CONFIG.isSecure === true ? 'https://' : 'http://') + BROWSER_CONFIG.host + ':' + BROWSER_CONFIG.port + '/__CORS_CALLBACK',
 
 		// form style
 		formStyle = params.formStyle,
@@ -127,7 +127,8 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 		});
 
 		GET({
-			port : CONFIG.webServerPort,
+			isSecure : BROWSER_CONFIG.isSecure,
+			port : BROWSER_CONFIG.port,
 			uri : '__UPLOAD_SERVER_HOST?defaultHost=' + BROWSER_CONFIG.host
 		}, function(host) {
 			
@@ -136,7 +137,7 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 			uploadKey = RANDOM_STR(20);
 
 			iframe.after( form = FORM({
-				action : 'http://' + host + ':' + CONFIG.webServerPort + '/__UPLOAD?boxName=' + box.boxName + '&callbackURL=' + callbackURL + '&uploadKey=' + uploadKey,
+				action : (BROWSER_CONFIG.isSecure === true ? 'https://' : 'http://') + host + ':' + BROWSER_CONFIG.port + '/__UPLOAD?boxName=' + box.boxName + '&callbackURL=' + callbackURL + '&uploadKey=' + uploadKey,
 				target : '__UPLOAD_FORM_' + self.id,
 				method : 'POST',
 				enctype : 'multipart/form-data',

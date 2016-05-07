@@ -1,5 +1,5 @@
 # UUI
-UPPERCASE User Interface BOX for web applications.
+UJS User Interface BOX for web applications.
 
 ## BUTTON
 이미지가 위에, 글자가 아래에 오는 버튼을 생성합니다.
