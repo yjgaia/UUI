@@ -389,5 +389,95 @@ UUI_SHOWCASE.MAIN = METHOD({
 				}
 			}
 		}).appendTo(wrapper);
+		
+		UUI.CONFIRM({
+			style : {
+				background : '#fff',
+				color : '#000',
+				borderRadius : 20
+			},
+			contentStyle : {
+				padding : 15
+			},
+			okButtonStyle : {
+				flt : 'left',
+				borderTop : '1px solid #999',
+				padding : '15px 0',
+				width : '50%'
+			},
+			cancelButtonStyle : {
+				flt : 'right',
+				marginLeft : -1,
+				borderLeft : '1px solid #999',
+				borderTop : '1px solid #999',
+				padding : '15px 0',
+				width : '50%'
+			},
+			msg : '이것은 확인 창입니다.\n닫기 버튼으로 종료할 수 있습니다.'
+		}, function() {
+			
+			UUI.ALERT({
+				style : {
+					background : '#fff',
+					color : '#000',
+					borderRadius : 20
+				},
+				contentStyle : {
+					padding : 15
+				},
+				buttonStyle : {
+					borderTop : '1px solid #999',
+					padding : 15
+				},
+				msg : '확인을 누르셨습니다.\n닫기 버튼으로 종료할 수 있습니다.'
+			});
+		});
+		
+		UUI.PROMPT({
+			style : {
+				background : '#fff',
+				color : '#000',
+				borderRadius : 20
+			},
+			contentStyle : {
+				padding : 15
+			},
+			inputStyle : {
+				padding : 10,
+				borderTop : '1px solid #999',
+			},
+			okButtonStyle : {
+				flt : 'left',
+				borderTop : '1px solid #999',
+				padding : '15px 0',
+				width : '50%'
+			},
+			cancelButtonStyle : {
+				flt : 'right',
+				marginLeft : -1,
+				borderLeft : '1px solid #999',
+				borderTop : '1px solid #999',
+				padding : '15px 0',
+				width : '50%'
+			},
+			msg : '이것은 입력 창입니다.\n닫기 버튼으로 종료할 수 있습니다.'
+		}, function(value) {
+			
+			UUI.ALERT({
+				style : {
+					background : '#fff',
+					color : '#000',
+					borderRadius : 20
+				},
+				contentStyle : {
+					padding : 15
+				},
+				buttonStyle : {
+					borderTop : '1px solid #999',
+					padding : 15
+				},
+				msg : value + '를 입력하셨습니다.\n닫기 버튼으로 종료할 수 있습니다.'
+			});
+		});
 	}
 });

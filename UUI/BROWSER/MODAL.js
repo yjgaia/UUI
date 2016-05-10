@@ -88,15 +88,9 @@ UUI.MODAL = CLASS({
 		
 		// get top.
 		getTop;
-
-		if (xImg === undefined && isCannotClose !== true) {
-			xImg = IMG({
-				src : UUI.R('x.png')
-			});
-		}
-
+		
 		wrapper = DIV({
-			c : [ content = DIV(), isCannotClose === true ? '' : UUI.IMG_BUTTON({
+			c : [ content = DIV(), xImg === undefined ? '' : UUI.IMG_BUTTON({
 				style : COMBINE([{
 					lineHeight : 0,
 					position : 'absolute'
