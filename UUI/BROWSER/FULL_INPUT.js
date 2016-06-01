@@ -20,6 +20,7 @@ UUI.FULL_INPUT = CLASS({
 		//OPTIONAL: params.accept
 		//OPTIONAL: params.style
 		//OPTIONAL: params.inputStyle
+		//OPTIONAL: params.isOffAutocomplete
 		//OPTIONAL: params.on
 
 		var
@@ -43,6 +44,9 @@ UUI.FULL_INPUT = CLASS({
 
 		// input style
 		inputStyle = params.inputStyle,
+		
+		// is off autocomplete
+		isOffAutocomplete = params.isOffAutocomplete,
 
 		// keydown delay
 		keydownDelay,
@@ -111,7 +115,8 @@ UUI.FULL_INPUT = CLASS({
 					value : value,
 					capture : capture,
 					accept : accept,
-					placeholder : placeholder
+					placeholder : placeholder,
+					isOffAutocomplete : isOffAutocomplete
 				})]
 			}),
 			on : {

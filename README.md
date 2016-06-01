@@ -313,7 +313,7 @@ UUI.VALID_FORM({
 ```
 
 ## FULL_INPUT
-너비가 폼 크기와 딱 맞는 입력 칸을 생성합니다.
+너비가 폼 크기와 딱 맞는 입력 칸을 생성합니다. 내부 `input`에 스타일을 지정하기 위해서는 `inputStyle`을 지정해 주시기 바랍니다.
 ```javascript
 UUI.FULL_INPUT({
 	name : 'name',
