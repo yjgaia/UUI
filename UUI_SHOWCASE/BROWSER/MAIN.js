@@ -277,7 +277,8 @@ UUI_SHOWCASE.MAIN = METHOD({
 			},
 			c : [UUI.FULL_INPUT({
 				name : 'name',
-				placeholder : 'Name'
+				placeholder : 'Name',
+				isOffAutocomplete : true
 			}), UUI.FULL_SELECT({
 				style : {
 					marginTop : 10
