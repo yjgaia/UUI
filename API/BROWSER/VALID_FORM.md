@@ -1,25 +1,28 @@
-# CLASS UUI.VALID_FORM
+# `CLASS` UUI.VALID_FORM
 Validatable form class
+
 ## Parameters
-* OPTIONAL params 
-* OPTIONAL params.errorMsgs 
-* OPTIONAL params.on 
-* OPTIONAL params.c 
-* OPTIONAL params.style 
-* OPTIONAL params.errorMsgStyle 
+* `OPTIONAL` params 
+* `OPTIONAL` params.errorMsgs 
+* `OPTIONAL` params.on 
+* `OPTIONAL` params.c 
+* `OPTIONAL` params.style 
+* `OPTIONAL` params.errorMsgStyle 
 
 ## Static Members
 No static members.
+
 ## Public Members
+
 ### showErrors
 show errors.
 ###### Parameters
-* REQUIRED _errors
+* `REQUIRED` _errors
 
 ### getErrorMsgs
 get error msgs.
 ###### Parameters
-* REQUIRED errors
+* `REQUIRED` errors
 
 ### getErrorMsgStyle
 get error msg style.

@@ -1,20 +1,23 @@
-# CLASS UUI.FULL_SUBMIT
+# `CLASS` UUI.FULL_SUBMIT
 Full-size submit class
+
 ## Parameters
-* OPTIONAL params 
-* OPTIONAL params.value 
-* OPTIONAL params.style 
-* OPTIONAL params.on 
+* `OPTIONAL` params 
+* `OPTIONAL` params.value 
+* `OPTIONAL` params.style 
+* `OPTIONAL` params.on 
 
 ## Static Members
 No static members.
+
 ## Public Members
+
 ### getValue
 get value.
 ###### Parameters
 No parameters.
+
 ### setValue
 set value.
 ###### Parameters
-* REQUIRED value
-
+* `REQUIRED` value
