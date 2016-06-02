@@ -1,6 +1,9 @@
 # `CLASS` UUI.FULL_CHECKBOX
 Full-size checkbox class
 
+## Mom
+NODE
+
 ## Parameters
 * `REQUIRED` params 
 * `REQUIRED` params.name 

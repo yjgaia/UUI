@@ -1,6 +1,9 @@
 # `CLASS` UUI.FULL_UPLOAD_FORM
 Full-size upload form class
 
+## Mom
+NODE
+
 ## Parameters
 * `REQUIRED` params 
 * `REQUIRED` params.box 

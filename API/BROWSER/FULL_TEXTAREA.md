@@ -1,6 +1,9 @@
 # `CLASS` UUI.FULL_TEXTAREA
 Full-size textarea class
 
+## Mom
+NODE
+
 ## Parameters
 * `REQUIRED` params 
 * `REQUIRED` params.name 
