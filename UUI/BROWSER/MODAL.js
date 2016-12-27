@@ -165,8 +165,8 @@ UUI.MODAL = CLASS({
 		escEvent = EVENT({
 			name : 'keydown'
 		}, function(e) {
-
-			if (e.getKeyCode() === 27 && isCannotClose !== true) {
+			
+			if (e.getKey() === 'Escape' && isCannotClose !== true) {
 				close();
 			}
 		});

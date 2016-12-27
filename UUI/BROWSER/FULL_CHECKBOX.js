@@ -223,7 +223,7 @@ UUI.FULL_CHECKBOX = CLASS({
 			lowNode : input,
 			name : 'keyup'
 		}, function(e) {
-			if (e !== undefined && e.getKeyCode() === 32) {
+			if (e !== undefined && e.getKey() === ' ') {
 				DELAY(function() {
 					EVENT.fireAll({
 						node : self,

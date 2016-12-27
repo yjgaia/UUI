@@ -1,8 +1,5 @@
-// load UJS.
-require(process.env.UPPERCASE_PATH + '/UJS-NODE.js');
-
-// load UPPERCASE-UTIL.
-require(process.env.UPPERCASE_PATH + '/UPPERCASE-UTIL/NODE.js');
+// load UPPERCASE-CORE.
+require(process.env.UPPERCASE_PATH + '/UPPERCASE-CORE/NODE.js');
 
 /*
  * pack UPPERCASE BOX.
@@ -93,7 +90,7 @@ RUN(function() {
 		//REQUIRED: path
 		//REQUIRED: func
 
-		if (CHECK_IS_EXISTS_FILE({
+		if (CHECK_IS_FILE_EXISTS({
 			path : path,
 			isSync : true
 		}) === true) {
@@ -287,7 +284,7 @@ RUN(function() {
 	}
 
 	// save client script.
-	if (commonScript !== '' || clientScript !== '') {
+	if (clientScript !== '') {
 
 		log('SAVING CLIENT SCRIPT...');
 
@@ -301,7 +298,7 @@ RUN(function() {
 	}
 
 	// save browser script.
-	if (commonScript !== '' || clientScript !== '' || browserScript !== '') {
+	if (browserScript !== '') {
 
 		log('SAVING BROWSER SCRIPT...');
 
@@ -315,7 +312,7 @@ RUN(function() {
 	}
 
 	// save node script.
-	if (commonScript !== '' || nodeScript !== '') {
+	if (nodeScript !== '') {
 
 		log('SAVING NODE SCRIPT...');
 
