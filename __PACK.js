@@ -23,9 +23,6 @@ RUN(function() {
 	// common script
 	commonScript = '',
 
-	// client script
-	clientScript = '',
-
 	// browser script
 	browserScript = '',
 
@@ -171,20 +168,6 @@ RUN(function() {
 		}
 	},
 
-	// load for client.
-	loadForClient = function(relativePath) {
-		//REQUIRED: relativePath
-
-		if (path.extname(relativePath) === '.js') {
-
-			// add to client script.
-			clientScript += READ_FILE({
-				path : rootPath + '/' + relativePath,
-				isSync : true
-			}) + '\n';
-		}
-	},
-
 	// load for browser.
 	loadForBrowser = function(relativePath) {
 		//REQUIRED: relativePath
@@ -218,10 +201,7 @@ RUN(function() {
 
 		// minify common script.
 		commonScript = MINIFY_JS(commonScript);
-
-		// minify client script.
-		clientScript = MINIFY_JS(clientScript);
-
+		
 		// minify browser script.
 		browserScript = MINIFY_JS(browserScript);
 
@@ -283,28 +263,14 @@ RUN(function() {
 		log('SAVED COMMON SCRIPT!');
 	}
 
-	// save client script.
-	if (clientScript !== '') {
-
-		log('SAVING CLIENT SCRIPT...');
-
-		WRITE_FILE({
-			path : '__PACK/' + boxName + '/CLIENT.js',
-			content : commonScript + clientScript,
-			isSync : true
-		});
-
-		log('SAVED CLIENT SCRIPT!');
-	}
-
 	// save browser script.
-	if (browserScript !== '') {
+	if (commonScript !== '' || browserScript !== '') {
 
 		log('SAVING BROWSER SCRIPT...');
 
 		WRITE_FILE({
 			path : '__PACK/' + boxName + '/BROWSER.js',
-			content : commonScript + clientScript + browserScript,
+			content : commonScript + browserScript,
 			isSync : true
 		});
 
@@ -312,7 +278,7 @@ RUN(function() {
 	}
 
 	// save node script.
-	if (nodeScript !== '') {
+	if (commonScript !== '' || nodeScript !== '') {
 
 		log('SAVING NODE SCRIPT...');
 
