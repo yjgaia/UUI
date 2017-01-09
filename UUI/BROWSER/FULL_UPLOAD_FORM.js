@@ -110,7 +110,7 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 					position : 'absolute',
 					top : 0,
 					left : 0,
-					backgroundColor : RGBA([0, 0, 0, 0.5]),
+					backgroundColor : 'rgba(0, 0, 0, 0.5)',
 					color : '#fff',
 					textAlign : 'center'
 				},
