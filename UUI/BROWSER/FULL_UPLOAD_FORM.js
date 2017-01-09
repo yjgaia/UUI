@@ -13,7 +13,6 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 		'use strict';
 		//REQUIRED: params
 		//REQUIRED: params.box
-		//OPTIONAL: params.capture
 		//OPTIONAL: params.accept
 		//OPTIONAL: params.isMultiple
 		//OPTIONAL: params.style
@@ -28,10 +27,7 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 		var
 		// box
 		box = params.box,
-
-		// capture
-		capture = params.capture,
-
+		
 		// accept
 		accept = params.accept,
 
@@ -145,7 +141,6 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 				c : [ input = INPUT({
 					type : 'file',
 					name : 'file',
-					capture : capture,
 					accept : accept,
 					isMultiple : isMultiple,
 					style : COMBINE([{
@@ -187,7 +182,7 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 					});
 
 					if (form !== undefined) {
-						form.submit(true);
+						form.submit();
 					}
 				}
 			});

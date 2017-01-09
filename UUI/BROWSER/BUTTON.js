@@ -58,7 +58,8 @@ UUI.BUTTON = CLASS({
 				cursor : 'pointer',
 				textDecoration : 'none',
 				touchCallout : 'none',
-				userSelect : 'none'
+				userSelect : 'none',
+				color : 'inherit'
 			},
 			href : href,
 			target : target
