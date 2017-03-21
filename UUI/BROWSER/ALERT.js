@@ -3,74 +3,24 @@
  */
 UUI.ALERT = CLASS({
 
-	init : function(inner, self, params) {
-		'use strict';
+	init : (inner, self, params) => {
 		//REQUIRED: params
 		//OPTIONAL: params.style
 		//OPTIONAL: params.contentStyle
 		//OPTIONAL: params.buttonStyle
 		//OPTIONAL: params.on
 		//REQUIRED: params.msg
-
-		var
-		// style
-		style = params.style,
 		
-		// content style
-		contentStyle = params.contentStyle,
-		
-		// button style
-		buttonStyle = params.buttonStyle,
+		let style = params.style;
+		let contentStyle = params.contentStyle;
+		let buttonStyle = params.buttonStyle;
+		let on = params.on;
+		let msg = params.msg;
 
-		// on
-		on = params.on,
+		let content;
+		let button;
 
-		// msg
-		msg = params.msg,
-
-		// modal
-		modal,
-		
-		// content
-		content,
-		
-		// button
-		button,
-
-		// get node.
-		getNode,
-
-		// append.
-		append,
-
-		// prepend.
-		prepend,
-
-		// after.
-		after,
-
-		// before.
-		before,
-
-		// remove.
-		remove,
-
-		// empty.
-		empty,
-
-		// get children.
-		getChildren,
-		
-		// get button.
-		getButton,
-
-		// add content style.
-		addContentStyle,
-
-		// add button style.
-		addButtonStyle;
-
-		modal = UUI.MODAL({
+		let modal = UUI.MODAL({
 			style : COMBINE([{
 				textAlign : 'center'
 			}, style]),
@@ -85,64 +35,64 @@ UUI.ALERT = CLASS({
 					ko : '닫기'
 				}),
 				on : {
-					tap : function() {
+					tap : () => {
 						remove();
 					}
 				}
 			})]
 		});
 
-		self.getNode = getNode = function() {
+		let getNode = self.getNode = () => {
 			return modal.getNode();
 		};
 
-		self.append = append = function(node) {
+		let append = self.append = (node) => {
 			//REQUIRED: node
 
 			content.append(node);
 		};
 
-		self.prepend = prepend = function(node) {
+		let prepend = self.prepend = (node) => {
 			//REQUIRED: node
 
 			content.prepend(node);
 		};
 
-		self.after = after = function(node) {
+		let after = self.after = (node) => {
 			//REQUIRED: node
 
 			modal.after(node);
 		};
 
-		self.before = before = function(node) {
+		let before = self.before = (node) => {
 			//REQUIRED: node
 
 			modal.before(node);
 		};
 
-		self.remove = remove = function() {
+		let remove = self.remove = () => {
 			modal.remove();
 		};
 
-		self.empty = empty = function() {
+		let empty = self.empty = () => {
 			content.empty();
 		};
 
-		self.getChildren = getChildren = function() {
+		let getChildren = self.getChildren = () => {
 			return content.getChildren();
 		};
 
-		self.getButton = getButton = function() {
+		let getButton = self.getButton = () => {
 			return button;
 		};
 
-		self.addContentStyle = addContentStyle = function(style) {
+		let addContentStyle = self.addContentStyle = (style) => {
 			//REQUIRED: style
 
 			content.addContentStyle(style);
 		};
 		
-		self.addButtonStyle = addButtonStyle = function(style) {
+		let addButtonStyle = self.addButtonStyle = (style) => {
 			//REQUIRED: style
 			
 			button.addStyle(style);
