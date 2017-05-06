@@ -1,68 +1,40 @@
-/**
+/*
  * Table class
  */
 UUI.TABLE = CLASS({
 
-	preset : function() {
-		'use strict';
-
+	preset : () => {
 		return NODE;
 	},
 
-	init : function(inner, self, params) {
-		'use strict';
+	init : (inner, self, params) => {
 		//OPTIONAL: params
 		//OPTIONAL: params.c
 		//OPTIONAL: params.style
 		//OPTIONAL: params.trs
 		//OPTIONAL: params.on
 
-		var
-		// trs
-		trs = params === undefined ? undefined : params.trs,
-
-		// tr stack
-		trStack = [],
-
-		// remove tr handlers
-		removeTRHandlers = {},
-
-		// table
-		table,
-
-		// add tr.
-		addTR,
-
-		// remove tr.
-		removeTR,
-
-		// add remove tr handler.
-		addRemoveTRHandler,
-
-		// remove all trs.
-		removeAllTRs;
+		let trs = params === undefined ? undefined : params.trs;
+		
+		let trStack = [];
+		let removeTRHandlers = {};
 
 		if (trs === undefined) {
 			trs = {};
 		}
 
-		inner.setDom( table = TABLE());
+		let table;
+		inner.setDom(table = TABLE());
 
-		self.addTR = addTR = function(params) {
+		let addTR = self.addTR = (params) => {
 			//REQUIRED: params
 			//REQUIRED: params.key
 			//REQUIRED: params.tr
 			//OPTIONAL: params.isFirst
 
-			var
-			// key
-			key = params.key,
-
-			// tr
-			tr = params.tr,
-
-			// is first
-			isFirst = params.isFirst;
+			let key = params.key;
+			let tr = params.tr;
+			let isFirst = params.isFirst;
 
 			if (trs[key] !== undefined) {
 
@@ -86,27 +58,23 @@ UUI.TABLE = CLASS({
 			trs[key] = tr;
 		};
 
-		EACH(trs, function(tr, key) {
+		EACH(trs, (tr, key) => {
 			trStack.push(tr);
 			self.append(tr);
 		});
 
-		self.removeTR = removeTR = function(key) {
+		let removeTR = self.removeTR = (key) => {
 			//REQUIRED: key
 
-			var
-			// tr
-			tr = trs[key],
-
-			// handlers
-			handlers = removeTRHandlers[key];
+			let tr = trs[key];
+			let handlers = removeTRHandlers[key];
 
 			if (tr !== undefined) {
 				tr.remove();
 			}
 
 			if (handlers !== undefined) {
-				EACH(handlers, function(handler) {
+				EACH(handlers, (handler) => {
 					handler();
 				});
 			}
@@ -125,7 +93,7 @@ UUI.TABLE = CLASS({
 			});
 		};
 
-		self.addRemoveTRHandler = addRemoveTRHandler = function(key, handler) {
+		let addRemoveTRHandler = self.addRemoveTRHandler = (key, handler) => {
 			//REQUIRED: key
 			//REQUIRED: handler
 
@@ -136,18 +104,16 @@ UUI.TABLE = CLASS({
 			removeTRHandlers[key].push(handler);
 		};
 
-		self.removeAllTRs = removeAllTRs = function() {
+		let removeAllTRs = self.removeAllTRs = () => {
 
-			EACH(trs, function(tr, key) {
+			EACH(trs, (tr, key) => {
 
-				var
-				// handlers
-				handlers = removeTRHandlers[key];
+				let handlers = removeTRHandlers[key];
 
 				tr.remove();
 
 				if (handlers !== undefined) {
-					EACH(handlers, function(handler) {
+					EACH(handlers, (handler) => {
 						handler();
 					});
 				}

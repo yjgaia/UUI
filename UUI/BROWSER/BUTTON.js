@@ -1,16 +1,13 @@
-/**
+/*
  * Button class
  */
 UUI.BUTTON = CLASS({
 
-	preset : function() {
-		'use strict';
-
+	preset : () => {
 		return NODE;
 	},
 
-	init : function(inner, self, params) {
-		'use strict';
+	init : (inner, self, params) => {
 		//REQUIRED: params
 		//OPTIONAL: params.img
 		//OPTIONAL: params.title
@@ -20,38 +17,15 @@ UUI.BUTTON = CLASS({
 		//OPTIONAL: params.style
 		//OPTIONAL: params.on
 
-		var
-		// img
-		img = params.img,
-
-		// title
-		title = params.title,
-
-		// spacing
-		spacing = params.spacing === undefined ? 0 : params.spacing,
-
-		// href
-		href = params.href,
-
-		// target
-		target = params.target,
-
-		// a
-		a,
-
-		// title dom
-		titleDom,
-
-		// set title.
-		setTitle,
-
-		// get img.
-		getImg,
-
-		// tap.
-		tap;
-
-		a = A({
+		let img = params.img;
+		let title = params.title;
+		let spacing = params.spacing === undefined ? 0 : params.spacing;
+		let href = params.href;
+		let target = params.target;
+		
+		let titleDom;
+		
+		let a = A({
 			style : {
 				display : 'block',
 				textAlign : 'center',
@@ -66,7 +40,7 @@ UUI.BUTTON = CLASS({
 		});
 
 		if (title !== undefined) {
-			a.prepend( titleDom = DIV({
+			a.prepend(titleDom = DIV({
 				c : title === undefined ? '' : title
 			}));
 		}
@@ -82,16 +56,16 @@ UUI.BUTTON = CLASS({
 
 		inner.setDom(a);
 
-		self.setTitle = setTitle = function(title) {
+		let setTitle = self.setTitle = (title) => {
 			titleDom.empty();
 			titleDom.append(title);
 		};
 
-		self.getImg = getImg = function() {
+		let getImg = self.getImg = () => {
 			return img;
 		};
 
-		self.tap = tap = function() {
+		let tap = self.tap = () => {
 			EVENT.fireAll({
 				node : self,
 				name : 'tap'

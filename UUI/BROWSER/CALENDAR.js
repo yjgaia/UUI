@@ -1,16 +1,13 @@
-/**
+/*
  * Calendar class
  */
 UUI.CALENDAR = CLASS({
 
-	preset : function() {
-		'use strict';
-
+	preset : () => {
 		return UUI.TABLE;
 	},
 
-	init : function(inner, self, params, selectDateHandlerOrHandlers) {
-		'use strict';
+	init : (inner, self, params, selectDateHandlerOrHandlers) => {
 		//REQUIRED: params
 		//OPTIONAL: params.year
 		//OPTIONAL: params.month
@@ -27,63 +24,17 @@ UUI.CALENDAR = CLASS({
 		//OPTIONAL: selectDateHandlerOrHandlers.selectDate
 		//OPTIONAL: selectDateHandlerOrHandlers.each
 
-		var
-		// year
-		year = params.year,
-		
-		// month
-		month = params.month,
-		
-		// date
-		date = params.date,
-		
-		// header style
-		headerStyle = params.headerStyle === undefined ? {} : params.headerStyle,
-		
-		// day style
-		dayStyle = params.dayStyle,
-		
-		// date style
-		dateStyle = params.dateStyle,
-		
-		// today date style
-		todayDateStyle = params.todayDateStyle,
-		
-		// other month date style
-		otherMonthDateStyle = params.otherMonthDateStyle,
-		
-		// selected date style
-		selectedDateStyle = params.selectedDateStyle,
-		
-		// left arrow img
-		leftArrowImg = params.leftArrowImg,
-		
-		// right arrow img
-		rightArrowImg = params.rightArrowImg,
-		
-		// select date handler.
-		selectDateHandler,
-		
-		// each handler.
-		eachHandler,
-		
-		// now cal
-		nowCal = CALENDAR(),
-		
-		// first date cal
-		firstDateCal,
-		
-		// title
-		title,
-		
-		// load dates.
-		loadDates,
-		
-		// get year.
-		getYear,
-		
-		// get month.
-		getMonth;
+		let year = params.year;
+		let month = params.month;
+		let date = params.date;
+		let headerStyle = params.headerStyle === undefined ? {} : params.headerStyle;
+		let dayStyle = params.dayStyle;
+		let dateStyle = params.dateStyle;
+		let todayDateStyle = params.todayDateStyle;
+		let otherMonthDateStyle = params.otherMonthDateStyle;
+		let selectedDateStyle = params.selectedDateStyle;
+		let leftArrowImg = params.leftArrowImg;
+		let rightArrowImg = params.rightArrowImg;
 		
 		if (year === undefined || month === undefined) {
 			
@@ -96,12 +47,20 @@ UUI.CALENDAR = CLASS({
 			}
 		}
 		
+		let selectDateHandler;
+		let eachHandler;
+		
 		if (CHECK_IS_DATA(selectDateHandlerOrHandlers) !== true) {
 			selectDateHandler = selectDateHandlerOrHandlers;
 		} else {
 			selectDateHandler = selectDateHandlerOrHandlers.selectDate;
 			eachHandler = selectDateHandlerOrHandlers.each;
 		}
+		
+		let nowCal = CALENDAR();
+		
+		let firstDateCal;
+		let title;
 		
 		// header
 		self.append(TR({
@@ -116,11 +75,12 @@ UUI.CALENDAR = CLASS({
 				DIV({
 					style : {
 						flt : 'left',
-						cursor : 'pointer'
+						cursor : 'pointer',
+						userSelect : 'none'
 					},
 					c : leftArrowImg === undefined ? '<' : leftArrowImg,
 					on : {
-						tap : function() {
+						tap : () => {
 							
 							month -= 1;
 							
@@ -133,11 +93,12 @@ UUI.CALENDAR = CLASS({
 				DIV({
 					style : {
 						flt : 'right',
-						cursor : 'pointer'
+						cursor : 'pointer',
+						userSelect : 'none'
 					},
 					c : rightArrowImg === undefined ? '>' : rightArrowImg,
 					on : {
-						tap : function() {
+						tap : () => {
 							
 							month += 1;
 							
@@ -174,38 +135,28 @@ UUI.CALENDAR = CLASS({
 			})]
 		}));
 		
-		self.getYear = getYear = function() {
+		let getYear = self.getYear = () => {
 			return firstDateCal.getYear();
 		};
 		
-		self.getMonth = getMonth = function() {
+		let getMonth = self.getMonth = () => {
 			return firstDateCal.getMonth();
 		};
 		
-		loadDates = RAR(function() {
+		let loadDates = RAR(() => {
 			
-			var
-			// last date cal
-			lastDateCal = CALENDAR(CREATE_DATE({
+			let lastDateCal = CALENDAR(CREATE_DATE({
 				year : year,
 				month : month + 1,
 				date : 0
-			})),
+			}));
 			
-			// start date cal
-			startDateCal,
+			let dateCount = 0;
 			
-			// date count
-			dateCount = 0,
+			let nowTR;
+			let selectedDate;
 			
-			// now tr
-			nowTR,
-			
-			// selected date
-			selectedDate,
-			
-			// selected date origin style
-			selectedDateOriginStyle;
+			let selectedDateOriginStyle;
 			
 			firstDateCal = CALENDAR(CREATE_DATE({
 				year : year,
@@ -213,7 +164,7 @@ UUI.CALENDAR = CLASS({
 				date : 1
 			}));
 			
-			startDateCal = CALENDAR(CREATE_DATE({
+			let startDateCal = CALENDAR(CREATE_DATE({
 				year : year,
 				month : month,
 				date : -(firstDateCal.getDay() - 1)
@@ -222,15 +173,11 @@ UUI.CALENDAR = CLASS({
 			title.empty();
 			title.append(firstDateCal.getYear() + '년 ' + firstDateCal.getMonth() + '월');
 			
-			REPEAT(7, function(i) {
+			REPEAT(7, (i) => {
 				self.removeTR(i);
 			});
 			
-			REPEAT(firstDateCal.getDay(), function(i) {
-				
-				var
-				// td
-				td;
+			REPEAT(firstDateCal.getDay(), (i) => {
 				
 				if (dateCount % 7 === 0) {
 					self.addTR({
@@ -239,11 +186,13 @@ UUI.CALENDAR = CLASS({
 					});
 				}
 				
+				let td;
+				
 				nowTR.append(td = TD({
 					style : otherMonthDateStyle === undefined ? dateStyle : otherMonthDateStyle,
 					c : startDateCal.getDate() + i,
 					on : {
-						tap : function(e, td) {
+						tap : (e, td) => {
 							
 							if (selectedDateOriginStyle !== undefined) {
 								selectedDate.addStyle(selectedDateOriginStyle);
@@ -282,11 +231,7 @@ UUI.CALENDAR = CLASS({
 			REPEAT({
 				start : firstDateCal.getDate(),
 				end : lastDateCal.getDate()
-			}, function(d, i) {
-				
-				var
-				// td
-				td;
+			}, (d, i) => {
 				
 				if (dateCount % 7 === 0) {
 					self.addTR({
@@ -294,6 +239,8 @@ UUI.CALENDAR = CLASS({
 						tr : nowTR = TR()
 					});
 				}
+				
+				let td;
 				
 				nowTR.append(td = TD({
 					style : COMBINE([dateStyle,
@@ -303,7 +250,7 @@ UUI.CALENDAR = CLASS({
 						d === nowCal.getDate() ? todayDateStyle : {}]),
 					c : d,
 					on : {
-						tap : function(e, td) {
+						tap : (e, td) => {
 							
 							if (selectedDateOriginStyle !== undefined) {
 								selectedDate.addStyle(selectedDateOriginStyle);
@@ -363,11 +310,7 @@ UUI.CALENDAR = CLASS({
 				dateCount += 1;
 			});
 			
-			REPEAT(42 - dateCount, function(i) {
-				
-				var
-				// td
-				td;
+			REPEAT(42 - dateCount, (i) => {
 				
 				if (dateCount % 7 === 0) {
 					self.addTR({
@@ -376,11 +319,13 @@ UUI.CALENDAR = CLASS({
 					});
 				}
 				
+				let td;
+				
 				nowTR.append(td = TD({
 					style : otherMonthDateStyle === undefined ? dateStyle : otherMonthDateStyle,
 					c : i + 1,
 					on : {
-						tap : function(e, td) {
+						tap : (e, td) => {
 							
 							if (selectedDateOriginStyle !== undefined) {
 								selectedDate.addStyle(selectedDateOriginStyle);

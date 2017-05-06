@@ -1,16 +1,13 @@
-/**
+/*
  * Full-size textarea class
  */
 UUI.FULL_TEXTAREA = CLASS({
 
-	preset : function() {
-		'use strict';
-
+	preset : () => {
 		return NODE;
 	},
 
-	init : function(inner, self, params) {
-		'use strict';
+	init : (inner, self, params) => {
 		//REQUIRED: params
 		//REQUIRED: params.name
 		//OPTIONAL: params.placeholder
@@ -19,50 +16,13 @@ UUI.FULL_TEXTAREA = CLASS({
 		//OPTIONAL: params.textareaStyle
 		//OPTIONAL: params.on
 
-		var
-		// name
-		name = params.name,
+		let name = params.name;
+		let placeholder = params.placeholder;
+		let value = params.value;
+		let textareaStyle = params.textareaStyle;
 
-		// placeholder
-		placeholder = params.placeholder,
-
-		// value
-		value = params.value,
-
-		// textarea style
-		textareaStyle = params.textareaStyle,
-
-		// wrapper
-		wrapper,
-
-		// textarea
-		textarea,
-
-		// get name.
-		getName,
-
-		// get value.
-		getValue,
-
-		// set value.
-		setValue,
-
-		// select.
-		select,
-
-		// focus.
-		focus,
-
-		// blur.
-		blur,
-
-		// add input style.
-		addTextareaStyle,
-
-		// on.
-		on;
-
-		wrapper = DIV({
+		let textarea;
+		let wrapper = DIV({
 			style : {
 				padding : 5,
 				backgroundColor : '#fff',
@@ -85,20 +45,18 @@ UUI.FULL_TEXTAREA = CLASS({
 		inner.setWrapperDom(wrapper);
 		inner.setContentDom(textarea);
 
-		self.getName = getName = function() {
+		let getName = self.getName = () => {
 			return name;
 		};
 
-		self.getValue = getValue = function() {
+		let getValue = self.getValue = () => {
 			return textarea.getValue();
 		};
 
-		self.setValue = setValue = function(value) {
+		let setValue = self.setValue = (value) => {
 			//REQUIRED: value
 
-			var
-			// origin value
-			originValue = textarea.getValue();
+			let originValue = textarea.getValue();
 
 			textarea.setValue(value);
 
@@ -111,19 +69,19 @@ UUI.FULL_TEXTAREA = CLASS({
 			}
 		};
 
-		self.select = select = function() {
+		let select = self.select = () => {
 			textarea.select();
 		};
 
-		self.focus = focus = function() {
+		let focus = self.focus = () => {
 			textarea.focus();
 		};
 
-		self.blur = blur = function() {
+		let blur = self.blur = () => {
 			textarea.blur();
 		};
 
-		self.addTextareaStyle = addTextareaStyle = function(style) {
+		let addTextareaStyle = self.addTextareaStyle = (style) => {
 			//REQUIRED: style
 
 			textarea.addStyle(style);
@@ -133,7 +91,7 @@ UUI.FULL_TEXTAREA = CLASS({
 			addTextareaStyle(textareaStyle);
 		}
 
-		self.on = on = function(eventName, eventHandler) {
+		let on = self.on = (eventName, eventHandler) => {
 			//REQUIRED: eventName
 			//REQUIRED: eventHandler
 

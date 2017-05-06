@@ -1,16 +1,13 @@
-/**
+/*
  * Full-size input class
  */
 UUI.FULL_INPUT = CLASS({
 
-	preset : function() {
-		'use strict';
-
+	preset : () => {
 		return NODE;
 	},
 
-	init : function(inner, self, params) {
-		'use strict';
+	init : (inner, self, params) => {
 		//REQUIRED: params
 		//REQUIRED: params.name
 		//OPTIONAL: params.type
@@ -23,65 +20,17 @@ UUI.FULL_INPUT = CLASS({
 		//OPTIONAL: params.isOffAutocomplete
 		//OPTIONAL: params.on
 
-		var
-		// name
-		name = params.name,
+		let name = params.name;
+		let type = params.type;
+		let placeholder = params.placeholder;
+		let capture = params.capture;
+		let accept = params.accept;
+		let value = params.value;
+		let inputStyle = params.inputStyle;
+		let isOffAutocomplete = params.isOffAutocomplete;
 
-		// type
-		type = params.type,
-
-		// placeholder
-		placeholder = params.placeholder,
-
-		// capture
-		capture = params.capture,
-
-		// accept
-		accept = params.accept,
-
-		// value
-		value = params.value,
-
-		// input style
-		inputStyle = params.inputStyle,
-		
-		// is off autocomplete
-		isOffAutocomplete = params.isOffAutocomplete,
-
-		// keydown delay
-		keydownDelay,
-
-		// wrapper
-		wrapper,
-
-		// input
-		input,
-
-		// get name.
-		getName,
-
-		// get value.
-		getValue,
-
-		// set value.
-		setValue,
-
-		// select.
-		select,
-
-		// focus.
-		focus,
-
-		// blur.
-		blur,
-
-		// add input style.
-		addInputStyle,
-
-		// on.
-		on;
-
-		wrapper = DIV({
+		let input;
+		let wrapper = DIV({
 			style : {
 				padding : 5,
 				backgroundColor : '#fff'
@@ -120,7 +69,7 @@ UUI.FULL_INPUT = CLASS({
 				})]
 			}),
 			on : {
-				tap : function() {
+				tap : () => {
 
 					input.focus();
 
@@ -134,20 +83,18 @@ UUI.FULL_INPUT = CLASS({
 
 		inner.setWrapperDom(wrapper);
 
-		self.getName = getName = function() {
+		let getName = self.getName = () => {
 			return name;
 		};
 
-		self.getValue = getValue = function() {
+		let getValue = self.getValue = () => {
 			return input.getValue();
 		};
 
-		self.setValue = setValue = function(value) {
+		let setValue = self.setValue = (value) => {
 			//REQUIRED: value
 
-			var
-			// origin value
-			originValue = input.getValue();
+			let originValue = input.getValue();
 
 			input.setValue(value);
 
@@ -160,7 +107,7 @@ UUI.FULL_INPUT = CLASS({
 			}
 		};
 
-		self.select = select = function() {
+		let select = self.select = () => {
 
 			input.select();
 
@@ -175,7 +122,7 @@ UUI.FULL_INPUT = CLASS({
 			});
 		};
 
-		self.focus = focus = function() {
+		let focus = self.focus = () => {
 
 			input.focus();
 
@@ -185,7 +132,7 @@ UUI.FULL_INPUT = CLASS({
 			});
 		};
 
-		self.blur = blur = function() {
+		let blur = self.blur = () => {
 
 			input.blur();
 
@@ -195,7 +142,7 @@ UUI.FULL_INPUT = CLASS({
 			});
 		};
 
-		self.addInputStyle = addInputStyle = function(style) {
+		let addInputStyle = self.addInputStyle = (style) => {
 			//REQUIRED: style
 
 			input.addStyle(style);
@@ -205,7 +152,7 @@ UUI.FULL_INPUT = CLASS({
 			addInputStyle(inputStyle);
 		}
 
-		self.on = on = function(eventName, eventHandler) {
+		let on = self.on = (eventName, eventHandler) => {
 			//REQUIRED: eventName
 			//REQUIRED: eventHandler
 

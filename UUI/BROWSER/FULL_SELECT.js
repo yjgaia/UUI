@@ -1,16 +1,13 @@
-/**
+/*
  * Full-size select class
  */
 UUI.FULL_SELECT = CLASS({
 
-	preset : function() {
-		'use strict';
-
+	preset : () => {
 		return NODE;
 	},
 
-	init : function(inner, self, params) {
-		'use strict';
+	init : (inner, self, params) => {
 		//REQUIRED: params
 		//REQUIRED: params.name
 		//OPTIONAL: params.value
@@ -18,53 +15,13 @@ UUI.FULL_SELECT = CLASS({
 		//OPTIONAL: params.style
 		//OPTIONAL: params.selectStyle
 
-		var
-		// name
-		name = params.name,
+		let name = params.name;
+		let value = params.value;
+		let options = params.options;
+		let selectStyle = params.selectStyle;
 
-		// value
-		value = params.value,
-
-		// options
-		options = params.options,
-
-		// select style
-		selectStyle = params.selectStyle,
-
-		// wrapper
-		wrapper,
-
-		// _select
-		_select,
-
-		// get name.
-		getName,
-
-		// get value.
-		getValue,
-
-		// set value.
-		setValue,
-
-		// select.
-		select,
-
-		// blur.
-		blur,
-
-		// add select style.
-		addSelectStyle,
-
-		// add option.
-		addOption,
-
-		// remove all options.
-		removeAllOptions,
-
-		// on.
-		on;
-
-		wrapper = DIV({
+		let _select
+		let wrapper = DIV({
 			style : {
 				padding : 5,
 				backgroundColor : '#fff',
@@ -84,20 +41,18 @@ UUI.FULL_SELECT = CLASS({
 
 		inner.setWrapperDom(wrapper);
 
-		self.getName = getName = function() {
+		let getName = self.getName = () => {
 			return name;
 		};
 
-		self.getValue = getValue = function() {
+		let getValue = self.getValue = () => {
 			return _select.getValue();
 		};
 
-		self.setValue = setValue = function(value) {
+		let setValue = self.setValue = (value) => {
 			//REQUIRED: value
 
-			var
-			// origin value
-			originValue = _select.getValue();
+			let originValue = _select.getValue();
 
 			_select.setValue(value);
 
@@ -110,15 +65,15 @@ UUI.FULL_SELECT = CLASS({
 			}
 		};
 
-		self.select = select = function() {
+		let select = self.select = () => {
 			_select.select();
 		};
 
-		self.blur = blur = function() {
+		let blur = self.blur = () => {
 			_select.blur();
 		};
 
-		self.addSelectStyle = addSelectStyle = function(style) {
+		let addSelectStyle = self.addSelectStyle = (style) => {
 			//REQUIRED: style
 
 			_select.addStyle(style);
@@ -128,17 +83,17 @@ UUI.FULL_SELECT = CLASS({
 			addSelectStyle(selectStyle);
 		}
 
-		self.addOption = addOption = function(option) {
+		let addOption = self.addOption = (option) => {
 			//REQUIRED: option
 
 			_select.append(option);
 		};
 
-		self.removeAllOptions = removeAllOptions = function() {
+		let removeAllOptions = self.removeAllOptions = () => {
 			_select.empty();
 		};
 
-		self.on = on = function(eventName, eventHandler) {
+		let on = self.on = (eventName, eventHandler) => {
 			//REQUIRED: eventName
 			//REQUIRED: eventHandler
 

@@ -1,10 +1,9 @@
-/**
+/*
  * Modal class
  */
 UUI.MODAL = CLASS({
 
-	init : function(inner, self, params) {
-		'use strict';
+	init : (inner, self, params) => {
 		//OPTIONAL: params
 		//OPTIONAL: params.c
 		//OPTIONAL: params.style
@@ -13,83 +12,15 @@ UUI.MODAL = CLASS({
 		//OPTIONAL: params.xImg
 		//OPTIONAL: params.isCannotClose
 
-		var
-		// children
-		children = params === undefined ? undefined : params.c,
+		let children = params === undefined ? undefined : params.c;
+		let style = params === undefined ? undefined : params.style;
+		let contentStyle = params === undefined ? undefined : params.contentStyle;
+		let xStyle = params === undefined ? undefined : params.xStyle;
+		let xImg = params === undefined ? undefined : params.xImg;
+		let isCannotClose = params === undefined ? undefined : params.isCannotClose;
 
-		// style
-		style = params === undefined ? undefined : params.style,
-
-		// content style
-		contentStyle = params === undefined ? undefined : params.contentStyle,
-
-		// x style
-		xStyle = params === undefined ? undefined : params.xStyle,
-
-		// x img
-		xImg = params === undefined ? undefined : params.xImg,
-
-		// is cannot close
-		isCannotClose = params === undefined ? undefined : params.isCannotClose,
-
-		// wrapper
-		wrapper,
-
-		// content
-		content,
-
-		// resize event
-		resizeEvent,
-		
-		// esc event
-		escEvent,
-
-		// get node.
-		getNode,
-
-		// move to center.
-		moveToCenter,
-
-		// append.
-		append,
-
-		// prepend.
-		prepend,
-
-		// after.
-		after,
-
-		// before.
-		before,
-
-		// remove.
-		remove,
-
-		// empty.
-		empty,
-
-		// get children.
-		getChildren,
-		
-		// add style.
-		addStyle,
-
-		// add content style.
-		addContentStyle,
-
-		// on.
-		on,
-
-		// close.
-		close,
-		
-		// get left.
-		getLeft,
-		
-		// get top.
-		getTop;
-		
-		wrapper = DIV({
+		let content;
+		let wrapper = DIV({
 			c : [ content = DIV(), xImg === undefined ? '' : UUI.IMG_BUTTON({
 				style : COMBINE([{
 					lineHeight : 0,
@@ -100,15 +31,15 @@ UUI.MODAL = CLASS({
 				} : xStyle]),
 				img : xImg,
 				on : {
-					tap : function(e) {
+					tap : (e) => {
 						close();
 					},
-					mouseover : function() {
+					mouseover : () => {
 						addStyle({
 							opacity : 0.8
 						});
 					},
-					mouseout : function() {
+					mouseout : () => {
 						addStyle({
 							opacity : 1
 						});
@@ -117,17 +48,10 @@ UUI.MODAL = CLASS({
 			})]
 		}).appendTo(BODY);
 
-		moveToCenter = RAR(function() {
+		let moveToCenter = RAR(() => {
 
-			var
-			// left
-			left = (WIN_WIDTH() - wrapper.getWidth()) / 2,
-
-			// top
-			top = (WIN_HEIGHT() - wrapper.getHeight()) / 2,
-
-			// find.
-			find;
+			let left = (WIN_WIDTH() - wrapper.getWidth()) / 2;
+			let top = (WIN_HEIGHT() - wrapper.getHeight()) / 2;
 
 			wrapper.addStyle({
 				position : 'fixed',
@@ -135,14 +59,14 @@ UUI.MODAL = CLASS({
 				top : top < 0 ? 0 : top
 			});
 
-			find = function(children) {
-				EACH(children, function(child) {
+			let find = (children) => {
+				EACH(children, (child) => {
 
 					if (child.type === IMG) {
 						EVENT({
 							node : child,
 							name : 'load'
-						}, function() {
+						}, () => {
 							moveToCenter();
 						});
 					}
@@ -158,28 +82,28 @@ UUI.MODAL = CLASS({
 
 		wrapper.on('show', moveToCenter);
 
-		resizeEvent = EVENT({
+		let resizeEvent = EVENT({
 			name : 'resize'
 		}, moveToCenter);
 
-		escEvent = EVENT({
+		let escEvent = EVENT({
 			name : 'keydown'
-		}, function(e) {
+		}, (e) => {
 			if (e.getKey() === 'Escape' && isCannotClose !== true) {
 				close();
 			}
 		});
 
-		wrapper.on('remove', function() {
+		wrapper.on('remove', () => {
 			resizeEvent.remove();
 			escEvent.remove();
 		});
 
-		self.getNode = getNode = function() {
+		let getNode = self.getNode = () => {
 			return wrapper;
 		};
 
-		self.append = append = function(node) {
+		let append = self.append = (node) => {
 			//REQUIRED: node
 
 			content.append(node);
@@ -190,7 +114,7 @@ UUI.MODAL = CLASS({
 
 			if (CHECK_IS_ARRAY(children) === true) {
 
-				EACH(children, function(child, i) {
+				EACH(children, (child, i) => {
 					append(child);
 				});
 
@@ -199,40 +123,40 @@ UUI.MODAL = CLASS({
 			}
 		}
 
-		self.prepend = prepend = function(node) {
+		let prepend = self.prepend = (node) => {
 			//REQUIRED: node
 
 			content.prepend(node);
 			moveToCenter();
 		};
 
-		self.after = after = function(node) {
+		let after = self.after = (node) => {
 			//REQUIRED: node
 
 			wrapper.after(node);
 			moveToCenter();
 		};
 
-		self.before = before = function(node) {
+		let before = self.before = (node) => {
 			//REQUIRED: node
 
 			wrapper.before(node);
 			moveToCenter();
 		};
 
-		self.remove = remove = function() {
+		let remove = self.remove = () => {
 			wrapper.remove();
 		};
 
-		self.empty = empty = function() {
+		let empty = self.empty = () => {
 			content.empty();
 		};
 
-		self.getChildren = getChildren = function() {
+		let getChildren = self.getChildren = () => {
 			return content.getChildren();
 		};
 
-		self.addStyle = addStyle = function(style) {
+		let addStyle = self.addStyle = (style) => {
 			//REQUIRED: style
 
 			wrapper.addStyle(style);
@@ -243,7 +167,7 @@ UUI.MODAL = CLASS({
 			addStyle(style);
 		}
 
-		self.addContentStyle = addContentStyle = function(style) {
+		let addContentStyle = self.addContentStyle = (style) => {
 			//REQUIRED: style
 
 			content.addStyle(style);
@@ -254,7 +178,7 @@ UUI.MODAL = CLASS({
 			addContentStyle(contentStyle);
 		}
 
-		self.on = on = function(eventName, eventHandler) {
+		let on = self.on = (eventName, eventHandler) => {
 			EVENT({
 				node : self,
 				lowNode : wrapper,
@@ -262,7 +186,7 @@ UUI.MODAL = CLASS({
 			}, eventHandler);
 		};
 
-		self.close = close = function() {
+		let close = self.close = () => {
 
 			if (EVENT.fireAll({
 				node : self,
@@ -272,17 +196,16 @@ UUI.MODAL = CLASS({
 			}
 		};
 		
-		self.getLeft = getLeft = function() {
+		let getLeft = self.getLeft = () => {
 			return wrapper.getLeft();
 		};
 		
-		self.getTop = getTop = function() {
+		let getTop = self.getTop = () => {
 			return wrapper.getTop();
 		};
 	},
 
-	afterInit : function(inner, self, params) {
-		'use strict';
+	afterInit : (inner, self, params) => {
 		//OPTIONAL: params
 		//OPTIONAL: params.c
 		//OPTIONAL: params.style
@@ -292,9 +215,7 @@ UUI.MODAL = CLASS({
 		//OPTIONAL: params.isCannotClose
 		//OPTIONAL: params.on
 
-		var
-		// on
-		on;
+		let on;
 
 		// init params.
 		if (params !== undefined && CHECK_IS_DATA(params) === true) {
@@ -302,7 +223,7 @@ UUI.MODAL = CLASS({
 		}
 
 		if (on !== undefined) {
-			EACH(on, function(handler, name) {
+			EACH(on, (handler, name) => {
 				self.on(name, handler);
 			});
 		}

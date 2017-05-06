@@ -1,16 +1,13 @@
-/**
+/*
  * Full-size upload form class
  */
 UUI.FULL_UPLOAD_FORM = CLASS({
 
-	preset : function() {
-		'use strict';
-
+	preset : () => {
 		return NODE;
 	},
 
-	init : function(inner, self, params, handlers) {
-		'use strict';
+	init : (inner, self, params, handlers) => {
 		//REQUIRED: params
 		//REQUIRED: params.box
 		//OPTIONAL: params.accept
@@ -24,82 +21,36 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 		//OPTIONAL: handlers.success
 		//OPTIONAL: handlers.overSizeFile
 
-		var
-		// box
-		box = params.box,
+		let box = params.box;
+		let accept = params.accept;
+		let isMultiple = params.isMultiple;
+		let callbackURL = params.callbackURL !== undefined ? params.callbackURL : (BROWSER_CONFIG.isSecure === true ? 'https://' : 'http://') + BROWSER_CONFIG.host + ':' + BROWSER_CONFIG.port + '/__CORS_CALLBACK';
+		let formStyle = params.formStyle;
+		let inputStyle = params.inputStyle;
+		let uploadingStyle = params.uploadingStyle;
 		
-		// accept
-		accept = params.accept,
-
-		// is multiple
-		isMultiple = params.isMultiple,
-
-		// callback url
-		callbackURL = params.callbackURL !== undefined ? params.callbackURL : (BROWSER_CONFIG.isSecure === true ? 'https://' : 'http://') + BROWSER_CONFIG.host + ':' + BROWSER_CONFIG.port + '/__CORS_CALLBACK',
-
-		// form style
-		formStyle = params.formStyle,
-
-		// input style
-		inputStyle = params.inputStyle,
-
-		// uploading style
-		uploadingStyle = params.uploadingStyle,
-		
-		// success handler.
-		successHandler,
-
-		// over size file handler.
-		overSizeFileHandler,
-		
-		// upload progress room
-		uploadProgressRoom,
-
-		// wrapper
-		wrapper,
-
-		// form
-		form,
-
-		// input
-		input,
-
-		// iframe
-		iframe,
-
-		// uploading
-		uploading,
-		
-		// uploading progress
-		uploadingProgress,
-
-		// select.
-		select,
-
-		// add form style.
-		addFormStyle,
-
-		// add input style.
-		addInputStyle,
-
-		// add uplading style.
-		addUploadingStyle,
-
-		// on.
-		on;
+		let successHandler;
+		let overSizeFileHandler;
 		
 		if (handlers !== undefined) {
 			successHandler = handlers.success;
 			overSizeFileHandler = handlers.overSizeFile;
 		}
-
-		wrapper = DIV({
+		
+		let uploadProgressRoom;
+		
+		let form;
+		let input;
+		let iframe;
+		let uploading;
+		let uploadingProgress;
+		let wrapper = DIV({
 			style : {
 				padding : 5,
 				background : '#FFF',
 				position : 'relative'
 			},
-			c : [ iframe = IFRAME({
+			c : [iframe = IFRAME({
 				style : {
 					display : 'none'
 				},
@@ -126,19 +77,17 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 			isSecure : BROWSER_CONFIG.isSecure,
 			port : BROWSER_CONFIG.port,
 			uri : '__UPLOAD_SERVER_HOST?defaultHost=' + BROWSER_CONFIG.host
-		}, function(host) {
+		}, (host) => {
 			
-			var
-			// upload key
-			uploadKey = RANDOM_STR(20);
+			let uploadKey = RANDOM_STR(20);
 
-			iframe.after( form = FORM({
+			iframe.after(form = FORM({
 				action : (BROWSER_CONFIG.isSecure === true ? 'https://' : 'http://') + host + ':' + BROWSER_CONFIG.port + '/__UPLOAD?boxName=' + box.boxName + '&callbackURL=' + callbackURL + '&uploadKey=' + uploadKey,
 				target : '__UPLOAD_FORM_' + self.id,
 				method : 'POST',
 				enctype : 'multipart/form-data',
 				style : formStyle,
-				c : [ input = INPUT({
+				c : [input = INPUT({
 					type : 'file',
 					name : 'file',
 					accept : accept,
@@ -161,7 +110,7 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 			EVENT({
 				node : input,
 				name : 'change'
-			}, function(e) {
+			}, (e) => {
 
 				if (input.getValue() !== '') {
 					
@@ -176,7 +125,7 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 						uploadProgressRoom.exit();
 					}
 					uploadProgressRoom = box.ROOM('uploadProgressRoom/' + uploadKey);
-					uploadProgressRoom.on('progress', function(info) {
+					uploadProgressRoom.on('progress', (info) => {
 						uploadingProgress.empty();
 						uploadingProgress.append('(' + info.bytesRecieved + '/' + info.bytesExpected + ')');
 					});
@@ -191,23 +140,13 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 		EVENT({
 			node : iframe,
 			name : 'load'
-		}, function(e) {
+		}, (e) => {
 
-			var
-			// frame
-			frame = global['__UPLOAD_FORM_' + self.id],
+			let frame = global['__UPLOAD_FORM_' + self.id];
+			let fileDataSetStr = frame !== undefined ? frame.fileDataSetStr : undefined;
+			let maxUploadFileMB = frame !== undefined ? frame.maxUploadFileMB : undefined;
 
-			// file data set str
-			fileDataSetStr = frame !== undefined ? frame.fileDataSetStr : undefined,
-
-			// file data set
-			fileDataSet,
-
-			// max upload file MB
-			maxUploadFileMB = frame !== undefined ? frame.maxUploadFileMB : undefined,
-
-			// origin value
-			originValue;
+			let originValue;
 
 			if (maxUploadFileMB !== undefined) {
 
@@ -229,9 +168,9 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 
 			} else if (fileDataSetStr !== undefined) {
 
-				fileDataSet = PARSE_STR(decodeURIComponent(fileDataSetStr));
+				let fileDataSet = PARSE_STR(decodeURIComponent(fileDataSetStr));
 
-				EACH(fileDataSet, function(fileData, i) {
+				EACH(fileDataSet, (fileData, i) => {
 					fileDataSet[i] = UNPACK_DATA(fileData);
 				});
 
@@ -262,7 +201,7 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 
 		inner.setWrapperDom(wrapper);
 
-		self.select = select = function() {
+		let select = self.select = () => {
 
 			if (input !== undefined) {
 
@@ -280,7 +219,7 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 			}
 		};
 
-		self.addFormStyle = addFormStyle = function(style) {
+		let addFormStyle = self.addFormStyle = (style) => {
 			//REQUIRED: style
 
 			if (form !== undefined) {
@@ -297,7 +236,7 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 			addFormStyle(formStyle);
 		}
 
-		self.addInputStyle = addInputStyle = function(style) {
+		let addInputStyle = self.addInputStyle = (style) => {
 			//REQUIRED: style
 
 			if (input !== undefined) {
@@ -314,7 +253,7 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 			addInputStyle(inputStyle);
 		}
 
-		self.addUploadingStyle = addUploadingStyle = function(style) {
+		let addUploadingStyle = self.addUploadingStyle = (style) => {
 			//REQUIRED: style
 
 			uploading.addStyle(style);
@@ -324,7 +263,7 @@ UUI.FULL_UPLOAD_FORM = CLASS({
 			addUploadingStyle(uploadingStyle);
 		}
 
-		self.on = on = function(eventName, eventHandler) {
+		let on = self.on = (eventName, eventHandler) => {
 			//REQUIRED: eventName
 			//REQUIRED: eventHandler
 

@@ -1,16 +1,13 @@
-/**
+/*
  * Title class
  */
 UUI.TITLE = CLASS({
 
-	preset : function() {
-		'use strict';
-
+	preset : () => {
 		return NODE;
 	},
 
-	init : function(inner, self, params) {
-		'use strict';
+	init : (inner, self, params) => {
 		//REQUIRED: params
 		//OPTIONAL: params.img
 		//OPTIONAL: params.title
@@ -19,39 +16,14 @@ UUI.TITLE = CLASS({
 		//OPTIONAL: params.isImgRight
 		//OPTIONAL: params.on
 
-		var
-		// img
-		img = params.img,
-
-		// title
-		title = params.title,
-
-		// spacing
-		spacing = params.spacing === undefined ? 0 : params.spacing,
-
-		// is img right
-		isImgRight = params.isImgRight,
+		let img = params.img;
+		let title = params.title;
+		let spacing = params.spacing === undefined ? 0 : params.spacing;
+		let isImgRight = params.isImgRight;
 		
-		// div
-		div,
-
-		// title dom
-		titleDom,
-
-		// resize event
-		resizeEvent,
-
-		// set title.
-		setTitle,
-
-		// get img.
-		getImg,
-
-		// tap.
-		tap;
-
-		div = DIV({
-			c : [ titleDom = DIV({
+		let titleDom;
+		let div = DIV({
+			c : [titleDom = DIV({
 				style : {
 					flt : 'left'
 				},
@@ -79,13 +51,11 @@ UUI.TITLE = CLASS({
 				titleDom.after(img);
 			}
 
-			resizeEvent = EVENT({
+			let resizeEvent = EVENT({
 				name : 'resize'
-			}, function(e) {
+			}, (e) => {
 
-				var
-				// title dom height
-				titleDomHeight = titleDom.getHeight();
+				let titleDomHeight = titleDom.getHeight();
 
 				if (titleDomHeight > 0) {
 					titleDom.addStyle({
@@ -97,27 +67,27 @@ UUI.TITLE = CLASS({
 			EVENT_ONCE({
 				node : img,
 				name : 'load'
-			}, function(e) {
+			}, (e) => {
 				resizeEvent.fire();
 			});
 
-			self.on('show', function() {
+			self.on('show', () => {
 				resizeEvent.fire();
 			});
 
-			self.on('remove', function() {
+			self.on('remove', () => {
 				resizeEvent.remove();
 			});
 		}
 
 		inner.setDom(div);
 
-		self.setTitle = setTitle = function(title) {
+		let setTitle = self.setTitle = (title) => {
 			titleDom.empty();
 			titleDom.append(title);
 		};
 
-		self.getImg = getImg = function() {
+		let getImg = self.getImg = () => {
 			return img;
 		};
 	}

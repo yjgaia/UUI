@@ -1,16 +1,13 @@
-/**
+/*
  * List class
  */
 UUI.LIST = CLASS({
 
-	preset : function() {
-		'use strict';
-
+	preset : () => {
 		return NODE;
 	},
 
-	init : function(inner, self, params) {
-		'use strict';
+	init : (inner, self, params) => {
 		//OPTIONAL: params
 		//OPTIONAL: params.c
 		//OPTIONAL: params.style
@@ -18,58 +15,29 @@ UUI.LIST = CLASS({
 		//OPTIONAL: params.items
 		//OPTIONAL: params.isRequiringClearBoth
 
-		var
-		// is requiring clear both
-		isRequiringClearBoth = params === undefined ? undefined : params.isRequiringClearBoth,
+		let isRequiringClearBoth = params === undefined ? undefined : params.isRequiringClearBoth;
+		let itemStack = [];
+		let removeItemHandlers = {};
 
-		// item stack
-		itemStack = [],
-
-		// remove item handlers
-		removeItemHandlers = {},
-
-		// ul
-		ul,
-
-		// items
-		items,
-
-		// clear both
-		clearBoth,
-
-		// add item.
-		addItem,
-
-		// remove item.
-		removeItem,
-
-		// add remove item handler.
-		addRemoveItemHandler,
-
-		// remove all items.
-		removeAllItems;
+		let ul;
+		let items;
+		let clearBoth;
 
 		if (items === undefined) {
 			items = {};
 		}
 
-		inner.setDom( ul = UL());
+		inner.setDom(ul = UL());
 
-		self.addItem = addItem = function(params) {
+		let addItem = self.addItem = (params) => {
 			//REQUIRED: params
 			//REQUIRED: params.key
 			//REQUIRED: params.item
 			//OPTIONAL: params.isFirst
 
-			var
-			// key
-			key = params.key,
-
-			// item
-			item = params.item,
-
-			// is first
-			isFirst = params.isFirst;
+			let key = params.key;
+			let item = params.item;
+			let isFirst = params.isFirst;
 
 			if (items[key] !== undefined) {
 
@@ -104,7 +72,7 @@ UUI.LIST = CLASS({
 
 		if (params !== undefined && params.items !== undefined) {
 
-			EACH(params.items, function(item, key) {
+			EACH(params.items, (item, key) => {
 				addItem({
 					key : key,
 					item : item
@@ -112,22 +80,18 @@ UUI.LIST = CLASS({
 			});
 		}
 
-		self.removeItem = removeItem = function(key) {
+		let removeItem = self.removeItem = (key) => {
 			//REQUIRED: key
 
-			var
-			// item
-			item = items[key],
-
-			// handlers
-			handlers = removeItemHandlers[key];
+			let item = items[key];
+			let handlers = removeItemHandlers[key];
 
 			if (item !== undefined) {
 				item.remove();
 			}
 
 			if (handlers !== undefined) {
-				EACH(handlers, function(handler) {
+				EACH(handlers, (handler) => {
 					handler();
 				});
 			}
@@ -146,7 +110,7 @@ UUI.LIST = CLASS({
 			});
 		};
 
-		self.addRemoveItemHandler = addRemoveItemHandler = function(key, handler) {
+		let addRemoveItemHandler = self.addRemoveItemHandler = (key, handler) => {
 			//REQUIRED: key
 			//REQUIRED: handler
 
@@ -157,18 +121,16 @@ UUI.LIST = CLASS({
 			removeItemHandlers[key].push(handler);
 		};
 
-		self.removeAllItems = removeAllItems = function() {
+		let removeAllItems = self.removeAllItems = () => {
 
-			EACH(items, function(item, key) {
+			EACH(items, (item, key) => {
 
-				var
-				// handlers
-				handlers = removeItemHandlers[key];
+				let handlers = removeItemHandlers[key];
 
 				item.remove();
 
 				if (handlers !== undefined) {
-					EACH(handlers, function(handler) {
+					EACH(handlers, (handler) => {
 						handler();
 					});
 				}

@@ -1,10 +1,9 @@
-/**
+/*
  * Prompt class
  */
 UUI.PROMPT = CLASS({
 
-	init : function(inner, self, params, callback) {
-		'use strict';
+	init : (inner, self, params, callback) => {
 		//REQUIRED: params
 		//OPTIONAL: params.style
 		//OPTIONAL: params.contentStyle
@@ -15,89 +14,21 @@ UUI.PROMPT = CLASS({
 		//REQUIRED: params.msg
 		//REQUIRED: callback
 
-		var
-		// style
-		style = params.style,
+		let style = params.style;
+		let contentStyle = params.contentStyle;
+		let inputStyle = params.inputStyle;
+		let okButtonStyle = params.okButtonStyle;
+		let cancelButtonStyle = params.cancelButtonStyle;
+		let on = params.on;
+		let msg = params.msg;
 		
-		// content style
-		contentStyle = params.contentStyle,
-		
-		// input style
-		inputStyle = params.inputStyle,
-		
-		// ok button style
-		okButtonStyle = params.okButtonStyle,
-		
-		// cancel button style
-		cancelButtonStyle = params.cancelButtonStyle,
-
-		// on
-		on = params.on,
-
-		// msg
-		msg = params.msg,
-
-		// modal
-		modal,
-		
-		// content
-		content,
-		
-		// form
-		form,
-		
-		// input
-		input,
-		
-		// ok button
-		okButton,
-		
-		// cancel button
-		cancelButton,
-
-		// get node.
-		getNode,
-
-		// append.
-		append,
-
-		// prepend.
-		prepend,
-
-		// after.
-		after,
-
-		// before.
-		before,
-
-		// remove.
-		remove,
-
-		// empty.
-		empty,
-
-		// get children.
-		getChildren,
-		
-		// get ok button.
-		getOkButton,
-		
-		// get cancel button.
-		getCancelButton,
-
-		// add content style.
-		addContentStyle,
-
-		// add input style.
-		addInputStyle,
-
-		// add ok button style.
-		addOkButtonStyle,
-
-		// add cancel button style.
-		addCancelButtonStyle;
-
-		modal = UUI.MODAL({
+		let modal;
+		let content;
+		let form;
+		let input;
+		let okButton;
+		let cancelButton;
+		let modal = UUI.MODAL({
 			style : COMBINE([{
 				textAlign : 'center'
 			}, style]),
@@ -110,7 +41,7 @@ UUI.PROMPT = CLASS({
 					style : inputStyle
 				}),
 				on : {
-					submit : function() {
+					submit : () => {
 						callback(input.getValue());
 						remove();
 					}
@@ -122,7 +53,7 @@ UUI.PROMPT = CLASS({
 					ko : '확인'
 				}),
 				on : {
-					tap : function() {
+					tap : () => {
 						form.submit();
 					}
 				}
@@ -133,80 +64,80 @@ UUI.PROMPT = CLASS({
 					ko : '닫기'
 				}),
 				on : {
-					tap : function() {
+					tap : () => {
 						remove();
 					}
 				}
 			}), CLEAR_BOTH()]
 		});
 
-		self.getNode = getNode = function() {
+		let getNode = self.getNode = () => {
 			return modal.getNode();
 		};
 
-		self.append = append = function(node) {
+		let append = self.append = (node) => {
 			//REQUIRED: node
 
 			content.append(node);
 		};
 
-		self.prepend = prepend = function(node) {
+		let prepend = self.prepend = (node) => {
 			//REQUIRED: node
 
 			content.prepend(node);
 		};
 
-		self.after = after = function(node) {
+		let after = self.after = (node) => {
 			//REQUIRED: node
 
 			modal.after(node);
 		};
 
-		self.before = before = function(node) {
+		let before = self.before = (node) => {
 			//REQUIRED: node
 
 			modal.before(node);
 		};
 
-		self.remove = remove = function() {
+		let remove = self.remove = () => {
 			modal.remove();
 		};
 
-		self.empty = empty = function() {
+		let empty = self.empty = () => {
 			content.empty();
 		};
 
-		self.getChildren = getChildren = function() {
+		let getChildren = self.getChildren = () => {
 			return content.getChildren();
 		};
 		
-		self.getOkButton = getOkButton = function() {
+		let getOkButton = self.getOkButton = () => {
 			return okButton;
 		};
 		
-		self.getCancelButton = getCancelButton = function() {
+		let getCancelButton = self.getCancelButton = () => {
 			return cancelButton;
 		};
 		
-		self.addContentStyle = addContentStyle = function(style) {
+		let addContentStyle = self.addContentStyle = (style) => {
 			//REQUIRED: style
 
 			content.addContentStyle(style);
 		};
 
-		self.addInputStyle = addInputStyle = function(style) {
+		let addInputStyle = self.addInputStyle = (style) => {
 			//REQUIRED: style
 
 			input.addStyle(style);
 		};
 		
-		self.addOkButtonStyle = addOkButtonStyle = function(style) {
+		let addOkButtonStyle = self.addOkButtonStyle = (style) => {
 			//REQUIRED: style
 			
 			okButton.addStyle(style);
 		};
 		
-		self.addCancelButtonStyle = addCancelButtonStyle = function(style) {
+		let addCancelButtonStyle = self.addCancelButtonStyle = (style) => {
 			//REQUIRED: style
 			
 			cancelButton.addStyle(style);

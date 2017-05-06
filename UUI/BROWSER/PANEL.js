@@ -1,35 +1,23 @@
-/**
+/*
  * Panel(wrapper layer + content layer) class
  */
 UUI.PANEL = CLASS({
 
-	preset : function() {
-		'use strict';
-
+	preset : () => {
 		return NODE;
 	},
 
-	init : function(inner, self, params) {
-		'use strict';
+	init : (inner, self, params) => {
 		//OPTIONAL: params
 		//OPTIONAL: params.c
 		//OPTIONAL: params.style
 		//OPTIONAL: params.contentStyle
 		//OPTIONAL: params.on
 
-		var
-		// content style
-		contentStyle = params === undefined ? undefined : params.contentStyle,
+		let contentStyle = params === undefined ? undefined : params.contentStyle;
 
-		// wrapper
-		wrapper,
-
-		// content
-		content,
-
-		// add content style.
-		addContentStyle;
-
+		let wrapper;
+		let content;
 		wrapper = DIV({
 			c : content = DIV()
 		});
@@ -37,7 +25,7 @@ UUI.PANEL = CLASS({
 		inner.setWrapperDom(wrapper);
 		inner.setContentDom(content);
 
-		self.addContentStyle = addContentStyle = function(style) {
+		self.addContentStyle = addContentStyle = (style) => {
 			//REQUIRED: style
 
 			content.addStyle(style);

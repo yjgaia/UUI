@@ -1,16 +1,13 @@
-/**
+/*
  * Full-size checkbox class
  */
 UUI.FULL_CHECKBOX = CLASS({
 
-	preset : function() {
-		'use strict';
-
+	preset : () => {
 		return NODE;
 	},
 
-	init : function(inner, self, params) {
-		'use strict';
+	init : (inner, self, params) => {
 		//REQUIRED: params
 		//REQUIRED: params.name
 		//REQUIRED: params.label
@@ -20,56 +17,14 @@ UUI.FULL_CHECKBOX = CLASS({
 		//OPTIONAL: params.inputStyle
 		//OPTIONAL: params.on
 
-		var
-		// name
-		name = params.name,
+		let name = params.name;
+		let label = params.label;
+		let spacing = params.spacing === undefined ? 0 : params.spacing;
+		let value = params.value;
+		let inputStyle = params.inputStyle;
 
-		// label
-		label = params.label,
-		
-		// spacing
-		spacing = params.spacing === undefined ? 0 : params.spacing,
-
-		// value
-		value = params.value,
-
-		// input style
-		inputStyle = params.inputStyle,
-
-		// wrapper
-		wrapper,
-
-		// input
-		input,
-
-		// get name.
-		getName,
-
-		// get value.
-		getValue,
-
-		// set value.
-		setValue,
-
-		// select.
-		select,
-
-		// blur.
-		blur,
-
-		// add input style.
-		addInputStyle,
-
-		// on.
-		on,
-
-		// toggle check.
-		toggleCheck,
-
-		// check is checked.
-		checkIsChecked;
-
-		wrapper = DIV({
+		let input;
+		let wrapper = DIV({
 			style : {
 				position : 'relative'
 			},
@@ -89,7 +44,7 @@ UUI.FULL_CHECKBOX = CLASS({
 				},
 				c : label,
 				on : {
-					tap : function(e) {
+					tap : (e) => {
 
 						input.toggleCheck();
 
@@ -104,20 +59,18 @@ UUI.FULL_CHECKBOX = CLASS({
 
 		inner.setWrapperDom(wrapper);
 
-		self.getName = getName = function() {
+		self.getName = getName = () => {
 			return name;
 		};
 
-		self.getValue = getValue = function() {
+		self.getValue = getValue = () => {
 			return input.getValue();
 		};
 
-		self.setValue = setValue = function(value) {
+		self.setValue = setValue = (value) => {
 			//REQUIRED: value
 
-			var
-			// checked
-			checked = input.checkIsChecked();
+			let checked = input.checkIsChecked();
 
 			input.setValue(value);
 
@@ -143,7 +96,7 @@ UUI.FULL_CHECKBOX = CLASS({
 			}
 		};
 
-		self.select = select = function() {
+		self.select = select = () => {
 
 			input.select();
 
@@ -158,7 +111,7 @@ UUI.FULL_CHECKBOX = CLASS({
 			});
 		};
 
-		self.blur = blur = function() {
+		self.blur = blur = () => {
 
 			input.blur();
 
@@ -168,7 +121,7 @@ UUI.FULL_CHECKBOX = CLASS({
 			});
 		};
 
-		self.addInputStyle = addInputStyle = function(style) {
+		self.addInputStyle = addInputStyle = (style) => {
 			//REQUIRED: style
 
 			input.addStyle(style);
@@ -178,7 +131,7 @@ UUI.FULL_CHECKBOX = CLASS({
 			addInputStyle(inputStyle);
 		}
 
-		self.on = on = function(eventName, eventHandler) {
+		self.on = on = (eventName, eventHandler) => {
 			//REQUIRED: eventName
 			//REQUIRED: eventHandler
 
@@ -200,11 +153,9 @@ UUI.FULL_CHECKBOX = CLASS({
 			}
 		};
 
-		self.toggleCheck = toggleCheck = function(e) {
+		self.toggleCheck = toggleCheck = (e) => {
 
-			var
-			// checked
-			checked = input.toggleCheck();
+			let checked = input.toggleCheck();
 
 			EVENT.fireAll({
 				node : self,
@@ -214,7 +165,7 @@ UUI.FULL_CHECKBOX = CLASS({
 			return checked;
 		};
 
-		self.checkIsChecked = checkIsChecked = function() {
+		self.checkIsChecked = checkIsChecked = () => {
 			return input.checkIsChecked();
 		};
 
@@ -222,9 +173,9 @@ UUI.FULL_CHECKBOX = CLASS({
 			node : self,
 			lowNode : input,
 			name : 'keyup'
-		}, function(e) {
+		}, (e) => {
 			if (e !== undefined && e.getKey() === ' ') {
-				DELAY(function() {
+				DELAY(() => {
 					EVENT.fireAll({
 						node : self,
 						name : 'change'

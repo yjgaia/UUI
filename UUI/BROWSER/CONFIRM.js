@@ -1,10 +1,9 @@
-/**
+/*
  * Confirm class
  */
 UUI.CONFIRM = CLASS({
 
-	init : function(inner, self, params, callback) {
-		'use strict';
+	init : (inner, self, params, callback) => {
 		//REQUIRED: params
 		//OPTIONAL: params.style
 		//OPTIONAL: params.contentStyle
@@ -14,77 +13,17 @@ UUI.CONFIRM = CLASS({
 		//REQUIRED: params.msg
 		//REQUIRED: callback
 
-		var
-		// style
-		style = params.style,
-		
-		// content style
-		contentStyle = params.contentStyle,
-		
-		// ok button style
-		okButtonStyle = params.okButtonStyle,
-		
-		// cancel button style
-		cancelButtonStyle = params.cancelButtonStyle,
+		let style = params.style;
+		let contentStyle = params.contentStyle;
+		let okButtonStyle = params.okButtonStyle;
+		let cancelButtonStyle = params.cancelButtonStyle;
+		let on = params.on;
+		let msg = params.msg;
 
-		// on
-		on = params.on,
-
-		// msg
-		msg = params.msg,
-
-		// modal
-		modal,
-		
-		// content
-		content,
-		
-		// ok button
-		okButton,
-		
-		// cancel button
-		cancelButton,
-
-		// get node.
-		getNode,
-
-		// append.
-		append,
-
-		// prepend.
-		prepend,
-
-		// after.
-		after,
-
-		// before.
-		before,
-
-		// remove.
-		remove,
-
-		// empty.
-		empty,
-
-		// get children.
-		getChildren,
-		
-		// get ok button.
-		getOkButton,
-		
-		// get cancel button.
-		getCancelButton,
-
-		// add content style.
-		addContentStyle,
-
-		// add ok button style.
-		addOkButtonStyle,
-
-		// add cancel button style.
-		addCancelButtonStyle;
-
-		modal = UUI.MODAL({
+		let content;
+		let okButton;
+		let cancelButton;
+		let modal = UUI.MODAL({
 			style : COMBINE([{
 				textAlign : 'center'
 			}, style]),
@@ -99,7 +38,7 @@ UUI.CONFIRM = CLASS({
 					ko : '확인'
 				}),
 				on : {
-					tap : function() {
+					tap : () => {
 						callback();
 						remove();
 					}
@@ -111,74 +50,74 @@ UUI.CONFIRM = CLASS({
 					ko : '닫기'
 				}),
 				on : {
-					tap : function() {
+					tap : () => {
 						remove();
 					}
 				}
 			}), CLEAR_BOTH()]
 		});
 
-		self.getNode = getNode = function() {
+		let getNode = self.getNode = () => {
 			return modal.getNode();
 		};
 
-		self.append = append = function(node) {
+		let append = self.append = (node) => {
 			//REQUIRED: node
 
 			content.append(node);
 		};
 
-		self.prepend = prepend = function(node) {
+		let prepend = self.prepend = (node) => {
 			//REQUIRED: node
 
 			content.prepend(node);
 		};
 
-		self.after = after = function(node) {
+		let after = self.after = (node) => {
 			//REQUIRED: node
 
 			modal.after(node);
 		};
 
-		self.before = before = function(node) {
+		let before = self.before = (node) => {
 			//REQUIRED: node
 
 			modal.before(node);
 		};
 
-		self.remove = remove = function() {
+		let remove = self.remove = () => {
 			modal.remove();
 		};
 
-		self.empty = empty = function() {
+		let empty = self.empty = () => {
 			content.empty();
 		};
 
-		self.getChildren = getChildren = function() {
+		let getChildren = self.getChildren = () => {
 			return content.getChildren();
 		};
 		
-		self.getOkButton = getOkButton = function() {
+		let getOkButton = self.getOkButton = () => {
 			return okButton;
 		};
 		
-		self.getCancelButton = getCancelButton = function() {
+		let getCancelButton = self.getCancelButton = () => {
 			return cancelButton;
 		};
 
-		self.addContentStyle = addContentStyle = function(style) {
+		let addContentStyle = self.addContentStyle = (style) => {
 			//REQUIRED: style
 
 			content.addContentStyle(style);
 		};
 		
-		self.addOkButtonStyle = addOkButtonStyle = function(style) {
+		let addOkButtonStyle = self.addOkButtonStyle = (style) => {
 			//REQUIRED: style
 			
 			okButton.addStyle(style);
 		};
 		
-		self.addCancelButtonStyle = addCancelButtonStyle = function(style) {
+		let addCancelButtonStyle = self.addCancelButtonStyle = (style) => {
 			//REQUIRED: style
 			
 			cancelButton.addStyle(style);

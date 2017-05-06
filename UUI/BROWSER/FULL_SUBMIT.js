@@ -1,35 +1,21 @@
-/**
+/*
  * Full-size submit class
  */
 UUI.FULL_SUBMIT = CLASS({
 
-	preset : function() {
-		'use strict';
-
+	preset : () => {
 		return NODE;
 	},
 
-	init : function(inner, self, params) {
-		'use strict';
+	init : (inner, self, params) => {
 		//OPTIONAL: params
 		//OPTIONAL: params.value
 		//OPTIONAL: params.style
 		//OPTIONAL: params.on
 
-		var
-		// value
-		value = params === undefined ? undefined : params.value,
+		let value = params === undefined ? undefined : params.value;
 
-		// input
-		input,
-		
-		// get value.
-		getValue,
-
-		// set value.
-		setValue;
-
-		input = INPUT({
+		let input = INPUT({
 			type : 'submit',
 			style : {
 				display : 'block',
@@ -46,11 +32,11 @@ UUI.FULL_SUBMIT = CLASS({
 
 		inner.setDom(input);
 		
-		self.getValue = getValue = function() {
+		let getValue = self.getValue = () => {
 			return input.getValue();
 		};
 
-		self.setValue = setValue = function(value) {
+		let setValue = self.setValue = (value) => {
 			//REQUIRED: value
 
 			input.setValue(value);

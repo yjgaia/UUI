@@ -1,16 +1,13 @@
-/**
+/*
  * IMG Button class
  */
 UUI.IMG_BUTTON = CLASS({
 
-	preset : function() {
-		'use strict';
-
+	preset : () => {
 		return NODE;
 	},
 
-	init : function(inner, self, params) {
-		'use strict';
+	init : (inner, self, params) => {
 		//REQUIRED: params
 		//OPTIONAL: params.img
 		//OPTIONAL: params.href
@@ -18,26 +15,11 @@ UUI.IMG_BUTTON = CLASS({
 		//OPTIONAL: params.style
 		//OPTIONAL: params.on
 
-		var
-		// img
-		img = params.img,
+		let img = params.img;
+		let href = params.href;
+		let target = params.target;
 
-		// href
-		href = params.href,
-
-		// target
-		target = params.target,
-
-		// a
-		a,
-
-		// get img.
-		getImg,
-
-		// tap.
-		tap;
-
-		a = A({
+		let a = A({
 			style : {
 				cursor : 'pointer',
 				textDecoration : 'none',
@@ -51,11 +33,11 @@ UUI.IMG_BUTTON = CLASS({
 
 		inner.setDom(a);
 
-		self.getImg = getImg = function() {
+		let getImg = self.getImg = () => {
 			return img;
 		};
 
-		self.tap = tap = function() {
+		let tap = self.tap = () => {
 			EVENT.fireAll({
 				node : self,
 				name : 'tap'

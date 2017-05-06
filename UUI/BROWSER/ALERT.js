@@ -1,4 +1,4 @@
-/**
+/*
  * Alert class
  */
 UUI.ALERT = CLASS({

@@ -1,16 +1,13 @@
-/**
+/*
  * Validatable form class
  */
 UUI.VALID_FORM = CLASS({
 
-	preset : function() {
-		'use strict';
-
+	preset : () => {
 		return FORM;
 	},
 
-	init : function(inner, self, params) {
-		'use strict';
+	init : (inner, self, params) => {
 		//OPTIONAL: params
 		//OPTIONAL: params.errorMsgs
 		//OPTIONAL: params.on
@@ -18,63 +15,32 @@ UUI.VALID_FORM = CLASS({
 		//OPTIONAL: params.style
 		//OPTIONAL: params.errorMsgStyle
 
-		var
-		// error msgs
-		errorMsgs = params === undefined ? undefined : params.errorMsgs,
+		let errorMsgs = params === undefined ? undefined : params.errorMsgs;
+		let errorMsgStyle = params === undefined ? undefined : params.errorMsgStyle;
+		let delays = [];
 
-		// error msg style
-		errorMsgStyle = params === undefined ? undefined : params.errorMsgStyle,
-
-		// delays
-		delays = [],
-
-		// show errors.
-		showErrors,
-
-		// get error msgs.
-		getErrorMsgs,
-		
-		// get error msg style.
-		getErrorMsgStyle;
-
-		self.on('remove', function() {
-			EACH(delays, function(delay) {
+		self.on('remove', () => {
+			EACH(delays, (delay) => {
 				delay.remove();
 			});
 		});
 
-		self.showErrors = showErrors = function(_errors) {
+		let showErrors = self.showErrors = (_errors) => {
 			//REQUIRED: _errors
 
-			var
-			// errors
-			errors = COPY(_errors),
+			let errors = COPY(_errors);
 
-			// f.
-			f = function(node) {
+			let f = (node) => {
 
-				EACH(node.getChildren(), function(child) {
-
-					var
-					// name
-					name,
-
-					// error
-					error,
-
-					// error msg
-					errorMsg,
-
-					// error msg p
-					errorMsgP;
-
+				EACH(node.getChildren(), (child) => {
+					
 					if (child.getValue !== undefined && child.getName !== undefined) {
 
-						name = child.getName();
-						error = errors[name];
+						let name = child.getName();
+						let error = errors[name];
 
 						if (error !== undefined && errorMsgs !== undefined) {
-							errorMsg = errorMsgs[name][error.type];
+							let errorMsg = errorMsgs[name][error.type];
 
 							if ( typeof errorMsg === 'function') {
 								if (error.validParam !== undefined) {
@@ -83,8 +49,9 @@ UUI.VALID_FORM = CLASS({
 									errorMsg = errorMsg(error.validParams);
 								}
 							}
-
-							child.after( errorMsgP = P({
+							
+							let errorMsgP;
+							child.after(errorMsgP = P({
 								style : errorMsgStyle,
 								c : errorMsg
 							}));
@@ -94,7 +61,7 @@ UUI.VALID_FORM = CLASS({
 								name : name
 							});
 
-							delays.push(DELAY(3, function(delay) {
+							delays.push(DELAY(3, (delay) => {
 								errorMsgP.remove();
 
 								REMOVE({
@@ -112,21 +79,15 @@ UUI.VALID_FORM = CLASS({
 			f(self);
 		};
 
-		self.getErrorMsgs = getErrorMsgs = function(errors) {
+		let getErrorMsgs = self.getErrorMsgs = (errors) => {
 			//REQUIRED: errors
 
-			var
-			// msgs
-			msgs = {};
+			let msgs = {};
 			
-			EACH(errors, function(error, name) {
+			EACH(errors, (error, name) => {
 				
-				var
-				// error msg
-				errorMsg;
-
 				if (errorMsgs !== undefined) {
-					errorMsg = errorMsgs[name][error.type];
+					let errorMsg = errorMsgs[name][error.type];
 
 					if ( typeof errorMsg === 'function') {
 						if (error.validParam !== undefined) {
@@ -143,7 +104,7 @@ UUI.VALID_FORM = CLASS({
 			return msgs;
 		};
 		
-		self.getErrorMsgStyle = getErrorMsgStyle = function() {
+		let getErrorMsgStyle = self.getErrorMsgStyle = () => {
 			return errorMsgStyle;
 		};
 	}

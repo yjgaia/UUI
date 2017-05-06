@@ -1,16 +1,13 @@
-/**
+/*
  * Text Button class
  */
 UUI.TEXT_BUTTON = CLASS({
 
-	preset : function() {
-		'use strict';
-
+	preset : () => {
 		return NODE;
 	},
 
-	init : function(inner, self, params) {
-		'use strict';
+	init : (inner, self, params) => {
 		//REQUIRED: params
 		//OPTIONAL: params.title
 		//OPTIONAL: params.href
@@ -18,29 +15,12 @@ UUI.TEXT_BUTTON = CLASS({
 		//OPTIONAL: params.style
 		//OPTIONAL: params.on
 
-		var
-		// title
-		title = params.title,
-
-		// href
-		href = params.href,
-
-		// target
-		target = params.target,
-
-		// a
-		a,
-
-		// span
-		span,
-
-		// set title.
-		setTitle,
-
-		// tap.
-		tap;
-
-		a = A({
+		let title = params.title;
+		let href = params.href;
+		let target = params.target;
+		
+		let span;
+		let a = A({
 			style : {
 				cursor : 'pointer',
 				textDecoration : 'none',
@@ -56,12 +36,12 @@ UUI.TEXT_BUTTON = CLASS({
 
 		inner.setDom(a);
 
-		self.setTitle = setTitle = function(title) {
+		let setTitle = self.setTitle = (title) => {
 			span.empty();
 			span.append(title);
 		};
 
-		self.tap = tap = function() {
+		let tap = self.tap = () => {
 			EVENT.fireAll({
 				node : self,
 				name : 'tap'
