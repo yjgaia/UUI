@@ -45,7 +45,7 @@ UUI.BUTTON_H({
 	spacing : 5,
 	title : '저장하기',
 	on : {
-		tap : function() {
+		tap : () => {
 			
 			UUI.NOTICE({
 				style : {
@@ -69,7 +69,7 @@ UUI.IMG_BUTTON({
 		src : UUI_SHOWCASE.R('save.png')
 	}),
 	on : {
-		tap : function() {
+		tap : () => {
 			
 			UUI.NOTICE({
 				style : {
@@ -97,7 +97,7 @@ UUI.TEXT_BUTTON({
 	},
 	title : '저장하기',
 	on : {
-		tap : function() {
+		tap : () => {
 			
 			UUI.NOTICE({
 				style : {
@@ -142,7 +142,7 @@ list.addItem({
 });
 
 // 특정 아이템이 제거 되었을 때 실행되는 핸들러
-list.addRemoveItemHandler('b', function() {
+list.addRemoveItemHandler('b', () => {
 	console.log('b가 지워졌습니다.');
 });
 
@@ -190,7 +190,7 @@ table.addTR({
 });
 
 // 특정 열이 제거 되었을 때 실행되는 핸들러
-table.addRemoveTRHandler('b', function() {
+table.addRemoveTRHandler('b', () => {
 	console.log('b가 지워졌습니다.');
 });
 
@@ -280,7 +280,7 @@ loading = UUI.LOADING({
 });
 
 // loaded
-DELAY(3, function() {
+DELAY(3, () => {
 	loading.remove();
 });
 ```
@@ -307,7 +307,7 @@ UUI.VALID_FORM({
 		placeholder : 'Name'
 	})],
 	on : {
-		submit : function(e, form) {
+		submit : (e, form) => {
 			
 			console.log(form.getData());
 			
@@ -381,10 +381,10 @@ UUI.FULL_SUBMIT({
 UUI.FULL_UPLOAD_FORM({
 	box : UUI_SHOWCASE
 }, {
-	overSizeFile : function(maxUploadFileMB) {
+	overSizeFile : (maxUploadFileMB) => {
 		alert('Max upload file size is ' + maxUploadFileMB + 'mb.');
 	},
-	success : function(fileData, form) {
+	success : (fileData, form) => {
 		
 		if (
 		fileData.type === 'image/png' ||
@@ -440,7 +440,7 @@ UUI.CALENDAR({
 		textAlign : 'center',
 		cursor : 'pointer'
 	}
-}, function(selectedCal) {
+}, (selectedCal) => {
 	console.log(selectedCal.getYear() + '-' + selectedCal.getMonth() + '-' + selectedCal.getDate());
 })
 ```

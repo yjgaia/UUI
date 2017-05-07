@@ -22,7 +22,6 @@ UUI.PROMPT = CLASS({
 		let on = params.on;
 		let msg = params.msg;
 		
-		let modal;
 		let content;
 		let form;
 		let input;

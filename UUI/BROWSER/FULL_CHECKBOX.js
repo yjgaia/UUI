@@ -59,15 +59,15 @@ UUI.FULL_CHECKBOX = CLASS({
 
 		inner.setWrapperDom(wrapper);
 
-		self.getName = getName = () => {
+		let getName = self.getName = () => {
 			return name;
 		};
 
-		self.getValue = getValue = () => {
+		let getValue = self.getValue = () => {
 			return input.getValue();
 		};
 
-		self.setValue = setValue = (value) => {
+		let setValue = self.setValue = (value) => {
 			//REQUIRED: value
 
 			let checked = input.checkIsChecked();
@@ -96,7 +96,7 @@ UUI.FULL_CHECKBOX = CLASS({
 			}
 		};
 
-		self.select = select = () => {
+		let select = self.select = () => {
 
 			input.select();
 
@@ -111,7 +111,7 @@ UUI.FULL_CHECKBOX = CLASS({
 			});
 		};
 
-		self.blur = blur = () => {
+		let blur = self.blur = () => {
 
 			input.blur();
 
@@ -121,7 +121,7 @@ UUI.FULL_CHECKBOX = CLASS({
 			});
 		};
 
-		self.addInputStyle = addInputStyle = (style) => {
+		let addInputStyle = self.addInputStyle = (style) => {
 			//REQUIRED: style
 
 			input.addStyle(style);
@@ -131,7 +131,7 @@ UUI.FULL_CHECKBOX = CLASS({
 			addInputStyle(inputStyle);
 		}
 
-		self.on = on = (eventName, eventHandler) => {
+		let on = self.on = (eventName, eventHandler) => {
 			//REQUIRED: eventName
 			//REQUIRED: eventHandler
 
@@ -153,7 +153,7 @@ UUI.FULL_CHECKBOX = CLASS({
 			}
 		};
 
-		self.toggleCheck = toggleCheck = (e) => {
+		let toggleCheck = self.toggleCheck = (e) => {
 
 			let checked = input.toggleCheck();
 
@@ -165,7 +165,7 @@ UUI.FULL_CHECKBOX = CLASS({
 			return checked;
 		};
 
-		self.checkIsChecked = checkIsChecked = () => {
+		let checkIsChecked = self.checkIsChecked = () => {
 			return input.checkIsChecked();
 		};
 

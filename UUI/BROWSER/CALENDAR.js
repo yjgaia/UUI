@@ -36,6 +36,8 @@ UUI.CALENDAR = CLASS({
 		let leftArrowImg = params.leftArrowImg;
 		let rightArrowImg = params.rightArrowImg;
 		
+		let nowCal = CALENDAR();
+		
 		if (year === undefined || month === undefined) {
 			
 			if (year === undefined) {
@@ -56,8 +58,6 @@ UUI.CALENDAR = CLASS({
 			selectDateHandler = selectDateHandlerOrHandlers.selectDate;
 			eachHandler = selectDateHandlerOrHandlers.each;
 		}
-		
-		let nowCal = CALENDAR();
 		
 		let firstDateCal;
 		let title;

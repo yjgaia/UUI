@@ -25,7 +25,7 @@ UUI.PANEL = CLASS({
 		inner.setWrapperDom(wrapper);
 		inner.setContentDom(content);
 
-		self.addContentStyle = addContentStyle = (style) => {
+		let addContentStyle = self.addContentStyle = (style) => {
 			//REQUIRED: style
 
 			content.addStyle(style);
