@@ -9,19 +9,19 @@ UUI.MODAL = CLASS({
 		//OPTIONAL: params.style
 		//OPTIONAL: params.contentStyle
 		//OPTIONAL: params.xStyle
-		//OPTIONAL: params.xImg
+		//OPTIONAL: params.xIcon
 		//OPTIONAL: params.isCannotClose
 
 		let children = params === undefined ? undefined : params.c;
 		let style = params === undefined ? undefined : params.style;
 		let contentStyle = params === undefined ? undefined : params.contentStyle;
 		let xStyle = params === undefined ? undefined : params.xStyle;
-		let xImg = params === undefined ? undefined : params.xImg;
+		let xIcon = params === undefined ? undefined : params.xIcon;
 		let isCannotClose = params === undefined ? undefined : params.isCannotClose;
 
 		let content;
 		let wrapper = DIV({
-			c : [ content = DIV(), xImg === undefined ? '' : UUI.IMG_BUTTON({
+			c : [ content = DIV(), xIcon === undefined ? '' : UUI.IMG_BUTTON({
 				style : COMBINE([{
 					lineHeight : 0,
 					position : 'absolute'
@@ -29,7 +29,7 @@ UUI.MODAL = CLASS({
 					top : -10,
 					right : -10
 				} : xStyle]),
-				img : xImg,
+				icon : xIcon,
 				on : {
 					tap : (e) => {
 						close();
@@ -211,7 +211,7 @@ UUI.MODAL = CLASS({
 		//OPTIONAL: params.style
 		//OPTIONAL: params.contentStyle
 		//OPTIONAL: params.xStyle
-		//OPTIONAL: params.xImg
+		//OPTIONAL: params.xIcon
 		//OPTIONAL: params.isCannotClose
 		//OPTIONAL: params.on
 

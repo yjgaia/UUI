@@ -9,7 +9,7 @@ UUI.BUTTON = CLASS({
 
 	init : (inner, self, params) => {
 		//REQUIRED: params
-		//OPTIONAL: params.img
+		//OPTIONAL: params.icon
 		//OPTIONAL: params.title
 		//OPTIONAL: params.spacing
 		//OPTIONAL: params.href
@@ -17,7 +17,7 @@ UUI.BUTTON = CLASS({
 		//OPTIONAL: params.style
 		//OPTIONAL: params.on
 
-		let img = params.img;
+		let icon = params.icon;
 		let title = params.title;
 		let spacing = params.spacing === undefined ? 0 : params.spacing;
 		let href = params.href;
@@ -45,12 +45,12 @@ UUI.BUTTON = CLASS({
 			}));
 		}
 
-		if (img !== undefined) {
+		if (icon !== undefined) {
 			a.prepend(DIV({
 				style : {
 					marginBottom : title !== undefined ? spacing : 0
 				},
-				c : img
+				c : icon
 			}));
 		}
 
@@ -61,8 +61,8 @@ UUI.BUTTON = CLASS({
 			titleDom.append(title);
 		};
 
-		let getImg = self.getImg = () => {
-			return img;
+		let getIcon = self.getIcon = () => {
+			return icon;
 		};
 
 		let tap = self.tap = () => {

@@ -9,13 +9,13 @@ UUI.IMG_BUTTON = CLASS({
 
 	init : (inner, self, params) => {
 		//REQUIRED: params
-		//OPTIONAL: params.img
+		//OPTIONAL: params.icon
 		//OPTIONAL: params.href
 		//OPTIONAL: params.target
 		//OPTIONAL: params.style
 		//OPTIONAL: params.on
 
-		let img = params.img;
+		let icon = params.icon;
 		let href = params.href;
 		let target = params.target;
 
@@ -28,13 +28,13 @@ UUI.IMG_BUTTON = CLASS({
 			},
 			href : href,
 			target : target,
-			c : img
+			c : icon
 		});
 
 		inner.setDom(a);
 
-		let getImg = self.getImg = () => {
-			return img;
+		let getIcon = self.getIcon = () => {
+			return icon;
 		};
 
 		let tap = self.tap = () => {

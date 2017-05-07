@@ -25,7 +25,7 @@ UUI_SHOWCASE.MAIN = METHOD({
 				color : '#000',
 				padding : 5
 			},
-			img : IMG({
+			icon : IMG({
 				src : UUI_SHOWCASE.R('doge.jpg')
 			}),
 			title : 'UUI GitHub 저장소',
@@ -43,7 +43,7 @@ UUI_SHOWCASE.MAIN = METHOD({
 				color : '#000',
 				padding : 5
 			},
-			img : IMG({
+			icon : IMG({
 				src : UUI_SHOWCASE.R('save.png')
 			}),
 			spacing : 5,
@@ -67,7 +67,7 @@ UUI_SHOWCASE.MAIN = METHOD({
 		wrapper.append(BR());
 		
 		UUI.IMG_BUTTON({
-			img : IMG({
+			icon : IMG({
 				src : UUI_SHOWCASE.R('save.png')
 			}),
 			on : {
@@ -221,7 +221,7 @@ UUI_SHOWCASE.MAIN = METHOD({
 				background : 'purple',
 				padding : 10
 			},
-			xImg : IMG({
+			xIcon : IMG({
 				src : UUI_SHOWCASE.R('cancel.png')
 			}),
 			c : 'This is a modal.'

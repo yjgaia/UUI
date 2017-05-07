@@ -18,8 +18,8 @@ UUI.CALENDAR = CLASS({
 		//OPTIONAL: params.todayDateStyle
 		//OPTIONAL: params.otherMonthDateStyle
 		//OPTIONAL: params.selectedDateStyle
-		//OPTIONAL: params.leftArrowImg
-		//OPTIONAL: params.rightArrowImg
+		//OPTIONAL: params.leftArrowIcon
+		//OPTIONAL: params.rightArrowIcon
 		//OPTIONAL: selectDateHandlerOrHandlers
 		//OPTIONAL: selectDateHandlerOrHandlers.selectDate
 		//OPTIONAL: selectDateHandlerOrHandlers.each
@@ -33,8 +33,8 @@ UUI.CALENDAR = CLASS({
 		let todayDateStyle = params.todayDateStyle;
 		let otherMonthDateStyle = params.otherMonthDateStyle;
 		let selectedDateStyle = params.selectedDateStyle;
-		let leftArrowImg = params.leftArrowImg;
-		let rightArrowImg = params.rightArrowImg;
+		let leftArrowIcon = params.leftArrowIcon;
+		let rightArrowIcon = params.rightArrowIcon;
 		
 		let nowCal = CALENDAR();
 		
@@ -78,7 +78,7 @@ UUI.CALENDAR = CLASS({
 						cursor : 'pointer',
 						userSelect : 'none'
 					},
-					c : leftArrowImg === undefined ? '<' : leftArrowImg,
+					c : leftArrowIcon === undefined ? '<' : leftArrowIcon,
 					on : {
 						tap : () => {
 							
@@ -96,7 +96,7 @@ UUI.CALENDAR = CLASS({
 						cursor : 'pointer',
 						userSelect : 'none'
 					},
-					c : rightArrowImg === undefined ? '>' : rightArrowImg,
+					c : rightArrowIcon === undefined ? '>' : rightArrowIcon,
 					on : {
 						tap : () => {
 							

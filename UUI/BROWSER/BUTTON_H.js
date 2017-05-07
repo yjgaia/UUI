@@ -9,21 +9,21 @@ UUI.BUTTON_H = CLASS({
 
 	init : (inner, self, params) => {
 		//REQUIRED: params
-		//OPTIONAL: params.img
+		//OPTIONAL: params.icon
 		//OPTIONAL: params.title
 		//OPTIONAL: params.spacing
 		//OPTIONAL: params.href
 		//OPTIONAL: params.target
 		//OPTIONAL: params.style
-		//OPTIONAL: params.isImgRight
+		//OPTIONAL: params.isIconRight
 		//OPTIONAL: params.on
 
-		let img = params.img;
+		let icon = params.icon;
 		let title = params.title;
 		let spacing = params.spacing === undefined ? 0 : params.spacing;
 		let href = params.href;
 		let target = params.target;
-		let isImgRight = params.isImgRight;
+		let isIconRight = params.isIconRight;
 
 		let titleDom;
 		let a = A({
@@ -45,24 +45,24 @@ UUI.BUTTON_H = CLASS({
 			}), CLEAR_BOTH()]
 		});
 
-		if (img !== undefined) {
+		if (icon !== undefined) {
 
-			img.addStyle({
+			icon.addStyle({
 				flt : 'left'
 			});
 
-			if (img.getStyle('margin') === undefined && img.getStyle('marginRight') === undefined) {
-				img.addStyle(isImgRight !== true ? {
+			if (icon.getStyle('margin') === undefined && icon.getStyle('marginRight') === undefined) {
+				icon.addStyle(isIconRight !== true ? {
 					marginRight : spacing
 				} : {
 					marginLeft : spacing
 				});
 			}
 
-			if (isImgRight !== true) {
-				a.prepend(img);
+			if (isIconRight !== true) {
+				a.prepend(icon);
 			} else {
-				titleDom.after(img);
+				titleDom.after(icon);
 			}
 
 			let resizeEvent = EVENT({
@@ -73,13 +73,13 @@ UUI.BUTTON_H = CLASS({
 
 				if (titleDomHeight > 0) {
 					titleDom.addStyle({
-						marginTop : (img.getHeight() - titleDom.getHeight()) / 2
+						marginTop : (icon.getHeight() - titleDom.getHeight()) / 2
 					});
 				}
 			});
 
 			EVENT_ONCE({
-				node : img,
+				node : icon,
 				name : 'load'
 			}, (e) => {
 				resizeEvent.fire();
@@ -101,8 +101,8 @@ UUI.BUTTON_H = CLASS({
 			titleDom.append(title);
 		};
 
-		let getImg = self.getImg = () => {
-			return img;
+		let getIcon = self.getIcon = () => {
+			return icon;
 		};
 
 		let tap = self.tap = () => {
