@@ -5,10 +5,34 @@ List class
 NODE
 
 ## Parameters
-No parameters.
+* `OPTIONAL` params 
+* `OPTIONAL` params.c 
+* `OPTIONAL` params.style 
+* `OPTIONAL` params.on 
+* `OPTIONAL` params.items 
+* `OPTIONAL` params.isRequiringClearBoth 
 
 ## Static Members
 No static members.
 
 ## Public Members
-No public members.
+
+### addItem
+#### Parameters
+* `REQUIRED` params
+* `REQUIRED` params.key
+* `REQUIRED` params.item
+* `OPTIONAL` params.isFirst
+
+### removeItem
+#### Parameters
+* `REQUIRED` key
+
+### addRemoveItemHandler
+#### Parameters
+* `REQUIRED` key
+* `REQUIRED` handler
+
+### removeAllItems
+#### Parameters
+No parameters.

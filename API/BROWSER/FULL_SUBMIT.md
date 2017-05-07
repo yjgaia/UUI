@@ -5,10 +5,20 @@ Full-size submit class
 NODE
 
 ## Parameters
-No parameters.
+* `OPTIONAL` params 
+* `OPTIONAL` params.value 
+* `OPTIONAL` params.style 
+* `OPTIONAL` params.on 
 
 ## Static Members
 No static members.
 
 ## Public Members
-No public members.
+
+### getValue
+#### Parameters
+No parameters.
+
+### setValue
+#### Parameters
+* `REQUIRED` value

@@ -5,10 +5,41 @@ Full-size upload form class
 NODE
 
 ## Parameters
-No parameters.
+* `REQUIRED` params 
+* `REQUIRED` params.box 
+* `OPTIONAL` params.accept 
+* `OPTIONAL` params.isMultiple 
+* `OPTIONAL` params.style 
+* `OPTIONAL` params.formStyle 
+* `OPTIONAL` params.inputStyle 
+* `OPTIONAL` params.uploadingStyle 
+* `OPTIONAL` params.on 
+* `OPTIONAL` handlers 
+* `OPTIONAL` handlers.success 
+* `OPTIONAL` handlers.overSizeFile 
 
 ## Static Members
 No static members.
 
 ## Public Members
-No public members.
+
+### select
+#### Parameters
+No parameters.
+
+### addFormStyle
+#### Parameters
+* `REQUIRED` style
+
+### addInputStyle
+#### Parameters
+* `REQUIRED` style
+
+### addUploadingStyle
+#### Parameters
+* `REQUIRED` style
+
+### on
+#### Parameters
+* `REQUIRED` eventName
+* `REQUIRED` eventHandler

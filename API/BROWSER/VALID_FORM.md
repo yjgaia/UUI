@@ -5,10 +5,26 @@ Validatable form class
 FORM
 
 ## Parameters
-No parameters.
+* `OPTIONAL` params 
+* `OPTIONAL` params.errorMsgs 
+* `OPTIONAL` params.on 
+* `OPTIONAL` params.c 
+* `OPTIONAL` params.style 
+* `OPTIONAL` params.errorMsgStyle 
 
 ## Static Members
 No static members.
 
 ## Public Members
-No public members.
+
+### showErrors
+#### Parameters
+* `REQUIRED` _errors
+
+### getErrorMsgs
+#### Parameters
+* `REQUIRED` errors
+
+### getErrorMsgStyle
+#### Parameters
+No parameters.

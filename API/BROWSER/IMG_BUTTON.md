@@ -5,10 +5,22 @@ IMG Button class
 NODE
 
 ## Parameters
-No parameters.
+* `REQUIRED` params 
+* `OPTIONAL` params.img 
+* `OPTIONAL` params.href 
+* `OPTIONAL` params.target 
+* `OPTIONAL` params.style 
+* `OPTIONAL` params.on 
 
 ## Static Members
 No static members.
 
 ## Public Members
-No public members.
+
+### getImg
+#### Parameters
+No parameters.
+
+### tap
+#### Parameters
+No parameters.

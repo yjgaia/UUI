@@ -5,10 +5,17 @@ Panel(wrapper layer + content layer) class
 NODE
 
 ## Parameters
-No parameters.
+* `OPTIONAL` params 
+* `OPTIONAL` params.c 
+* `OPTIONAL` params.style 
+* `OPTIONAL` params.contentStyle 
+* `OPTIONAL` params.on 
 
 ## Static Members
 No static members.
 
 ## Public Members
-No public members.
+
+### addContentStyle
+#### Parameters
+* `REQUIRED` style

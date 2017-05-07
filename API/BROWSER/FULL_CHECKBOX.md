@@ -5,10 +5,53 @@ Full-size checkbox class
 NODE
 
 ## Parameters
-No parameters.
+* `REQUIRED` params 
+* `REQUIRED` params.name 
+* `REQUIRED` params.label 
+* `OPTIONAL` params.spacing 
+* `OPTIONAL` params.value 
+* `OPTIONAL` params.style 
+* `OPTIONAL` params.inputStyle 
+* `OPTIONAL` params.on 
 
 ## Static Members
 No static members.
 
 ## Public Members
-No public members.
+
+### getName
+#### Parameters
+No parameters.
+
+### getValue
+#### Parameters
+No parameters.
+
+### setValue
+#### Parameters
+* `REQUIRED` value
+
+### select
+#### Parameters
+No parameters.
+
+### blur
+#### Parameters
+No parameters.
+
+### addInputStyle
+#### Parameters
+* `REQUIRED` style
+
+### on
+#### Parameters
+* `REQUIRED` eventName
+* `REQUIRED` eventHandler
+
+### toggleCheck
+#### Parameters
+No parameters.
+
+### checkIsChecked
+#### Parameters
+No parameters.

@@ -5,10 +5,22 @@ Text Button class
 NODE
 
 ## Parameters
-No parameters.
+* `REQUIRED` params 
+* `OPTIONAL` params.title 
+* `OPTIONAL` params.href 
+* `OPTIONAL` params.target 
+* `OPTIONAL` params.style 
+* `OPTIONAL` params.on 
 
 ## Static Members
 No static members.
 
 ## Public Members
-No public members.
+
+### setTitle
+#### Parameters
+No parameters.
+
+### tap
+#### Parameters
+No parameters.

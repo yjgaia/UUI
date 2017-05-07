@@ -1,18 +1,8 @@
 UUI_SHOWCASE.MAIN = METHOD({
 
-	run : function(params) {
-		'use strict';
-
-		/**
-		 * 테스트 결과
-		 * IE 5.5 (SP1): 아직 테스트 하지 못함
-		 * Firefox 3.0: 아직 테스트 하지 못함
-		 * Opera 9.5 (SP1): 아직 테스트 하지 못함
-		 */
+	run : (params) => {
 		
-		var
-		// wrapper
-		wrapper = DIV({
+		let wrapper = DIV({
 			style : {
 				padding : 20,
 				width : 250
@@ -59,7 +49,7 @@ UUI_SHOWCASE.MAIN = METHOD({
 			spacing : 5,
 			title : '저장하기',
 			on : {
-				tap : function() {
+				tap : () => {
 					
 					UUI.NOTICE({
 						style : {
@@ -81,7 +71,7 @@ UUI_SHOWCASE.MAIN = METHOD({
 				src : UUI_SHOWCASE.R('save.png')
 			}),
 			on : {
-				tap : function() {
+				tap : () => {
 					
 					UUI.NOTICE({
 						style : {
@@ -107,7 +97,7 @@ UUI_SHOWCASE.MAIN = METHOD({
 			},
 			title : '저장하기',
 			on : {
-				tap : function() {
+				tap : () => {
 					
 					UUI.NOTICE({
 						style : {
@@ -125,9 +115,7 @@ UUI_SHOWCASE.MAIN = METHOD({
 		wrapper.append(BR());
 		wrapper.append(BR());
 		
-		var
-		// list
-		list = UUI.LIST({
+		let list = UUI.LIST({
 			items : {
 				a : LI({
 					c : 'a 입니다.'
@@ -151,7 +139,7 @@ UUI_SHOWCASE.MAIN = METHOD({
 		});
 		
 		// 특정 아이템이 제거 되었을 때 실행되는 핸들러
-		list.addRemoveItemHandler('b', function() {
+		list.addRemoveItemHandler('b', () => {
 			console.log('b가 지워졌습니다.');
 		});
 		
@@ -161,9 +149,7 @@ UUI_SHOWCASE.MAIN = METHOD({
 		// 모든 아이템 제거
 		list.removeAllItems();
 		
-		var
-		// table
-		table = UUI.TABLE({
+		let table = UUI.TABLE({
 			trs : {
 				a : TR({
 					c : TD({
@@ -195,7 +181,7 @@ UUI_SHOWCASE.MAIN = METHOD({
 		});
 		
 		// 특정 열이 제거 되었을 때 실행되는 핸들러
-		table.addRemoveTRHandler('b', function() {
+		table.addRemoveTRHandler('b', () => {
 			console.log('b가 지워졌습니다.');
 		});
 		
@@ -241,9 +227,7 @@ UUI_SHOWCASE.MAIN = METHOD({
 			c : 'This is a modal.'
 		});
 		
-		var
-		// loading
-		loading = UUI.LOADING({
+		let loading = UUI.LOADING({
 			style : {
 				background : 'brown',
 				padding : 10
@@ -255,7 +239,7 @@ UUI_SHOWCASE.MAIN = METHOD({
 		});
 		
 		// loaded
-		DELAY(3, function() {
+		DELAY(3, () => {
 			loading.remove();
 		});
 		
@@ -348,7 +332,7 @@ UUI_SHOWCASE.MAIN = METHOD({
 					textAlign : 'center',
 					cursor : 'pointer'
 				}
-			}, function(selectedCal) {
+			}, (selectedCal) => {
 				console.log(selectedCal.getYear() + '-' + selectedCal.getMonth() + '-' + selectedCal.getDate());
 			}), UUI.FULL_UPLOAD_FORM({
 				style : {
@@ -356,10 +340,10 @@ UUI_SHOWCASE.MAIN = METHOD({
 				},
 				box : UUI_SHOWCASE
 			}, {
-				overSizeFile : function(maxUploadFileMB) {
+				overSizeFile : (maxUploadFileMB) => {
 					alert('Max upload file size is ' + maxUploadFileMB + 'mb.');
 				},
-				success : function(fileData, form) {
+				success : (fileData, form) => {
 					
 					if (
 					fileData.type === 'image/png' ||
@@ -378,7 +362,7 @@ UUI_SHOWCASE.MAIN = METHOD({
 				value : 'Submit'
 			})],
 			on : {
-				submit : function(e, form) {
+				submit : (e, form) => {
 					
 					console.log(form.getData());
 					
@@ -415,7 +399,7 @@ UUI_SHOWCASE.MAIN = METHOD({
 				width : '50%'
 			},
 			msg : '이것은 확인 창입니다.\n닫기 버튼으로 종료할 수 있습니다.'
-		}, function() {
+		}, () => {
 			
 			UUI.ALERT({
 				style : {
@@ -462,7 +446,7 @@ UUI_SHOWCASE.MAIN = METHOD({
 				width : '50%'
 			},
 			msg : '이것은 입력 창입니다.\n닫기 버튼으로 종료할 수 있습니다.'
-		}, function(value) {
+		}, (value) => {
 			
 			UUI.ALERT({
 				style : {
