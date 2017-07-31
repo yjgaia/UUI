@@ -70,8 +70,8 @@ UUI.BUTTON_H = CLASS({
 			}, (e) => {
 
 				let titleDomHeight = titleDom.getHeight();
-
-				if (titleDomHeight > 0) {
+				
+				if (titleDomHeight > 0 && icon.getHeight() > 0) {
 					titleDom.addStyle({
 						marginTop : (icon.getHeight() - titleDom.getHeight()) / 2
 					});
@@ -91,6 +91,10 @@ UUI.BUTTON_H = CLASS({
 
 			self.on('remove', () => {
 				resizeEvent.remove();
+			});
+			
+			DELAY(() => {
+				resizeEvent.fire();
 			});
 		}
 
