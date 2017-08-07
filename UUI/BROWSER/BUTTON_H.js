@@ -44,9 +44,17 @@ UUI.BUTTON_H = CLASS({
 				c : title === undefined ? '' : title
 			}), CLEAR_BOTH()]
 		});
+		
+		let resizeEvent;
 
-		if (icon !== undefined) {
-
+		let setIcon = self.setIcon = (_icon) => {
+			
+			if (icon !== undefined) {
+				icon.remove();
+			}
+			
+			icon = _icon;
+			
 			icon.addStyle({
 				flt : 'left'
 			});
@@ -64,38 +72,45 @@ UUI.BUTTON_H = CLASS({
 			} else {
 				titleDom.after(icon);
 			}
-
-			let resizeEvent = EVENT({
-				name : 'resize'
-			}, (e) => {
-
-				let titleDomHeight = titleDom.getHeight();
+			
+			if (resizeEvent === undefined) {
 				
-				if (titleDomHeight > 0 && icon.getHeight() > 0) {
-					titleDom.addStyle({
-						marginTop : (icon.getHeight() - titleDom.getHeight()) / 2
-					});
-				}
-			});
-
+				resizeEvent = EVENT({
+					name : 'resize'
+				}, (e) => {
+	
+					let titleDomHeight = titleDom.getHeight();
+					
+					if (titleDomHeight > 0 && icon.getHeight() > 0) {
+						titleDom.addStyle({
+							marginTop : (icon.getHeight() - titleDom.getHeight()) / 2
+						});
+					}
+				});
+	
+				self.on('show', () => {
+					resizeEvent.fire();
+				});
+	
+				self.on('remove', () => {
+					resizeEvent.remove();
+				});
+				
+				DELAY(() => {
+					resizeEvent.fire();
+				});
+			}
+			
 			EVENT_ONCE({
 				node : icon,
 				name : 'load'
 			}, (e) => {
 				resizeEvent.fire();
 			});
+		};
 
-			self.on('show', () => {
-				resizeEvent.fire();
-			});
-
-			self.on('remove', () => {
-				resizeEvent.remove();
-			});
-			
-			DELAY(() => {
-				resizeEvent.fire();
-			});
+		if (icon !== undefined) {
+			setIcon(icon);
 		}
 
 		inner.setDom(a);
