@@ -1,7 +1,7 @@
 /*
- * IMG Button class
+ * Icon Button class
  */
-UUI.IMG_BUTTON = CLASS({
+UUI.ICON_BUTTON = CLASS({
 
 	preset : () => {
 		return NODE;
