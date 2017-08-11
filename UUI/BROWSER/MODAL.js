@@ -79,6 +79,10 @@ UUI.MODAL = CLASS({
 
 			find(wrapper.getChildren());
 		});
+		
+		DELAY(() => {
+			moveToCenter();
+		});
 
 		wrapper.on('show', moveToCenter);
 

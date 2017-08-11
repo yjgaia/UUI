@@ -48,6 +48,7 @@ UUI.BUTTON_H = CLASS({
 		let resizeEvent;
 
 		let setIcon = self.setIcon = (_icon) => {
+			//REQUIRED: icon
 			
 			if (icon !== undefined) {
 				icon.remove();
@@ -116,6 +117,8 @@ UUI.BUTTON_H = CLASS({
 		inner.setDom(a);
 
 		let setTitle = self.setTitle = (title) => {
+			//REQUIRED: title
+			
 			titleDom.empty();
 			titleDom.append(title);
 		};
