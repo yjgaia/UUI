@@ -44,14 +44,26 @@ UUI.BUTTON = CLASS({
 				c : title === undefined ? '' : title
 			}));
 		}
-
-		if (icon !== undefined) {
+		
+		let setIcon = self.setIcon = (_icon) => {
+			//REQUIRED: icon
+			
+			if (icon !== undefined) {
+				icon.remove();
+			}
+			
+			icon = _icon;
+			
 			a.prepend(DIV({
 				style : {
 					marginBottom : title !== undefined ? spacing : 0
 				},
 				c : icon
 			}));
+		};
+
+		if (icon !== undefined) {
+			setIcon(icon);
 		}
 
 		inner.setDom(a);
@@ -70,6 +82,24 @@ UUI.BUTTON = CLASS({
 				node : self,
 				name : 'tap'
 			});
+		};
+		
+		let hideTitle = self.hideTitle = () => {
+			
+			icon.addStyle({
+				marginBottom : 0
+			});
+			
+			titleDom.hide();
+		};
+		
+		let showTitle = self.showTitle = () => {
+			
+			icon.addStyle({
+				marginBottom : spacing
+			});
+			
+			titleDom.show();
 		};
 	}
 });

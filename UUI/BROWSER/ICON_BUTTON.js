@@ -27,9 +27,24 @@ UUI.ICON_BUTTON = CLASS({
 				userSelect : 'none'
 			},
 			href : href,
-			target : target,
-			c : icon
+			target : target
 		});
+		
+		let setIcon = self.setIcon = (_icon) => {
+			//REQUIRED: icon
+			
+			if (icon !== undefined) {
+				icon.remove();
+			}
+			
+			icon = _icon;
+			
+			a.append(icon);
+		};
+
+		if (icon !== undefined) {
+			setIcon(icon);
+		}
 
 		inner.setDom(a);
 

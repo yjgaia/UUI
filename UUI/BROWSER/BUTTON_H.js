@@ -136,15 +136,22 @@ UUI.BUTTON_H = CLASS({
 		
 		let hideTitle = self.hideTitle = () => {
 			icon.addStyle({
-				marginRight : 0
+				marginRight : 0,
+				marginLeft : 0
 			});
 			titleDom.hide();
 		};
 		
 		let showTitle = self.showTitle = () => {
-			icon.addStyle({
-				marginRight : 5
-			});
+			
+			if (icon.getStyle('margin') === undefined && icon.getStyle('marginRight') === undefined) {
+				icon.addStyle(isIconRight !== true ? {
+					marginRight : spacing
+				} : {
+					marginLeft : spacing
+				});
+			}
+			
 			titleDom.show();
 		};
 	}
