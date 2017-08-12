@@ -133,5 +133,19 @@ UUI.BUTTON_H = CLASS({
 				name : 'tap'
 			});
 		};
+		
+		let hideTitle = self.hideTitle = () => {
+			icon.addStyle({
+				marginRight : 0
+			});
+			titleDom.hide();
+		};
+		
+		let showTitle = self.showTitle = () => {
+			icon.addStyle({
+				marginRight : 5
+			});
+			titleDom.show();
+		};
 	}
 });

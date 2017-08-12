@@ -8,6 +8,7 @@ UUI.CONFIRM = CLASS({
 		//OPTIONAL: params.style
 		//OPTIONAL: params.contentStyle
 		//OPTIONAL: params.okButtonStyle
+		//OPTIONAL: params.okButtonTitle
 		//OPTIONAL: params.cancelButtonStyle
 		//OPTIONAL: params.on
 		//REQUIRED: params.msg
@@ -16,6 +17,7 @@ UUI.CONFIRM = CLASS({
 		let style = params.style;
 		let contentStyle = params.contentStyle;
 		let okButtonStyle = params.okButtonStyle;
+		let okButtonTitle = params.okButtonTitle;
 		let cancelButtonStyle = params.cancelButtonStyle;
 		let on = params.on;
 		let msg = params.msg;
@@ -33,7 +35,7 @@ UUI.CONFIRM = CLASS({
 				c : msg
 			}), okButton = UUI.BUTTON({
 				style : okButtonStyle,
-				title : MSG({
+				title : okButtonTitle !== undefined ? okButtonTitle : MSG({
 					en : 'Ok',
 					ko : '확인'
 				}),
