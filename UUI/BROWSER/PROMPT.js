@@ -7,6 +7,7 @@ UUI.PROMPT = CLASS({
 		//REQUIRED: params
 		//OPTIONAL: params.style
 		//OPTIONAL: params.contentStyle
+		//OPTIONAL: params.formStyle
 		//OPTIONAL: params.inputStyle
 		//OPTIONAL: params.okButtonStyle
 		//OPTIONAL: params.cancelButtonStyle
@@ -16,6 +17,7 @@ UUI.PROMPT = CLASS({
 
 		let style = params.style;
 		let contentStyle = params.contentStyle;
+		let formStyle = params.formStyle;
 		let inputStyle = params.inputStyle;
 		let okButtonStyle = params.okButtonStyle;
 		let cancelButtonStyle = params.cancelButtonStyle;
@@ -36,6 +38,7 @@ UUI.PROMPT = CLASS({
 				style : contentStyle,
 				c : msg
 			}), form = FORM({
+				style : formStyle,
 				c : input = UUI.FULL_INPUT({
 					style : inputStyle
 				}),
