@@ -13,6 +13,7 @@ UUI.PROMPT = CLASS({
 		//OPTIONAL: params.cancelButtonStyle
 		//OPTIONAL: params.on
 		//REQUIRED: params.msg
+		//OPTIONAL: params.value
 		//REQUIRED: callback
 
 		let style = params.style;
@@ -23,6 +24,7 @@ UUI.PROMPT = CLASS({
 		let cancelButtonStyle = params.cancelButtonStyle;
 		let on = params.on;
 		let msg = params.msg;
+		let value = params.value;
 		
 		let content;
 		let form;
@@ -40,7 +42,8 @@ UUI.PROMPT = CLASS({
 			}), form = FORM({
 				style : formStyle,
 				c : input = UUI.FULL_INPUT({
-					style : inputStyle
+					style : inputStyle,
+					value : value
 				}),
 				on : {
 					submit : () => {
@@ -72,6 +75,8 @@ UUI.PROMPT = CLASS({
 				}
 			}), CLEAR_BOTH()]
 		});
+		
+		input.focus();
 
 		let getNode = self.getNode = () => {
 			return modal.getNode();
