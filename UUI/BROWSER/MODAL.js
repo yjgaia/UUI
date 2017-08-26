@@ -21,7 +21,7 @@ UUI.MODAL = CLASS({
 
 		let content;
 		let wrapper = DIV({
-			c : [ content = DIV(), xIcon === undefined ? '' : UUI.IMG_BUTTON({
+			c : [ content = DIV(), xIcon === undefined ? '' : UUI.ICON_BUTTON({
 				style : COMBINE([{
 					lineHeight : 0,
 					position : 'absolute'
