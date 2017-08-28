@@ -79,6 +79,10 @@ UUI.LIST = CLASS({
 				});
 			});
 		}
+		
+		let getAllItems = self.getAllItems = () => {
+			return items;
+		};
 
 		let removeItem = self.removeItem = (key) => {
 			//REQUIRED: key
