@@ -123,6 +123,10 @@ UUI.BUTTON_H = CLASS({
 			titleDom.append(title);
 		};
 
+		let getTitle = self.getTitle = () => {
+			return title;
+		};
+
 		let getIcon = self.getIcon = () => {
 			return icon;
 		};

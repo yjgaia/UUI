@@ -43,10 +43,21 @@ UUI.PROMPT = CLASS({
 				style : formStyle,
 				c : input = UUI.FULL_INPUT({
 					style : inputStyle,
-					value : value
+					value : value,
+					on : {
+						keydown : (e) => {
+							
+							if (e.getKey() === 'Enter') {
+								
+								form.submit();
+								
+								e.stop();
+							}
+						}
+					}
 				}),
 				on : {
-					submit : () => {
+					submit : (e) => {
 						callback(input.getValue());
 						remove();
 					}

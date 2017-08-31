@@ -80,8 +80,24 @@ UUI.LIST = CLASS({
 			});
 		}
 		
-		let getAllItems = self.getAllItems = () => {
+		let getItems = self.getItems = () => {
 			return items;
+		};
+		
+		let sortItems = self.sortItems = (f) => {
+			//REQUIRED: f
+			
+			itemStack.sort(f);
+			
+			EACH(itemStack, (item) => {
+				self.append(item);
+			});
+		};
+		
+		let getItem = self.getItem = (key) => {
+			//REQUIRED: key
+			
+			return items[key];
 		};
 
 		let removeItem = self.removeItem = (key) => {
