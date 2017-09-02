@@ -46,12 +46,8 @@ UUI.PROMPT = CLASS({
 					value : value,
 					on : {
 						keydown : (e) => {
-							
-							if (e.getKey() === 'Enter') {
-								
-								form.submit();
-								
-								e.stop();
+							if (e.getKey() !== 'Escape') {
+								e.stopBubbling();
 							}
 						}
 					}
@@ -87,7 +83,7 @@ UUI.PROMPT = CLASS({
 			}), CLEAR_BOTH()]
 		});
 		
-		input.focus();
+		input.select();
 
 		let getNode = self.getNode = () => {
 			return modal.getNode();
