@@ -41,8 +41,9 @@ UUI.CONFIRM = CLASS({
 				}),
 				on : {
 					tap : () => {
-						callback();
-						remove();
+						if (callback() !== false) {
+							remove();
+						}
 					}
 				}
 			}), cancelButton = UUI.BUTTON({

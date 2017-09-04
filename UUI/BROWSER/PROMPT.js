@@ -54,8 +54,9 @@ UUI.PROMPT = CLASS({
 				}),
 				on : {
 					submit : (e) => {
-						callback(input.getValue());
-						remove();
+						if (callback(input.getValue()) !== false) {
+							remove();
+						}
 					}
 				}
 			}), okButton = UUI.BUTTON({
