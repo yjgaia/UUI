@@ -86,6 +86,8 @@ UUI.MODAL = CLASS({
 
 		wrapper.on('show', moveToCenter);
 
+		wrapper.on('append', moveToCenter);
+
 		let resizeEvent = EVENT({
 			name : 'resize'
 		}, moveToCenter);
