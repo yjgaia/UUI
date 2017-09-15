@@ -185,17 +185,16 @@ UUI.MODAL = CLASS({
 		}
 
 		let on = self.on = (eventName, eventHandler) => {
-			EVENT({
-				node : self,
-				lowNode : wrapper,
-				name : eventName
-			}, eventHandler);
+			//REQUIRED: eventName
+			//REQUIRED: eventHandler
+			
+			wrapper.on(eventName, eventHandler);
 		};
 
 		let close = self.close = () => {
 
 			if (EVENT.fireAll({
-				node : self,
+				node : wrapper,
 				name : 'close'
 			}) !== false) {
 				remove();
