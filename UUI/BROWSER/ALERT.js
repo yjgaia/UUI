@@ -51,7 +51,7 @@ UUI.ALERT = CLASS((cls) => {
 			});
 			
 			let keydownEvent = EVENT('keydown', (e) => {
-				if (e.getKey() === 'Enter') {
+				if (e.getKey() === 'Enter' || e.getKey() === ' ') {
 					button.fireEvent('tap');
 					e.stop();
 				}

@@ -69,7 +69,7 @@ UUI.CONFIRM = CLASS((cls) => {
 			});
 			
 			let keydownEvent = EVENT('keydown', (e) => {
-				if (e.getKey() === 'Enter') {
+			    if (e.getKey() === 'Enter' || e.getKey() === ' ') {
 					okButton.fireEvent('tap');
 					e.stop();
 				}

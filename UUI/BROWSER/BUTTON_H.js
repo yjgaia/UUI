@@ -40,8 +40,7 @@ UUI.BUTTON_H = CLASS({
 			c : [ titleDom = DIV({
 				style : {
 					flt : 'left'
-				},
-				c : title === undefined ? '' : title
+				}
 			}), CLEAR_BOTH()]
 		});
 		
@@ -87,6 +86,10 @@ UUI.BUTTON_H = CLASS({
 							marginTop : (icon.getHeight() - titleDom.getHeight()) / 2
 						});
 					}
+					
+					a.addStyle({
+					    width : icon.getWidth() + spacing + titleDom.getWidth() + 1
+					});
 				});
 	
 				self.on('show', () => {
@@ -121,7 +124,17 @@ UUI.BUTTON_H = CLASS({
 			
 			titleDom.empty();
 			titleDom.append(title);
+			
+			if (icon !== undefined) {
+				a.addStyle({
+				    width : icon.getWidth() + spacing + titleDom.getWidth() + 1
+				});
+			}
 		};
+		
+		if (title !== undefined) {
+		    setTitle(title);
+		}
 
 		let getTitle = self.getTitle = () => {
 			return title;
