@@ -66,7 +66,7 @@ UUI_SHOWCASE.MAIN = METHOD({
 		
 		wrapper.append(BR());
 		
-		UUI.IMG_BUTTON({
+		UUI.ICON_BUTTON({
 			icon : IMG({
 				src : UUI_SHOWCASE.R('save.png')
 			}),
