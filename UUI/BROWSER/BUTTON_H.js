@@ -39,7 +39,8 @@ UUI.BUTTON_H = CLASS({
 			target : target,
 			c : [ titleDom = DIV({
 				style : {
-					flt : 'left'
+					flt : 'left',
+					whiteSpace : 'nowrap'
 				}
 			}), CLEAR_BOTH()]
 		});
@@ -78,7 +79,8 @@ UUI.BUTTON_H = CLASS({
 				resizeEvent = EVENT({
 					name : 'resize'
 				}, (e) => {
-	
+					
+					let titleDomWidth = titleDom.getWidth();
 					let titleDomHeight = titleDom.getHeight();
 					
 					if (titleDomHeight > 0 && icon.getHeight() > 0) {
@@ -87,9 +89,11 @@ UUI.BUTTON_H = CLASS({
 						});
 					}
 					
-					a.addStyle({
-					    width : icon.getWidth() + spacing + titleDom.getWidth() + 1
-					});
+					if (titleDomWidth > 0 && icon.getWidth() > 0) {
+						a.addStyle({
+						    width : icon.getWidth() + spacing + titleDomWidth + 1
+						});
+					}
 				});
 	
 				self.on('show', () => {
