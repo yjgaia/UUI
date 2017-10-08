@@ -68,6 +68,30 @@ UUI.LIST = CLASS({
 
 				clearBoth = CLEAR_BOTH().appendTo(ul);
 			}
+			
+			item.on('remove', () => {
+				
+				let handlers = removeItemHandlers[key];
+				
+				if (handlers !== undefined) {
+					EACH(handlers, (handler) => {
+						handler();
+					});
+				}
+	
+				REMOVE({
+					array : itemStack,
+					value : item
+				});
+				REMOVE({
+					data : items,
+					name : key
+				});
+				REMOVE({
+					data : removeItemHandlers,
+					name : key
+				});
+			});
 		};
 
 		if (params !== undefined && params.items !== undefined) {
@@ -104,30 +128,10 @@ UUI.LIST = CLASS({
 			//REQUIRED: key
 
 			let item = items[key];
-			let handlers = removeItemHandlers[key];
-
+			
 			if (item !== undefined) {
 				item.remove();
 			}
-
-			if (handlers !== undefined) {
-				EACH(handlers, (handler) => {
-					handler();
-				});
-			}
-
-			REMOVE({
-				array : itemStack,
-				value : item
-			});
-			REMOVE({
-				data : items,
-				name : key
-			});
-			REMOVE({
-				data : removeItemHandlers,
-				name : key
-			});
 		};
 
 		let addRemoveItemHandler = self.addRemoveItemHandler = (key, handler) => {

@@ -56,6 +56,30 @@ UUI.TABLE = CLASS({
 			}
 
 			trs[key] = tr;
+			
+			tr.on('remove', () => {
+				
+				let handlers = removeTRHandlers[key];
+	
+				if (handlers !== undefined) {
+					EACH(handlers, (handler) => {
+						handler();
+					});
+				}
+	
+				REMOVE({
+					array : trStack,
+					value : tr
+				});
+				REMOVE({
+					data : trs,
+					name : key
+				});
+				REMOVE({
+					data : removeTRHandlers,
+					name : key
+				});
+			});
 		};
 
 		EACH(trs, (tr, key) => {
@@ -67,30 +91,10 @@ UUI.TABLE = CLASS({
 			//REQUIRED: key
 
 			let tr = trs[key];
-			let handlers = removeTRHandlers[key];
-
+			
 			if (tr !== undefined) {
 				tr.remove();
 			}
-
-			if (handlers !== undefined) {
-				EACH(handlers, (handler) => {
-					handler();
-				});
-			}
-
-			REMOVE({
-				array : trStack,
-				value : tr
-			});
-			REMOVE({
-				data : trs,
-				name : key
-			});
-			REMOVE({
-				data : removeTRHandlers,
-				name : key
-			});
 		};
 
 		let addRemoveTRHandler = self.addRemoveTRHandler = (key, handler) => {
