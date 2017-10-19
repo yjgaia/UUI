@@ -69,7 +69,7 @@ UUI.CONFIRM = CLASS((cls) => {
 			});
 			
 			let keydownEvent = EVENT('keydown', (e) => {
-			    if (e.getKey() === 'Enter' || e.getKey() === ' ') {
+			    if (e.getKey() === 'Enter' || (document.activeElement.tagName !== 'TEXTAREA' && document.activeElement.tagName !== 'INPUT' && e.getKey() === ' ')) {
 					okButton.fireEvent('tap');
 					e.stop();
 				}
