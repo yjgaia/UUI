@@ -8,18 +8,25 @@ UUI.FULL_TEXTAREA = CLASS({
 	},
 
 	init : (inner, self, params) => {
-		//REQUIRED: params
-		//REQUIRED: params.name
+		//OPTIONAL: params
+		//OPTIONAL: params.name
 		//OPTIONAL: params.placeholder
 		//OPTIONAL: params.value
 		//OPTIONAL: params.style
 		//OPTIONAL: params.textareaStyle
 		//OPTIONAL: params.on
 
-		let name = params.name;
-		let placeholder = params.placeholder;
-		let value = params.value;
-		let textareaStyle = params.textareaStyle;
+		let name;
+		let placeholder;
+		let value;
+		let textareaStyle;
+		
+		if (params !== undefined) {
+			name = params.name;
+			placeholder = params.placeholder;
+			value = params.value;
+			textareaStyle = params.textareaStyle;
+		}
 
 		let textarea;
 		let wrapper = DIV({
