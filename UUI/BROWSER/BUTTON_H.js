@@ -91,7 +91,7 @@ UUI.BUTTON_H = CLASS({
 					
 					if (titleDomWidth > 0 && icon.getWidth() > 0) {
 						a.addStyle({
-						    width : icon.getWidth() + spacing + titleDomWidth + 1
+						    minWidth : icon.getWidth() + spacing + titleDomWidth + 1
 						});
 					}
 				});
@@ -131,7 +131,7 @@ UUI.BUTTON_H = CLASS({
 			
 			if (icon !== undefined) {
 				a.addStyle({
-				    width : icon.getWidth() + spacing + titleDom.getWidth() + 1
+				    minWidth : icon.getWidth() + spacing + titleDom.getWidth() + 1
 				});
 			}
 		};
