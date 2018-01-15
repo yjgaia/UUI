@@ -24,6 +24,12 @@ UUI.BUTTON_H = CLASS({
 		let href = params.href;
 		let target = params.target;
 		let isIconRight = params.isIconRight;
+		
+		let style = params.style;
+		let width;
+		if (style !== undefined) {
+			width = style.width;
+		}
 
 		let titleDom;
 		let a = A({
@@ -89,9 +95,9 @@ UUI.BUTTON_H = CLASS({
 						});
 					}
 					
-					if (titleDomWidth > 0 && icon.getWidth() > 0) {
+					if (width === undefined && titleDomWidth > 0 && icon.getWidth() > 0) {
 						a.addStyle({
-						    minWidth : icon.getWidth() + spacing + titleDomWidth + 1
+						    width : icon.getWidth() + spacing + titleDomWidth + 1
 						});
 					}
 				});
@@ -129,9 +135,9 @@ UUI.BUTTON_H = CLASS({
 			titleDom.empty();
 			titleDom.append(title);
 			
-			if (icon !== undefined) {
+			if (width === undefined && icon !== undefined) {
 				a.addStyle({
-				    minWidth : icon.getWidth() + spacing + titleDom.getWidth() + 1
+				    width : icon.getWidth() + spacing + titleDom.getWidth() + 1
 				});
 			}
 		};
