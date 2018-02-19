@@ -15,6 +15,7 @@ UUI.BUTTON_H = CLASS({
 		//OPTIONAL: params.href
 		//OPTIONAL: params.target
 		//OPTIONAL: params.style
+		//OPTIONAL: params.contentStyle
 		//OPTIONAL: params.isIconRight
 		//OPTIONAL: params.on
 
@@ -26,12 +27,14 @@ UUI.BUTTON_H = CLASS({
 		let isIconRight = params.isIconRight;
 		
 		let style = params.style;
+		let contentStyle = params.contentStyle;
 		let width;
 		if (style !== undefined) {
 			width = style.width;
 		}
 
 		let titleDom;
+		let content;
 		let a = A({
 			style : {
 				display : 'block',
@@ -43,12 +46,15 @@ UUI.BUTTON_H = CLASS({
 			},
 			href : href,
 			target : target,
-			c : [ titleDom = DIV({
-				style : {
-					flt : 'left',
-					whiteSpace : 'nowrap'
-				}
-			}), CLEAR_BOTH()]
+			c : content = DIV({
+				style : contentStyle,
+				c : [titleDom = DIV({
+					style : {
+						flt : 'left',
+						whiteSpace : 'nowrap'
+					}
+				}), CLEAR_BOTH()]
+			})
 		});
 		
 		let resizeEvent;
@@ -75,7 +81,7 @@ UUI.BUTTON_H = CLASS({
 			}
 
 			if (isIconRight !== true) {
-				a.prepend(icon);
+				content.prepend(icon);
 			} else {
 				titleDom.after(icon);
 			}

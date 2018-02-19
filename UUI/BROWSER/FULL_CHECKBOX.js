@@ -31,6 +31,7 @@ UUI.FULL_CHECKBOX = CLASS({
 			c : [ input = INPUT({
 				style : {
 					flt : 'left',
+					marginTop : 5,
 					marginRight : 5
 				},
 				name : name,

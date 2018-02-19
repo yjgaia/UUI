@@ -21,6 +21,9 @@ UUI.MODAL = CLASS({
 
 		let content;
 		let wrapper = DIV({
+			style : {
+				position : 'fixed'
+			},
 			c : [ content = DIV(), xIcon === undefined ? '' : UUI.ICON_BUTTON({
 				style : COMBINE([{
 					lineHeight : 0,
@@ -54,7 +57,6 @@ UUI.MODAL = CLASS({
 			let top = (WIN_HEIGHT() - wrapper.getHeight()) / 2;
 
 			wrapper.addStyle({
-				position : 'fixed',
 				left : left < 0 ? 0 : left,
 				top : top < 0 ? 0 : top
 			});
