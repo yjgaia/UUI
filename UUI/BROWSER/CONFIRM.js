@@ -11,7 +11,7 @@ UUI.CONFIRM = CLASS((cls) => {
 	
 	return {
 		
-		init : (inner, self, params, callback) => {
+		init : (inner, self, params, callbackOrHandler) => {
 			//REQUIRED: params
 			//OPTIONAL: params.style
 			//OPTIONAL: params.contentStyle
@@ -20,7 +20,9 @@ UUI.CONFIRM = CLASS((cls) => {
 			//OPTIONAL: params.cancelButtonStyle
 			//OPTIONAL: params.on
 			//REQUIRED: params.msg
-			//REQUIRED: callback
+			//REQUIRED: callbackOrHandler
+			//REQUIRED: callbackOrHandler.ok
+			//OPTIONAL: callbackOrHandler.cancel
 	
 			let style = params.style;
 			let contentStyle = params.contentStyle;
@@ -29,7 +31,17 @@ UUI.CONFIRM = CLASS((cls) => {
 			let cancelButtonStyle = params.cancelButtonStyle;
 			let on = params.on;
 			let msg = params.msg;
-	
+			
+			let okHandler;
+			let cancelHandler;
+			
+			if (CHECK_IS_DATA(callbackOrHandler) !== true) {
+				okHandler = callbackOrHandler;
+			} else {
+				okHandler = callbackOrHandler.ok;
+				cancelHandler = callbackOrHandler.cancel;
+			}
+			
 			let content;
 			let okButton;
 			let cancelButton;
@@ -49,7 +61,7 @@ UUI.CONFIRM = CLASS((cls) => {
 					}),
 					on : {
 						tap : () => {
-							if (callback() !== false) {
+							if (okHandler() !== false) {
 								remove();
 							}
 						}
@@ -62,6 +74,9 @@ UUI.CONFIRM = CLASS((cls) => {
 					}),
 					on : {
 						tap : () => {
+							if (cancelHandler !== undefined) {
+								cancelHandler();
+							}
 							remove();
 						}
 					}
