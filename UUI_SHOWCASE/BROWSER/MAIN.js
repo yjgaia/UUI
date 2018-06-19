@@ -288,6 +288,17 @@ UUI_SHOWCASE.MAIN = METHOD({
 			}), UUI.FULL_CHECKBOX({
 				name : 'cat',
 				label : 'Cat'
+			}), UUI.RANGE({
+				name : 'age',
+				thumbStyle : {
+					backgroundColor : 'red',
+					height : 20,
+					width : 10
+				},
+				trackStyle : {
+					height : 5,
+					backgroundColor : '#fff'
+				}
 			}), UUI.FULL_TEXTAREA({
 				style : {
 					marginTop : 10
