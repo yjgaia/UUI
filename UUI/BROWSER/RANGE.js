@@ -68,6 +68,7 @@ UUI.RANGE = CLASS({
 		self.on('show', () => {
 			
 			thumb.addStyle({
+				left : (value - min) / (max - min) * track.getWidth(),
 				marginLeft : -thumb.getWidth() / 2,
 				top : (track.getHeight() - thumb.getHeight()) / 2
 			});
