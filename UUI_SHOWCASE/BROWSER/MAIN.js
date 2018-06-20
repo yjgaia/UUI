@@ -289,6 +289,9 @@ UUI_SHOWCASE.MAIN = METHOD({
 				name : 'cat',
 				label : 'Cat'
 			}), UUI.RANGE({
+				style : {
+					marginTop : 5
+				},
 				name : 'age',
 				thumbStyle : {
 					backgroundColor : 'red',
@@ -298,6 +301,11 @@ UUI_SHOWCASE.MAIN = METHOD({
 				trackStyle : {
 					height : 5,
 					backgroundColor : '#fff'
+				},
+				on : {
+					change : (e, range) => {
+						console.log(range.getValue());
+					}
 				}
 			}), UUI.FULL_TEXTAREA({
 				style : {

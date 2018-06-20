@@ -10,69 +10,109 @@ UUI.RANGE = CLASS({
 	init : (inner, self, params) => {
 		//REQUIRED: params
 		//REQUIRED: params.name
+		//OPTIONAL: params.min
+		//OPTIONAL: params.max
+		//OPTIONAL: params.step
 		//OPTIONAL: params.value
 		//OPTIONAL: params.thumbStyle
 		//OPTIONAL: params.trackStyle
-		//OPTIONAL: params.on
 
 		let name = params.name;
+		let min = params.min;
+		let max = params.max;
+		let step = params.step;
 		let value = params.value;
 		let thumbStyle = params.thumbStyle;
 		let trackStyle = params.trackStyle;
+		
+		if (min === undefined) {
+			min = 0;
+		}
+		if (max === undefined) {
+			max = 100;
+		}
+		if (step === undefined) {
+			step = 1;
+		}
+		if (value === undefined) {
+			value = 0;
+		}
+		
+		let beforeValue = value;
 
-		let input;
 		let track;
 		let thumb;
 		let wrapper = DIV({
 			style : {
-				padding : 5
+				padding : '10px 5px'
 			},
-			c : DIV({
-				style : {
-					position : 'relative'
-				},
-				c : [
-					
-				track = DIV({
-					style : trackStyle,
-					c : thumb = DIV({
-						style : EXTEND({
-							origin : {
-								position : 'absolute',
-								cursor : 'pointer'
-							},
-							extend : thumbStyle
-						})
-					})
-				}),
-
-				// input
-				input = INPUT({
-					style : {
-						position : 'fixed',
-						left : -999999,
-						top : -999999
+			c : track = DIV({
+				style : EXTEND({
+					origin : {
+						position : 'relative'
 					},
-					name : name,
-					value : value
-				})]
-			}),
-			on : {
-				tap : () => {
-
-					input.focus();
-
-					EVENT.fireAll({
-						node : self,
-						name : 'focus'
-					});
-				}
-			}
+					extend : trackStyle
+				}),
+				c : thumb = DIV({
+					style : EXTEND({
+						origin : {
+							position : 'absolute',
+							cursor : 'pointer'
+						},
+						extend : thumbStyle
+					})
+				})
+			})
 		});
 		
 		self.on('show', () => {
+			
 			thumb.addStyle({
+				marginLeft : -thumb.getWidth() / 2,
 				top : (track.getHeight() - thumb.getHeight()) / 2
+			});
+			
+			thumb.on('touchstart', (e) => {
+				
+				let startLeft = thumb.getLeft();
+				
+				let touchmoveEvent = EVENT('touchmove', (e) => {
+					
+					let trackWidth = track.getWidth();
+					
+					let left = e.getLeft() - startLeft;
+					if (left < 0) {
+						left = 0;
+					}
+					if (left > trackWidth) {
+						left = trackWidth;
+					}
+					
+					value = (left / trackWidth) * (max - min) + min;
+					value = Math.round(value / step) * step;
+					
+					left = (value - min) / (max - min) * trackWidth;
+					
+					thumb.addStyle({
+						left : left
+					});
+					
+					if (beforeValue !== value) {
+						self.fireEvent('change');
+						beforeValue = value;
+					}
+					
+					e.stop();
+				});
+				
+				let touchendEvent = EVENT('touchend', (e) => {
+					touchmoveEvent.remove();
+					touchendEvent.remove();
+					
+					e.stop();
+				});
+				
+				e.stop();
 			});
 		});
 
@@ -83,80 +123,29 @@ UUI.RANGE = CLASS({
 		};
 
 		let getValue = self.getValue = () => {
-			return input.getValue();
+			return value;
 		};
 
-		let setValue = self.setValue = (value) => {
-			//REQUIRED: value
+		let setValue = self.setValue = (_value) => {
+			//REQUIRED: _value
 
-			let originValue = input.getValue();
-
-			input.setValue(value);
-
-			if (originValue !== value) {
-
-				EVENT.fireAll({
-					node : self,
-					name : 'change'
-				});
+			value = _value;
+			
+			if (beforeValue !== value) {
+				self.fireEvent('change');
+				beforeValue = value;
 			}
-		};
-
-		let select = self.select = () => {
-
-			input.select();
-
-			EVENT.fireAll({
-				node : self,
-				name : 'select'
-			});
-
-			EVENT.fireAll({
-				node : self,
-				name : 'focus'
-			});
-		};
-
-		let focus = self.focus = () => {
-
-			input.focus();
-
-			EVENT.fireAll({
-				node : self,
-				name : 'focus'
-			});
-		};
-
-		let blur = self.blur = () => {
-
-			input.blur();
-
-			EVENT.fireAll({
-				node : self,
-				name : 'blur'
-			});
 		};
 
 		let on = self.on = (eventName, eventHandler) => {
 			//REQUIRED: eventName
 			//REQUIRED: eventHandler
 
-			if (eventName === 'focus' || eventName === 'blur' || eventName === 'change' || eventName === 'keydown' || eventName === 'keypress' || eventName === 'keyup') {
-
-				EVENT({
-					node : self,
-					lowNode : input,
-					name : eventName
-				}, eventHandler);
-
-			} else {
-
-				EVENT({
-					node : self,
-					lowNode : wrapper,
-					name : eventName
-				}, eventHandler);
-			}
+			EVENT({
+				node : self,
+				lowNode : wrapper,
+				name : eventName
+			}, eventHandler);
 		};
 	}
 });
