@@ -35,7 +35,15 @@ UUI.RANGE = CLASS({
 			step = 1;
 		}
 		if (value === undefined) {
-			value = 0;
+			value = min;
+		}
+		
+		if (value > max) {
+			value = max;
+		}
+		
+		if (value < min) {
+			value = min;
 		}
 		
 		let beforeValue = value;
@@ -75,13 +83,11 @@ UUI.RANGE = CLASS({
 			
 			thumb.on('touchstart', (e) => {
 				
-				let startLeft = thumb.getLeft();
-				
 				let touchmoveEvent = EVENT('touchmove', (e) => {
 					
 					let trackWidth = track.getWidth();
 					
-					let left = e.getLeft() - startLeft;
+					let left = e.getLeft() - track.getLeft();
 					if (left < 0) {
 						left = 0;
 					}
@@ -131,6 +137,14 @@ UUI.RANGE = CLASS({
 			//REQUIRED: _value
 
 			value = _value;
+			
+			if (value > max) {
+				value = max;
+			}
+			
+			if (value < min) {
+				value = min;
+			}
 			
 			if (beforeValue !== value) {
 				self.fireEvent('change');
