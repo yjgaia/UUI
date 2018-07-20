@@ -16,6 +16,7 @@ UUI.RANGE = CLASS({
 		//OPTIONAL: params.value
 		//OPTIONAL: params.thumbStyle
 		//OPTIONAL: params.trackStyle
+		//OPTIONAL: params.scale
 
 		let name = params.name;
 		let min = params.min;
@@ -24,6 +25,7 @@ UUI.RANGE = CLASS({
 		let value = params.value;
 		let thumbStyle = params.thumbStyle;
 		let trackStyle = params.trackStyle;
+		let scale = params.scale;
 		
 		if (min === undefined) {
 			min = 0;
@@ -36,6 +38,9 @@ UUI.RANGE = CLASS({
 		}
 		if (value === undefined) {
 			value = min;
+		}
+		if (scale === undefined) {
+			scale = 1;
 		}
 		
 		if (value > max) {
@@ -83,11 +88,14 @@ UUI.RANGE = CLASS({
 			
 			thumb.on('touchstart', (e) => {
 				
+				let startTouchLeft = e.getLeft();
+				let startThumbLeft = thumb.getLeft() + thumb.getWidth() / 2 - track.getLeft();
+				
 				let touchmoveEvent = EVENT('touchmove', (e) => {
 					
 					let trackWidth = track.getWidth();
 					
-					let left = e.getLeft() - track.getLeft();
+					let left = startThumbLeft + (e.getLeft() - startTouchLeft) / scale;
 					if (left < 0) {
 						left = 0;
 					}
