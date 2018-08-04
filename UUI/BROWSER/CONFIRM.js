@@ -60,8 +60,9 @@ UUI.CONFIRM = CLASS((cls) => {
 						ko : '확인'
 					}),
 					on : {
-						tap : () => {
-							if (okHandler() !== false) {
+						tap : (e) => {
+							e.stop();
+							if (okHandler(e.getLeft(), e.getTop()) !== false) {
 								remove();
 							}
 						}
