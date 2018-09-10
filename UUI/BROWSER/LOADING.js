@@ -23,12 +23,17 @@ UUI.LOADING = CLASS({
 			}, style]),
 			contentStyle : contentStyle,
 			isCannotClose : true,
-			c : [indicator === undefined ? '' : indicator, P({
-				style : indicator === undefined ? {} : {
-					marginTop : 10
+			c : UUI.V_CENTER({
+				style : {
+					height : '100%'
 				},
-				c : msg
-			})],
+				c : [indicator === undefined ? '' : indicator, P({
+					style : indicator === undefined ? {} : {
+						marginTop : 10
+					},
+					c : msg
+				})]
+			}),
 			on : on
 		});
 
