@@ -23,7 +23,7 @@ UUI.CONFIRM = CLASS((cls) => {
 			//OPTIONAL: params.target
 			//OPTIONAL: params.href
 			//REQUIRED: callbackOrHandler
-			//REQUIRED: callbackOrHandler.ok
+			//OPTIONAL: callbackOrHandler.ok
 			//OPTIONAL: callbackOrHandler.cancel
 	
 			let style = params.style;
@@ -67,8 +67,8 @@ UUI.CONFIRM = CLASS((cls) => {
 					}),
 					on : {
 						tap : (e) => {
-							e.stop();
-							if (okHandler(e.getLeft(), e.getTop()) !== false) {
+							if (okHandler !== undefined && okHandler(e.getLeft(), e.getTop()) !== false) {
+								e.stop();
 								remove();
 							}
 						}
