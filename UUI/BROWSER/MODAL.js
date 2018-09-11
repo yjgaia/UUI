@@ -22,7 +22,8 @@ UUI.MODAL = CLASS({
 		let content;
 		let wrapper = DIV({
 			style : {
-				position : 'fixed'
+				position : 'fixed',
+				zIndex : 9999999
 			},
 			c : [ content = DIV(), xIcon === undefined ? '' : UUI.ICON_BUTTON({
 				style : COMBINE([{
