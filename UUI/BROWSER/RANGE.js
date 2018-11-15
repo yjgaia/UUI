@@ -117,17 +117,19 @@ UUI.RANGE = CLASS({
 						beforeValue = value;
 					}
 					
-					e.stop();
+					e.stopDefault();
 				});
 				
 				let touchendEvent = EVENT('touchend', (e) => {
 					touchmoveEvent.remove();
 					touchendEvent.remove();
 					
+					self.fireEvent('touchend');
+					
 					e.stop();
 				});
 				
-				e.stop();
+				e.stopDefault();
 			});
 		});
 
@@ -157,6 +159,11 @@ UUI.RANGE = CLASS({
 			if (beforeValue !== value) {
 				self.fireEvent('change');
 				beforeValue = value;
+				
+				thumb.addStyle({
+					left : (value - min) / (max - min) * track.getWidth(),
+					top : (track.getHeight() - thumb.getHeight()) / 2
+				});
 			}
 		};
 
