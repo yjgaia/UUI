@@ -86,6 +86,15 @@ UUI.RANGE = CLASS({
 				top : (track.getHeight() - thumb.getHeight()) / 2
 			});
 			
+			DELAY(() => {
+				
+				thumb.addStyle({
+					left : (value - min) / (max - min) * track.getWidth(),
+					marginLeft : -thumb.getWidth() / 2,
+					top : (track.getHeight() - thumb.getHeight()) / 2
+				});
+			});
+			
 			thumb.on('touchstart', (e) => {
 				
 				let startTouchLeft = e.getLeft();
@@ -159,11 +168,6 @@ UUI.RANGE = CLASS({
 			if (beforeValue !== value) {
 				self.fireEvent('change');
 				beforeValue = value;
-				
-				thumb.addStyle({
-					left : (value - min) / (max - min) * track.getWidth(),
-					top : (track.getHeight() - thumb.getHeight()) / 2
-				});
 			}
 		};
 
