@@ -113,11 +113,11 @@ UUI.BUTTON_H = CLASS({
 				});
 	
 				self.on('show', () => {
-					EVENT.fireAll('resize');
+					resizeEvent.fire();
 				});
 				
 				DELAY(() => {
-					EVENT.fireAll('resize');
+					resizeEvent.fire();
 				});
 			}
 			
@@ -125,7 +125,7 @@ UUI.BUTTON_H = CLASS({
 				node : icon,
 				name : 'load'
 			}, (e) => {
-				EVENT.fireAll('resize');
+				resizeEvent.fire();
 			});
 		};
 
