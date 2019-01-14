@@ -64,19 +64,24 @@ UUI.TITLE = CLASS({
 				}
 			});
 
+			self.on('remove', () => {
+				resizeEvent.remove();
+				resizeEvent = undefined;
+			});
+
 			EVENT_ONCE({
 				node : icon,
 				name : 'load'
 			}, (e) => {
-				resizeEvent.fire();
+				if (resizeEvent !== undefined) {
+					resizeEvent.fire();
+				}
 			});
 
 			self.on('show', () => {
-				resizeEvent.fire();
-			});
-
-			self.on('remove', () => {
-				resizeEvent.remove();
+				if (resizeEvent !== undefined) {
+					resizeEvent.fire();
+				}
 			});
 		}
 

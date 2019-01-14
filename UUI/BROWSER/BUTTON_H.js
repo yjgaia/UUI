@@ -110,14 +110,19 @@ UUI.BUTTON_H = CLASS({
 	
 				self.on('remove', () => {
 					resizeEvent.remove();
+					resizeEvent = undefined;
 				});
 	
 				self.on('show', () => {
-					resizeEvent.fire();
+					if (resizeEvent !== undefined) {
+						resizeEvent.fire();
+					}
 				});
 				
 				DELAY(() => {
-					resizeEvent.fire();
+					if (resizeEvent !== undefined) {
+						resizeEvent.fire();
+					}
 				});
 			}
 			
@@ -125,7 +130,9 @@ UUI.BUTTON_H = CLASS({
 				node : icon,
 				name : 'load'
 			}, (e) => {
-				resizeEvent.fire();
+				if (resizeEvent !== undefined) {
+					resizeEvent.fire();
+				}
 			});
 		};
 
