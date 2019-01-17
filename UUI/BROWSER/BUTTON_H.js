@@ -59,28 +59,48 @@ UUI.BUTTON_H = CLASS({
 						margin : 0,
 						padding : 0
 					},
-					c : isIconRight === true ? [titleDom = TD({
+					c : isIconRight === true ? [TD({
 						style : {
 							margin : 0,
 							padding : 0,
 							whiteSpace : 'nowrap'
-						}
-					}), iconDom = TD({
+						},
+						c : [titleDom = DIV({
+							style : {
+								flt : 'left'
+							}
+						}), CLEAR_BOTH()]
+					}), TD({
 						style : {
 							margin : 0,
 							padding : 0
-						}
-					})] : [iconDom = TD({
+						},
+						c : [iconDomDIV({
+							style : {
+								flt : 'left'
+							}
+						}), CLEAR_BOTH()]
+					})] : [TD({
 						style : {
 							margin : 0,
 							padding : 0
-						}
-					}), titleDom = TD({
+						},
+						c : [iconDom = DIV({
+							style : {
+								flt : 'left'
+							}
+						}), CLEAR_BOTH()]
+					}), TD({
 						style : {
 							margin : 0,
 							padding : 0,
 							whiteSpace : 'nowrap'
-						}
+						},
+						c : [titleDom = DIV({
+							style : {
+								flt : 'left'
+							}
+						}), CLEAR_BOTH()]
 					})]
 				})
 			})
@@ -88,10 +108,8 @@ UUI.BUTTON_H = CLASS({
 		
 		let resize = () => {
 			if (width === undefined) {
-				DELAY(() => {
-					a.addStyle({
-					    width : iconDom.getWidth() + titleDom.getWidth()
-					});
+				a.addStyle({
+				    width : iconDom.getWidth() + titleDom.getWidth()
 				});
 			}
 		};
