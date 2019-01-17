@@ -86,7 +86,19 @@ UUI.BUTTON_H = CLASS({
 			})
 		});
 		
-		let resizeEvent;
+		let resize = () => {
+			if (width === undefined) {
+				DELAY(() => {
+					a.addStyle({
+					    width : iconDom.getWidth() + titleDom.getWidth()
+					});
+				});
+			}
+		};
+		
+		self.on('show', () => {
+			resize();
+		});
 
 		let setIcon = self.setIcon = (_icon) => {
 			//REQUIRED: icon
@@ -102,43 +114,11 @@ UUI.BUTTON_H = CLASS({
 				paddingLeft : spacing
 			});
 			
-			if (resizeEvent === undefined) {
-				
-				resizeEvent = EVENT({
-					name : 'resize'
-				}, (e) => {
-					if (width === undefined) {
-						a.addStyle({
-						    width : iconDom.getWidth() + titleDom.getWidth()
-						});
-					}
-				});
-	
-				self.on('remove', () => {
-					resizeEvent.remove();
-					resizeEvent = undefined;
-				});
-	
-				self.on('show', () => {
-					if (resizeEvent !== undefined) {
-						resizeEvent.fire();
-					}
-				});
-				
-				DELAY(() => {
-					if (resizeEvent !== undefined) {
-						resizeEvent.fire();
-					}
-				});
-			}
-			
 			EVENT_ONCE({
 				node : icon,
 				name : 'load'
 			}, (e) => {
-				if (resizeEvent !== undefined) {
-					resizeEvent.fire();
-				}
+				resize();
 			});
 		};
 
@@ -154,11 +134,7 @@ UUI.BUTTON_H = CLASS({
 			titleDom.empty();
 			titleDom.append(title);
 			
-			if (width === undefined) {
-				a.addStyle({
-				    width : iconDom.getWidth() + titleDom.getWidth()
-				});
-			}
+			resize();
 		};
 		
 		if (title !== undefined) {
