@@ -17,6 +17,7 @@ UUI.BUTTON_H = CLASS({
 		//OPTIONAL: params.style
 		//OPTIONAL: params.contentStyle
 		//OPTIONAL: params.isIconRight
+		//OPTIONAL: params.isToFixWrapperSize
 		//OPTIONAL: params.on
 
 		let icon = params.icon;
@@ -25,6 +26,7 @@ UUI.BUTTON_H = CLASS({
 		let href = params.href;
 		let target = params.target;
 		let isIconRight = params.isIconRight;
+		let isToFixWrapperSize = params.isToFixWrapperSize;
 		
 		let style = params.style;
 		let contentStyle = params.contentStyle;
@@ -106,11 +108,21 @@ UUI.BUTTON_H = CLASS({
 			})
 		});
 		
-		let resize = self.resize = () => {
+		let resize = () => {
+			
 			if (width === undefined) {
-				a.addStyle({
-				    width : iconDom.getWidth() + titleDom.getWidth()
+				
+				let contentSize = iconDom.getWidth() + titleDom.getWidth();
+				
+				content.addStyle({
+					width : contentSize
 				});
+				
+				if (isToFixWrapperSize === true) {
+					a.addStyle({
+						width : contentSize
+					});
+				}
 			}
 		};
 		
