@@ -21,67 +21,55 @@ UUI.TITLE = CLASS({
 		let spacing = params.spacing === undefined ? 0 : params.spacing;
 		let isIconRight = params.isIconRight;
 		
+		let iconDom;
 		let titleDom;
 		let div = DIV({
-			c : [titleDom = DIV({
+			c : TABLE({
 				style : {
-					flt : 'left'
+					width : '100%'
 				},
-				c : title === undefined ? '' : title
-			}), CLEAR_BOTH()]
+				c : TR({
+					style : {
+						margin : 0,
+						padding : 0
+					},
+					c : isIconRight === true ? [titleDom = TD({
+						style : {
+							margin : 0,
+							padding : 0,
+							whiteSpace : 'nowrap'
+						},
+						c : title
+					}), iconDom = TD({
+						style : {
+							margin : 0,
+							padding : 0
+						}
+					})] : [iconDom = TD({
+						style : {
+							margin : 0,
+							padding : 0
+						}
+					}), titleDom = TD({
+						style : {
+							margin : 0,
+							padding : 0,
+							whiteSpace : 'nowrap'
+						},
+						c : title
+					})]
+				})
+			})
 		});
 
 		if (icon !== undefined) {
+			
+			iconDom.append(icon);
 
-			icon.addStyle({
-				flt : 'left'
-			});
-
-			if (icon.getStyle('margin') === undefined && icon.getStyle('marginRight') === undefined) {
-				icon.addStyle(isIconRight !== true ? {
-					marginRight : spacing
-				} : {
-					marginLeft : spacing
-				});
-			}
-
-			if (isIconRight !== true) {
-				div.prepend(icon);
-			} else {
-				titleDom.after(icon);
-			}
-
-			let resizeEvent = EVENT({
-				name : 'resize'
-			}, (e) => {
-
-				let titleDomHeight = titleDom.getHeight();
-
-				if (titleDomHeight > 0) {
-					titleDom.addStyle({
-						marginTop : (icon.getHeight() - titleDom.getHeight()) / 2
-					});
-				}
-			});
-
-			self.on('remove', () => {
-				resizeEvent.remove();
-				resizeEvent = undefined;
-			});
-
-			EVENT_ONCE({
-				node : icon,
-				name : 'load'
-			}, (e) => {
-				if (resizeEvent !== undefined) {
-					resizeEvent.fire();
-				}
-			});
-
-			self.on('show', () => {
-				if (resizeEvent !== undefined) {
-					resizeEvent.fire();
-				}
+			titleDom.addStyle(isIconRight === true ? {
+				paddingRight : spacing
+			} : {
+				paddingLeft : spacing
 			});
 		}
 

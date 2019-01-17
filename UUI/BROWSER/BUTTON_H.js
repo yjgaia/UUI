@@ -33,6 +33,7 @@ UUI.BUTTON_H = CLASS({
 			width = style.width;
 		}
 
+		let iconDom;
 		let titleDom;
 		let content;
 		let a = A({
@@ -46,14 +47,42 @@ UUI.BUTTON_H = CLASS({
 			},
 			href : href,
 			target : target,
-			c : content = DIV({
-				style : contentStyle,
-				c : [titleDom = DIV({
+			c : content = TABLE({
+				style : EXTEND({
+					origin : {
+						width : '100%'
+					},
+					extend : contentStyle
+				}),
+				c : TR({
 					style : {
-						flt : 'left',
-						whiteSpace : 'nowrap'
-					}
-				}), CLEAR_BOTH()]
+						margin : 0,
+						padding : 0
+					},
+					c : isIconRight === true ? [titleDom = TD({
+						style : {
+							margin : 0,
+							padding : 0,
+							whiteSpace : 'nowrap'
+						}
+					}), iconDom = TD({
+						style : {
+							margin : 0,
+							padding : 0
+						}
+					})] : [iconDom = TD({
+						style : {
+							margin : 0,
+							padding : 0
+						}
+					}), titleDom = TD({
+						style : {
+							margin : 0,
+							padding : 0,
+							whiteSpace : 'nowrap'
+						}
+					})]
+				})
 			})
 		});
 		
@@ -62,48 +91,25 @@ UUI.BUTTON_H = CLASS({
 		let setIcon = self.setIcon = (_icon) => {
 			//REQUIRED: icon
 			
-			if (icon !== undefined) {
-				icon.remove();
-			}
-			
 			icon = _icon;
 			
-			icon.addStyle({
-				flt : 'left'
+			iconDom.empty();
+			iconDom.append(icon);
+
+			titleDom.addStyle(isIconRight === true ? {
+				paddingRight : spacing
+			} : {
+				paddingLeft : spacing
 			});
-
-			if (icon.getStyle('margin') === undefined && icon.getStyle('marginRight') === undefined) {
-				icon.addStyle(isIconRight !== true ? {
-					marginRight : spacing
-				} : {
-					marginLeft : spacing
-				});
-			}
-
-			if (isIconRight !== true) {
-				content.prepend(icon);
-			} else {
-				titleDom.after(icon);
-			}
 			
 			if (resizeEvent === undefined) {
 				
 				resizeEvent = EVENT({
 					name : 'resize'
 				}, (e) => {
-					
-					let titleDomWidth = titleDom.getWidth();
-					let titleDomHeight = titleDom.getHeight();
-					
-					if (titleDomHeight > 0 && icon.getHeight() > 0) {
-						titleDom.addStyle({
-							marginTop : (icon.getHeight() - titleDom.getHeight()) / 2
-						});
-					}
-					
-					if (width === undefined && titleDomWidth > 0 && icon.getWidth() > 0) {
+					if (width === undefined) {
 						a.addStyle({
-						    width : icon.getWidth() + spacing + titleDomWidth + 1
+						    width : iconDom.getWidth() + titleDom.getWidth()
 						});
 					}
 				});
@@ -148,9 +154,9 @@ UUI.BUTTON_H = CLASS({
 			titleDom.empty();
 			titleDom.append(title);
 			
-			if (width === undefined && icon !== undefined) {
+			if (width === undefined) {
 				a.addStyle({
-				    width : icon.getWidth() + spacing + titleDom.getWidth() + 1
+				    width : iconDom.getWidth() + titleDom.getWidth()
 				});
 			}
 		};
@@ -175,23 +181,10 @@ UUI.BUTTON_H = CLASS({
 		};
 		
 		let hideTitle = self.hideTitle = () => {
-			icon.addStyle({
-				marginRight : 0,
-				marginLeft : 0
-			});
 			titleDom.hide();
 		};
 		
 		let showTitle = self.showTitle = () => {
-			
-			if (icon.getStyle('margin') === undefined && icon.getStyle('marginRight') === undefined) {
-				icon.addStyle(isIconRight !== true ? {
-					marginRight : spacing
-				} : {
-					marginLeft : spacing
-				});
-			}
-			
 			titleDom.show();
 		};
 	}
