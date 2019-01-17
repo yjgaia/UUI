@@ -106,7 +106,7 @@ UUI.BUTTON_H = CLASS({
 			})
 		});
 		
-		let resize = () => {
+		let resize = self.resize = () => {
 			if (width === undefined) {
 				a.addStyle({
 				    width : iconDom.getWidth() + titleDom.getWidth()
