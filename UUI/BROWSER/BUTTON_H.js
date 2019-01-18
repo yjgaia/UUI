@@ -77,9 +77,10 @@ UUI.BUTTON_H = CLASS({
 							margin : 0,
 							padding : 0
 						},
-						c : [iconDomDIV({
+						c : [iconDom = DIV({
 							style : {
-								flt : 'left'
+								flt : 'left',
+								lineHeight : 0
 							}
 						}), CLEAR_BOTH()]
 					})] : [TD({
@@ -89,7 +90,8 @@ UUI.BUTTON_H = CLASS({
 						},
 						c : [iconDom = DIV({
 							style : {
-								flt : 'left'
+								flt : 'left',
+								lineHeight : 0
 							}
 						}), CLEAR_BOTH()]
 					}), TD({
