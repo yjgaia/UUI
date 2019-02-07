@@ -11,7 +11,7 @@ UUI.CONFIRM = CLASS((cls) => {
 	
 	return {
 		
-		init : (inner, self, params, callbackOrHandler) => {
+		init : (inner, self, params, callbackOrhandlers) => {
 			//REQUIRED: params
 			//OPTIONAL: params.style
 			//OPTIONAL: params.contentStyle
@@ -22,9 +22,9 @@ UUI.CONFIRM = CLASS((cls) => {
 			//REQUIRED: params.msg
 			//OPTIONAL: params.target
 			//OPTIONAL: params.href
-			//REQUIRED: callbackOrHandler
-			//OPTIONAL: callbackOrHandler.ok
-			//OPTIONAL: callbackOrHandler.cancel
+			//REQUIRED: callbackOrhandlers
+			//OPTIONAL: callbackOrhandlers.ok
+			//OPTIONAL: callbackOrhandlers.cancel
 	
 			let style = params.style;
 			let contentStyle = params.contentStyle;
@@ -39,11 +39,11 @@ UUI.CONFIRM = CLASS((cls) => {
 			let okHandler;
 			let cancelHandler;
 			
-			if (CHECK_IS_DATA(callbackOrHandler) !== true) {
-				okHandler = callbackOrHandler;
+			if (CHECK_IS_DATA(callbackOrhandlers) !== true) {
+				okHandler = callbackOrhandlers;
 			} else {
-				okHandler = callbackOrHandler.ok;
-				cancelHandler = callbackOrHandler.cancel;
+				okHandler = callbackOrhandlers.ok;
+				cancelHandler = callbackOrhandlers.cancel;
 			}
 			
 			let content;
