@@ -33,7 +33,7 @@ UUI.ICON_BUTTON = CLASS({
 		let setIcon = self.setIcon = (_icon) => {
 			//REQUIRED: icon
 			
-			if (icon !== undefined) {
+			if (icon !== _icon && icon !== undefined) {
 				icon.remove();
 			}
 			
