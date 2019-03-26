@@ -67,7 +67,8 @@ UUI.FULL_INPUT = CLASS({
 					capture : capture,
 					accept : accept,
 					placeholder : placeholder,
-					isOffAutocomplete : isOffAutocomplete
+					isOffAutocomplete : isOffAutocomplete,
+					isOffAutocapitalize : isOffAutocapitalize
 				})]
 			}),
 			on : {
