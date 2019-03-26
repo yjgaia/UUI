@@ -18,6 +18,7 @@ UUI.FULL_INPUT = CLASS({
 		//OPTIONAL: params.style
 		//OPTIONAL: params.inputStyle
 		//OPTIONAL: params.isOffAutocomplete
+		//OPTIONAL: params.isOffAutocapitalize
 		//OPTIONAL: params.on
 
 		let name = params.name;
@@ -28,6 +29,7 @@ UUI.FULL_INPUT = CLASS({
 		let value = params.value;
 		let inputStyle = params.inputStyle;
 		let isOffAutocomplete = params.isOffAutocomplete;
+		let isOffAutocapitalize = params.isOffAutocapitalize;
 
 		let input;
 		let wrapper = DIV({
