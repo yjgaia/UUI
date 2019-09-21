@@ -166,8 +166,16 @@ UUI.RANGE = CLASS({
 			}
 			
 			if (beforeValue !== value) {
+				
 				self.fireEvent('change');
+				
 				beforeValue = value;
+				
+				thumb.addStyle({
+					left : (value - min) / (max - min) * track.getWidth(),
+					marginLeft : -thumb.getWidth() / 2,
+					top : (track.getHeight() - thumb.getHeight()) / 2
+				});
 			}
 		};
 
