@@ -14,6 +14,7 @@ UUI.RANGE = CLASS({
 		//OPTIONAL: params.max
 		//OPTIONAL: params.step
 		//OPTIONAL: params.value
+		//OPTIONAL: params.style
 		//OPTIONAL: params.thumbStyle
 		//OPTIONAL: params.trackStyle
 		//OPTIONAL: params.scale
@@ -23,6 +24,7 @@ UUI.RANGE = CLASS({
 		let max = params.max;
 		let step = params.step;
 		let value = params.value;
+		let style = params.style;
 		let thumbStyle = params.thumbStyle;
 		let trackStyle = params.trackStyle;
 		let scale = params.scale;
@@ -46,9 +48,12 @@ UUI.RANGE = CLASS({
 		if (value > max) {
 			value = max;
 		}
-		
 		if (value < min) {
 			value = min;
+		}
+		
+		if (style === undefined) {
+			style = {};
 		}
 		
 		let beforeValue = value;
@@ -56,9 +61,9 @@ UUI.RANGE = CLASS({
 		let track;
 		let thumb;
 		let wrapper = DIV({
-			style : {
+			style : COMBINE([{
 				padding : '10px 5px'
-			},
+			}, style]),
 			c : track = DIV({
 				style : EXTEND({
 					origin : {
