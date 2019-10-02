@@ -11,9 +11,11 @@ UUI.FULL_SUBMIT = CLASS({
 		//OPTIONAL: params
 		//OPTIONAL: params.value
 		//OPTIONAL: params.style
+		//OPTIONAL: params.inputStyle
 		//OPTIONAL: params.on
 
 		let value = params === undefined ? undefined : params.value;
+		let inputStyle = params === undefined ? undefined : params.inputStyle;
 
 		let input = INPUT({
 			type : 'submit',
@@ -41,5 +43,15 @@ UUI.FULL_SUBMIT = CLASS({
 
 			input.setValue(value);
 		};
+
+		let addInputStyle = self.addInputStyle = (style) => {
+			//REQUIRED: style
+
+			input.addStyle(style);
+		};
+
+		if (inputStyle !== undefined) {
+			addInputStyle(inputStyle);
+		}
 	}
 });
