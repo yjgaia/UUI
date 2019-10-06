@@ -87,6 +87,12 @@ UUI.FULL_TEXTAREA = CLASS({
 		let blur = self.blur = () => {
 			textarea.blur();
 		};
+		
+		let setPlaceholder = self.setPlaceholder = (placeholder) => {
+			//REQUIRED: placeholder
+			
+			textarea.setPlaceholder(placeholder);
+		};
 
 		let addTextareaStyle = self.addTextareaStyle = (style) => {
 			//REQUIRED: style

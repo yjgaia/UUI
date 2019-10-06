@@ -144,6 +144,12 @@ UUI.FULL_INPUT = CLASS({
 				name : 'blur'
 			});
 		};
+		
+		let setPlaceholder = self.setPlaceholder = (placeholder) => {
+			//REQUIRED: placeholder
+			
+			input.setPlaceholder(placeholder);
+		};
 
 		let addInputStyle = self.addInputStyle = (style) => {
 			//REQUIRED: style
